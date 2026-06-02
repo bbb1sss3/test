@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
+const font = Inter({ subsets: ["latin"] });
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,8 +27,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    >// 이렇게 바꿔서 그냥 싹 다 지우세요
     </html>
   );
 }
