@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "preinstall": "npm config set legacy-peer-deps true",
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint"
-},
+    "preinstall": "npm config set legacy-peer-deps true",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
+    "@notionhq/client": "^5.22.0",
     "next": "14.x.x",
     "react": "19.2.4",
     "react-dom": "19.2.4"
