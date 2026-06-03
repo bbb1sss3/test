@@ -192,6 +192,22 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                     <h2>살 거면 제대로,<br /><em>프리미엄만</em> 모았습니다</h2>
                     <p>노트북 · 냉장고 · TV · 청소기 · 생활가전</p>
                 </div>
+                <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', letterSpacing: '-1px' }}>100<span style={{ color: '#e52c2c' }}>+</span></div>
+                        <div style={{ fontSize: '10px', color: '#444', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>PRODUCTS</div>
+                    </div>
+                    <div style={{ width: '1px', height: '30px', background: '#333' }} />
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', letterSpacing: '-1px' }}>12<span style={{ color: '#e52c2c' }}>+</span></div>
+                        <div style={{ fontSize: '10px', color: '#444', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>CATEGORIES</div>
+                    </div>
+                    <div style={{ width: '1px', height: '30px', background: '#333' }} />
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', letterSpacing: '-1px' }}>NO<span style={{ color: '#e52c2c' }}>.1</span></div>
+                        <div style={{ fontSize: '10px', color: '#444', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>CURATION</div>
+                    </div>
+                </div>
                 <div className="hero-badge">PREMY PICK ✦</div>
             </div>
 
