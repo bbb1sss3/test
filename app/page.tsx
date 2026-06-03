@@ -1,5 +1,5 @@
 import { Client } from "@notionhq/client";
-import ProductGrid from "./Productgrid";
+import ProductGrid from "./ProductGrid";
 
 export const dynamic = 'force-dynamic';
 
