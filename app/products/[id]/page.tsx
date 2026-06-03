@@ -57,6 +57,22 @@ function Stars({ rating }: { rating: string }) {
   );
 }
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const product = await getProduct(params.id);
+  return {
+    title: `${product.name} | Premy`,
+    description: product.desc || `${product.category} 추천 - ${product.name}`,
+    keywords: product.tag || `${product.category}, 쿠팡추천, 프리미엄가전`,
+    openGraph: {
+      title: `${product.name} | Premy`,
+      description: product.desc || `${product.category} 추천 - ${product.name}`,
+      images: product.image ? [{ url: product.image }] : [],
+      locale: 'ko_KR',
+      type: 'website',
+    },
+  };
+}
+
 export default async function ProductPage({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
   const related = await getRelated(product.category, product.id);
