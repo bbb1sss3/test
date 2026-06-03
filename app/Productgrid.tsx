@@ -90,7 +90,7 @@ const css = `
   .wish-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; z-index: 1; transition: all 0.15s; }
   .wish-btn:hover { transform: scale(1.1); }
   .empty { text-align: center; padding: 5rem 2rem; color: #ccc; font-size: 15px; }
-  .recent-wrap { padding: 0 1.5rem 1.5rem; }
+ .recent-wrap { padding: 1.5rem 1.5rem 1rem; border-top: 1px solid #f0f0f0; margin-top: 0.5rem; }
   .recent-title { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 0.75rem; }
   .recent-list { display: flex; gap: 0.75rem; overflow-x: auto; scrollbar-width: none; }
   .recent-list::-webkit-scrollbar { display: none; }
@@ -122,6 +122,7 @@ const css = `
     .footer-pc { display: none; }
     .hero-banner { display: none !important; }
     .recent-wrap { padding: 0 1rem 1rem; }
+    .slider-wrap { margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
   }
   @media (min-width: 769px) {
     .slider-wrap { display: none; }
