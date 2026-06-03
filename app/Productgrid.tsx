@@ -78,7 +78,7 @@ const css = `
   .card-body { display: flex; flex-direction: column; flex: 1; }
   .card-category { font-size: 11px; color: #aaa; margin-bottom: 3px; }
   .card-name { font-size: 13px; color: #111; font-weight: 600; line-height: 1.45; margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-  .card-desc { font-size: 11px; color: #aaa; margin-bottom: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .card-desc { font-size: 11px; color: #aaa; margin-bottom: 6px; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; }
   .card-rating { font-size: 11px; color: #f5a623; margin-bottom: 4px; }
   .card-rating span { color: #aaa; margin-left: 2px; }
   .card-discount { font-size: 12px; color: #e52c2c; font-weight: 700; margin-bottom: 2px; }
