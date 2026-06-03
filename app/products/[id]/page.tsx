@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 import Link from "next/link";
-
+import ShareButton from "./ShareButton";
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -169,20 +169,3 @@ export default async function ProductPage({ params }: { params: { id: string } }
   );
 }
 
-function ShareButton({ name }: { name: string }) {
-  return (
-    <button
-      className="share-btn"
-      onClick={() => {
-        if (navigator.share) {
-          navigator.share({ title: name, url: window.location.href });
-        } else {
-          navigator.clipboard.writeText(window.location.href);
-          alert('링크가 복사되었습니다!');
-        }
-      }}
-    >
-      🔗 공유하기
-    </button>
-  );
-}
