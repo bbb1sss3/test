@@ -51,6 +51,7 @@ const css = `
   .sort-btn { background: #fff; color: #888; border: 1px solid #eee; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .sort-btn.active { background: #111; color: #fff; border-color: #111; }
   .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
+  .slider-wrap { position: relative; overflow: hidden; background: #fff; width: 100%; max-width: 100vw; }
  .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
 .slide { min-width: 100%; width: 100%; padding: 3rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
 .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
@@ -96,6 +97,7 @@ const css = `
     .slide-img { width: 90px; height: 90px; }
     .section { padding: 1.25rem 1rem 3rem; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    main { min-height: unset; }
   }
 `;
 
@@ -146,7 +148,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   if (sort === '높은가격순') filtered = [...filtered].sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
 
   return (
-    <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <header className="header">
@@ -167,32 +169,33 @@ export default function ProductGrid({ products }: { products: Product[] }) {
         </div>       
       </div>
 
-      {highlights.length > 0 && (
-        <div className="slider-wrap">
-          <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
-            {highlights.map((p) => (
-              <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="slide">
-                <div style={{ flex: 1 }}>
-                  <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
-                  <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
-                  <p className="slide-desc">{p.desc}</p>
-                  <div className="slide-price">{p.price}</div>
-                </div>
-                <div>
-                  {p.image ? <img src={p.image} alt={p.name} className="slide-img" /> : <span className="slide-emoji">🛒</span>}
-                </div>
-              </a>
-            ))}
-          </div>
-          {total > 1 && (
-            <div className="dots">
-              {highlights.map((_, i) => (
-                <div key={i} className={`dot${cur === i ? ' active' : ''}`} onClick={() => go(i)} />
-              ))}
-            </div>
+          {highlights.length > 0 && (
+              <div className="slider-wrap">
+                  <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
+                      {highlights.map((p) => (
+                          <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="slide">
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                  <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
+                                  <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
+                                  <p className="slide-desc">{p.desc}</p>
+                                  <div className="slide-price">{p.price}</div>
+                              </div>
+                              <div style={{ flexShrink: 0 }}>
+                                  {p.image ? <img src={p.image} alt={p.name} className="slide-img" /> : <span className="slide-emoji">🛒</span>}
+                              </div>
+                          </a>
+                      ))}
+                  </div>
+              </div>
+
           )}
-        </div>
-      )}
+          {total > 1 && (
+              <div className="dots" style={{ display: 'flex', justifyContent: 'center', gap: '6px', padding: '0.75rem 0', background: '#fff' }}>
+                  {highlights.map((_, i) => (
+                      <div key={i} className={`dot${cur === i ? ' active' : ''}`} onClick={() => go(i)} />
+                  ))}
+              </div>
+          )}
 
       <section className="section">
               <div className="section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
