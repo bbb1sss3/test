@@ -124,6 +124,7 @@ const css = `
     .hero-banner { display: none !important; }
     .recent-wrap { padding: 0.75rem 1.5rem 0.75rem; margin-top: 0.25rem; }
     .slider-wrap { margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   }
   @media (min-width: 769px) {
     .slider-wrap { display: none; }
