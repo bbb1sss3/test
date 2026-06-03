@@ -1,5 +1,5 @@
 'use client';
-
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -244,8 +244,11 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                           {products.filter(p => wishes.includes(p.id)).map(p => (
                               <Link key={p.id} href={`/products/${p.id}`} className="card">
                                   <div className="card-img-wrap">
-                                      {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
-                                  </div>
+                                    {p.image 
+                                        ? <Image src={p.image} alt={p.name} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                        : '🛒'
+                                    }
+                                    </div>
                                   <div className="card-body">
                                       <div className="card-category">{p.category}</div>
                                       <div className="card-name">{p.name}</div>
@@ -290,7 +293,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
               {highlights.map((p) => (
                 <Link key={p.id} href={`/products/${p.id}`} className="slide">
-                  {p.image && <img src={p.image} alt={p.name} className="slide-bg" />}
+                 {p.image && <Image src={p.image} alt={p.name} className="slide-bg" fill style={{ objectFit: 'cover', filter: 'brightness(0.6)' }} />}
                   <div className="slide-content">
                     <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
                     <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
@@ -312,7 +315,10 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             {recent.map(p => (
               <Link key={p.id} href={`/products/${p.id}`} className="recent-item">
                 <div className="recent-img">
-                  {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
+                   {p.image 
+                        ? <Image src={p.image} alt={p.name} width={80} height={80} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        : '🛒'
+                    }
                 </div>
                 <div className="recent-name">{p.name}</div>
               </Link>
@@ -352,7 +358,10 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                   {wishes.includes(p.id) ? '❤️' : '🤍'}
                 </button>
                 <div className="card-img-wrap">
-                  {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
+                {p.image 
+                    ? <Image src={p.image} alt={p.name} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    : '🛒'
+                }
                 </div>
                 <div className="card-body">
                   {p.category && <div className="card-category">{p.category}</div>}
