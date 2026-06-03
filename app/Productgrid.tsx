@@ -135,7 +135,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const go = (n: number) => setCur((n + total) % total);
 
   let filtered = products
-    .filter(p => {
+    .filter(p => { 
       if (active === '전체') return true;
       if (active === 'NEW') return p.badge === 'NEW';
       if (active === '추천') return p.badge === '인기' || p.badge === '추천';

@@ -1,8 +1,8 @@
 import { Client } from "@notionhq/client";
-import ProductGrid from "./ProductGrid";
+import ProductGrid from "./Productgrid";
 
 export const dynamic = 'force-dynamic';
-
+ 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 const rawId = process.env.NOTION_DATABASE_ID!;
