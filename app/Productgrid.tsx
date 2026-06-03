@@ -130,7 +130,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     const [sort, setSort] = useState('기본');
     const [cur, setCur] = useState(0);
 
-    const highlights = products.filter(p => p.badge === '인기').slice(0, 4);
+const highlights = products.slice(0, 4);
     const total = highlights.length;
 
     useEffect(() => {
