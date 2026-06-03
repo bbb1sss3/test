@@ -51,14 +51,16 @@ const css = `
   .sort-btn { background: #fff; color: #888; border: 1px solid #eee; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .sort-btn.active { background: #111; color: #fff; border-color: #111; }
   .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
-  .slider-wrap { position: relative; overflow: hidden; background: #fff; width: 100%; max-width: 100vw; }
- .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
-.slide { min-width: 100%; max-width: 100%; width: 100%; padding: 2rem 8rem; display: flex; align-items: center; justify-content: center; gap: 6rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; flex-shrink: 0; }
-.slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
-.slide h2 { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
-.slide h2 em { font-style: normal; color: #e52c2c; }
-.slide-desc { font-size: 13px; color: #999; margin-bottom: 1.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; }
-.slide-price { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -1px; }
+ .slider-wrap { position: relative; overflow: hidden; background: #111; width: 100%; max-width: 100vw; }
+.slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
+.slide { min-width: 100%; max-width: 100%; width: 100%; height: 300px; padding: 2rem 3rem; display: flex; align-items: flex-end; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; flex-shrink: 0; position: relative; }
+.slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(0.5); }
+.slide-content { position: relative; z-index: 1; }
+.slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #fff; border: 1.5px solid #fff; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 0.75rem; text-transform: uppercase; }
+.slide h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
+.slide h2 em { font-style: normal; color: #fff; }
+.slide-desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 0.75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 400px; }
+.slide-price { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -1px; }
 .slide-img { width: 220px; height: 220px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
 .slide-emoji { font-size: 100px; flex-shrink: 0; line-height: 1; }
   .dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
@@ -92,8 +94,8 @@ const css = `
     .header { padding: 0 1rem; }
     .filter-wrap { padding: 0.75rem 1rem; }
     .sort-wrap { padding: 0 1rem 0.75rem; }
-    .slide { padding: 2rem 1rem; }
-    .slide h2 { font-size: 22px; }
+  .slide { height: 200px; padding: 1.5rem 1rem; }
+.slide h2 { font-size: 20px; }
     .slide-emoji { font-size: 60px; }
     .slide-img { width: 90px; height: 90px; }
     .section { padding: 1.25rem 1rem 3rem; }
@@ -131,10 +133,10 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     const [cur, setCur] = useState(0);
 
     const highlights = products.filter(p => p.badge === '인기').slice(0, 4);
-console.log('highlights length:', highlights.length);
-    
+    console.log('highlights length:', highlights.length);
+
     const total = highlights.length;
-    
+
 
     useEffect(() => {
         if (total === 0) return;
@@ -183,14 +185,12 @@ console.log('highlights length:', highlights.length);
                     <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
                         {highlights.map((p) => (
                             <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="slide">
-                                <div style={{ flex: 1, minWidth: 0 }}>
+                                {p.image && <img src={p.image} alt={p.name} className="slide-bg" />}
+                                <div className="slide-content">
                                     <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
                                     <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
                                     <p className="slide-desc">{p.desc}</p>
                                     <div className="slide-price">{p.price}</div>
-                                </div>
-                                <div style={{ flexShrink: 0 }}>
-                                    {p.image ? <img src={p.image} alt={p.name} className="slide-img" /> : <span className="slide-emoji">🛒</span>}
                                 </div>
                             </a>
                         ))}
