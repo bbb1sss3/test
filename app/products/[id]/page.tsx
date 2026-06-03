@@ -24,6 +24,9 @@ async function getProduct(id: string) {
     discount: page.properties.할인율?.rich_text?.[0]?.plain_text ?? '',
     rating: page.properties.별점?.rich_text?.[0]?.plain_text ?? '',
     originalPrice: page.properties.원가?.rich_text?.[0]?.plain_text ?? '',
+    hanmadi: page.properties.한마디?.rich_text?.[0]?.plain_text ?? '',
+    tag: page.properties.태그?.rich_text?.[0]?.plain_text ?? '',
+    compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
   };
 }
 
@@ -95,12 +98,30 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .related-price { font-size: 13px; color: #111; font-weight: 900; margin-top: 4px; }
     .footer { border-top: 1px solid #e8e8e8; padding: 1rem 2rem; text-align: center; background: #111; }
     .footer p { font-size: 11px; color: #666; line-height: 1.7; }
+    .hanmadi { background: #111; border-radius: 12px; padding: 1.5rem 1.75rem; position: relative; overflow: hidden; border-left: 4px solid #e52c2c; margin-bottom: 1rem; }
+.hanmadi::after { content: '❝'; position: absolute; bottom: -20px; right: 16px; font-size: 100px; color: rgba(255,255,255,0.04); font-family: Georgia; line-height: 1; }
+.hanmadi-top { display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem; }
+.hanmadi-dot { width: 6px; height: 6px; background: #e52c2c; border-radius: 50%; }
+.hanmadi-title { font-size: 10px; font-weight: 800; color: #e52c2c; letter-spacing: 3px; text-transform: uppercase; }
+.hanmadi-text { font-size: 14px; color: #fff; line-height: 1.8; font-weight: 400; }
+.hanmadi-sign { font-size: 11px; color: #444; margin-top: 0.75rem; font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+.compare-box { background: #f9f9f9; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #f0f0f0; }
+.compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 1px; margin-bottom: 0.5rem; }
+.compare-text { font-size: 13px; color: #666; line-height: 1.8; white-space: pre-wrap; }
+
     @media (max-width: 768px) {
       .container { padding: 1rem; }
       .product-wrap { grid-template-columns: 1fr; gap: 1.5rem; }
       .product-name { font-size: 20px; }
       .product-price { font-size: 24px; }
       .related-grid { grid-template-columns: repeat(2, 1fr); }
+      .hanmadi { padding: 1.25rem; }
+  .hanmadi-text { font-size: 13px; }
+  .tag { font-size: 11px; padding: 4px 10px; }
+  .compare-box { padding: 0.875rem; }
+  .compare-text { font-size: 12px; }
     }
   `;
 
@@ -144,6 +165,29 @@ export default async function ProductPage({ params }: { params: { id: string } }
               {product.discount && <div className="product-discount">{product.discount} 할인</div>}
               {product.price && <div className="product-price">{product.price}</div>}
             </div>
+            {product.hanmadi && (
+                <div className="hanmadi">
+                    <div className="hanmadi-top">
+                    <div className="hanmadi-dot" />
+                    <div className="hanmadi-title">PREMY PICK · 에디터 코멘트</div>
+                    </div>
+                    <div className="hanmadi-text">{product.hanmadi}</div>
+                    <div className="hanmadi-sign">— PREMY 에디터</div>
+                </div>
+                )}
+                {product.tag && (
+                <div className="tags">
+                    {product.tag && product.tag.split(',').map((t: string, i: number) => (
+                        <span key={i} className="tag">{t.trim()}</span>
+                        ))}
+                </div>
+                )}
+                {product.compare && (
+                <div className="compare-box">
+                    <div className="compare-title">📊 경쟁 모델 비교</div>
+                    <div className="compare-text">{product.compare}</div>
+                </div>
+                )}
             <ShareButton name={product.name} />
             <a href={product.link} target="_blank" rel="noopener noreferrer" className="cta-btn">
               쿠팡 최저가 보러가기

@@ -15,6 +15,9 @@ type Product = {
   discount: string;
   rating: string;
   originalPrice: string;
+  hanmadi: string;
+    tag: string;
+    compare: string;
 };
 
 const categories = [

@@ -10,6 +10,7 @@ const rawId = process.env.NOTION_DATABASE_ID!;
 const dbId = rawId.includes('-')
   ? rawId
   : rawId.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
+  
 
 async function getProducts() {
   let allResults: any[] = [];
@@ -37,6 +38,9 @@ async function getProducts() {
     discount: page.properties.할인율?.rich_text?.[0]?.plain_text ?? '',
     rating: page.properties.별점?.rich_text?.[0]?.plain_text ?? '',
     originalPrice: page.properties.원가?.rich_text?.[0]?.plain_text ?? '',
+    hanmadi: page.properties.한마디?.rich_text?.[0]?.plain_text ?? '',
+    tag: page.properties.태그?.rich_text?.[0]?.plain_text ?? '',
+    compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
   }));
 }
 
