@@ -21,6 +21,7 @@ const categories = [
   { label: '전체', emoji: '🏠' },
   { label: 'NEW', emoji: '🆕' },
   { label: '추천', emoji: '⭐' },
+{ label: '인기', emoji: '🔥' },
   { label: '노트북', emoji: '💻' },
   { label: '데스크탑', emoji: '🖥️' },
   { label: '모니터', emoji: '🖥️' },
