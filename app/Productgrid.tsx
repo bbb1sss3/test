@@ -57,11 +57,11 @@ const css = `
 .slide { min-width: 100%; max-width: 100%; width: 100%; height: 250px; padding: 2rem 3rem; display: flex; align-items: flex-end; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; flex-shrink: 0; position: relative; }
 .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; filter: brightness(0.6); }
 .slide-content { position: relative; z-index: 1; }
-.slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 0.75rem; text-transform: uppercase; }
+.slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #D4A017; border: 1.5px solid #D4A017; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 0.75rem; text-transform: uppercase; }
 .slide h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
-.slide h2 em { font-style: normal; color: #e52c2c; }
+.slide h2 em { font-style: normal; color: #fff; }
 .slide-desc { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 0.75rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 400px; }
-.slide-price { font-size: 22px; font-weight: 900; color: #e52c2c; letter-spacing: -1px; }
+.slide-price { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -1px; }
 .slide-img { width: 220px; height: 220px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
 .slide-emoji { font-size: 100px; flex-shrink: 0; line-height: 1; }
   .dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
