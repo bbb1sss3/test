@@ -189,13 +189,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               </div>
 
           )}
-          {total > 1 && (
-              <div className="dots" style={{ display: 'flex', justifyContent: 'center', gap: '6px', padding: '0.75rem 0', background: '#fff' }}>
-                  {highlights.map((_, i) => (
-                      <div key={i} className={`dot${cur === i ? ' active' : ''}`} onClick={() => go(i)} />
-                  ))}
-              </div>
-          )}
+         
 
       <section className="section">
               <div className="section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
