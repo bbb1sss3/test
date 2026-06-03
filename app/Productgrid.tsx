@@ -53,8 +53,8 @@ const css = `
   .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
  .slider-wrap { position: relative; overflow: hidden; background: #111; width: 100%; max-width: 100vw; }
 .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
-.slide { min-width: 100%; max-width: 100%; width: 100%; height: 300px; padding: 2rem 3rem; display: flex; align-items: flex-end; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; flex-shrink: 0; position: relative; }
-.slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(0.5); }
+.slide { min-width: 100%; max-width: 100%; width: 100%; height: 250px; padding: 2rem 3rem; display: flex; align-items: flex-end; justify-content: flex-start; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; flex-shrink: 0; position: relative; }
+.slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; filter: brightness(0.5); }
 .slide-content { position: relative; z-index: 1; }
 .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #fff; border: 1.5px solid #fff; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 0.75rem; text-transform: uppercase; }
 .slide h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
