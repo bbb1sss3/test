@@ -122,7 +122,7 @@ const css = `
     .footer-mobile { display: block; font-size: 10px; color: #666; line-height: 1.6; }
     .footer-pc { display: none; }
     .hero-banner { display: none !important; }
-    .recent-wrap { padding: 0.75rem 1.5rem 0.75rem; margin-top: 0.25rem; }
+   .recent-wrap { padding: 0.75rem 1rem 0.75rem; margin-top: 0; }
     .slider-wrap { margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
       .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   }
