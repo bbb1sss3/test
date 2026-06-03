@@ -234,6 +234,16 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                         <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', letterSpacing: '-1px' }}>NO<span style={{ color: '#e52c2c' }}>.1</span></div>
                         <div style={{ fontSize: '10px', color: '#444', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>CURATION</div>
                     </div>
+                    <div style={{ width: '1px', height: '30px', background: '#333' }} />
+                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', letterSpacing: '-1px' }}>TOP<span style={{ color: '#e52c2c' }}>%</span></div>
+                    <div style={{ fontSize: '10px', color: '#444', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>PREMIUM</div>
+                    </div>
+                    <div style={{ width: '1px', height: '30px', background: '#333' }} />
+                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', letterSpacing: '-1px' }}>100<span style={{ color: '#e52c2c' }}>%</span></div>
+                    <div style={{ fontSize: '10px', color: '#444', letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>TRUSTED</div>
+                    </div>
                 </div>
                 <div className="hero-badge">PREMY PICK ✦</div>
             </div>
