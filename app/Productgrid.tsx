@@ -90,26 +90,24 @@ const css = `
 .footer { background: #111; border-top: none; padding: 0.75rem 1.5rem; text-align: center; }
 .footer p { font-size: 11px; color: #666; line-height: 1.7; }
 .footer-mobile { display: none; }
-  @media (max-width: 768px) {
-    .header { padding: 0 1rem; }
-    .filter-wrap { padding: 0.75rem 1rem; }
-    .sort-wrap { padding: 0 1rem 0.75rem; }
-  .slide { height: 200px; padding: 1.5rem 1rem; }
-.slide h2 { font-size: 20px; }
-    .slide-emoji { font-size: 60px; }
-    .slide-img { width: 90px; height: 90px; }
-    .section { padding: 1.25rem 1rem 3rem; }
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    main { min-height: unset; }
-.footer-mobile { display: block; font-size: 10px; color: #666; line-height: 1.6; }
-  .footer-pc { display: none; }
-  .slide { padding: 1.5rem 1rem; gap: 1rem; }
-  .slide-img { width: 100px; height: 100px; }
+ @media (max-width: 768px) {
+  .header { padding: 0 1rem; }
+  .filter-wrap { padding: 0.75rem 1rem; }
+  .sort-wrap { padding: 0 1rem 0.75rem; }
+  .slide { height: 200px; padding: 1.5rem 1rem; gap: 1rem; }
   .slide h2 { font-size: 18px; }
-  .hero-banner { display: none; } 
-.card-img-wrap { height: 140px; aspect-ratio: unset; }
-  }
-  .hero-banner { padding: 2rem; background: #111; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
+  .slide-emoji { font-size: 60px; }
+  .slide-img { width: 100px; height: 100px; }
+  .section { padding: 1.25rem 1rem 3rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  main { min-height: unset; }
+  .footer-mobile { display: block; font-size: 10px; color: #666; line-height: 1.6; }
+  .footer-pc { display: none; }
+  .card-img-wrap { height: 140px; aspect-ratio: unset; overflow: hidden; }
+  .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-banner { display: none; }
+}
+.hero-banner { padding: 2rem; background: #111; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
 .hero-banner h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.2; }
 .hero-banner h2 em { font-style: normal; color: #e52c2c; }
 .hero-banner p { font-size: 12px; color: #666; margin-top: 0.5rem; }
