@@ -73,7 +73,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-img { aspect-ratio: 1; background: #f9f9f9; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 80px; }
     .product-img img { width: 100%; height: 100%; object-fit: cover; }
     .product-info { display: flex; flex-direction: column; gap: 12px; }
-    .product-category { font-size: 12px; color: #e52c2c; font-weight: 700; }
+    .product-category { font-size: 12px; color: #333; font-weight: 700; }
     .product-name { font-size: 24px; font-weight: 800; color: #111; letter-spacing: -1px; line-height: 1.3; }
     .product-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
 .badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
@@ -126,11 +126,15 @@ export default async function ProductPage({ params }: { params: { id: string } }
           </div>
           <div className="product-info">
             <div className="product-category">{product.category}</div>
-            {product.badge && (
-               <span className={`product-badge ${product.badge === 'NEW' ? 'badge-new' : product.badge === '인기' ? 'badge-hot' : 'badge-pick'}`}>
-                {product.badge === 'NEW' ? 'NEW' : product.badge === '인기' ? '🥇 BEST' : '⭐ 추천'}
-            </span>
-            )}
+            <div style={{ display: 'flex' }}>
+                {product.badge && (
+                <span className={`product-badge ${product.badge === 'NEW' ? 'badge-new' : product.badge === '인기' ? 'badge-hot' : 'badge-pick'}`}>
+                    {product.badge === 'NEW' ? 'NEW' : product.badge === '인기' ? '🥇 BEST' : '⭐ 추천'}
+                </span>
+                )}
+
+            </div>
+               
             <div className="product-name">{product.name}</div>
             <Stars rating={product.rating} />
             {product.desc && <div className="product-desc">{product.desc}</div>}
