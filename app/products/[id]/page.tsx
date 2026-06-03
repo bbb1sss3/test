@@ -64,7 +64,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0 2rem; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
     .logo { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
     .logo span { color: #e52c2c; }
-    .breadcrumb { padding: 1rem 2rem; font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 8px; }
+    .breadcrumb { padding: 1rem 2rem; font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 8px; overflow: hidden; white-space: nowrap; }
+.breadcrumb span:last-child { overflow: hidden; text-overflow: ellipsis; }
     .breadcrumb a { color: #aaa; text-decoration: none; }
     .breadcrumb a:hover { color: #111; }
     .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
@@ -75,8 +76,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-category { font-size: 12px; color: #e52c2c; font-weight: 700; }
     .product-name { font-size: 24px; font-weight: 800; color: #111; letter-spacing: -1px; line-height: 1.3; }
     .product-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
-    .badge-new { background: #e52c2c; color: #fff; }
-    .badge-hot { background: #ff6b00; color: #fff; }
+.badge-hot { background: #ff6b00; color: #fff; border-radius: 20px; }
+.badge-new { background: #e52c2c; color: #fff; border-radius: 20px; }
     .product-desc { font-size: 14px; color: #666; line-height: 1.8; padding: 1rem; background: #f9f9f9; border-radius: 8px; }
     .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
@@ -102,7 +103,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
   `;
 
   return (
-    <main style={{ background: '#fff', minHeight: '100vh' }}>
+    <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <header className="header">
@@ -117,7 +118,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         <span>{product.name.slice(0, 20)}...</span>
       </div>
 
-      <div className="container">
+      <div className="container" style={{ flex: 1 }}>
         <div className="product-wrap">
           <div className="product-img">
             {product.image ? <img src={product.image} alt={product.name} /> : '🛒'}

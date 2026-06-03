@@ -230,7 +230,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           </div>
 
           {showWish && (
-              <div style={{ padding: '1rem 1.5rem', background: '#fff9f9', borderBottom: '1px solid #ffe0e0' }}>
+             <div style={{ padding: '1rem 1.5rem', background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
                   <div style={{ fontSize: '15px', fontWeight: 800, color: '#111', marginBottom: '1rem' }}>찜한 상품 ({wishes.length})</div>
                   {wishes.length === 0 ? (
                       <div style={{ color: '#ccc', fontSize: '14px' }}>찜한 상품이 없습니다</div>
@@ -296,13 +296,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               ))}
             </div>
           </div>
-          {total > 1 && (
-            <div className="dots">
-              {highlights.map((_, i) => (
-                <div key={i} className={`dot${cur === i ? ' active' : ''}`} onClick={() => go(i)} />
-              ))}
-            </div>
-          )}
+          
         </>
       )}
 
