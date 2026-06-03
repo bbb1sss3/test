@@ -150,6 +150,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('기본');
   const [cur, setCur] = useState(0);
+  const [showWish, setShowWish] = useState(false);
   const [wishes, setWishes] = useState<string[]>([]);
   const [recent, setRecent] = useState<Product[]>([]);
 
@@ -205,17 +206,53 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <input className="search-input" type="text" placeholder="상품 검색..." value={search} onChange={e => setSearch(e.target.value)} />
           <span className="search-icon">🔍</span>
         </div>
+          <button
+            onClick={() => setShowWish(!showWish)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '22px', position: 'relative', flexShrink: 0 }}
+        >
+            ❤️
+            {wishes.length > 0 && (
+            <span style={{ position: 'absolute', top: '-4px', right: '-4px', background: '#e52c2c', color: '#fff', fontSize: '10px', fontWeight: 800, borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {wishes.length}
+            </span>
+            )}
+        </button>
       </header>
 
-      <div className="filter-area">
-        <div className="filter-wrap">
-          {categories.map(cat => (
-            <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
-              <span>{cat.emoji}</span>{cat.label}
-            </button>
-          ))}
-        </div>
-      </div>
+          <div className="filter-area">
+              <div className="filter-wrap">
+                  {categories.map(cat => (
+                      <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
+                          <span>{cat.emoji}</span>{cat.label}
+                      </button>
+                  ))}
+              </div>
+          </div>
+
+          {showWish && (
+              <div style={{ padding: '1rem 1.5rem', background: '#fff9f9', borderBottom: '1px solid #ffe0e0' }}>
+                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#111', marginBottom: '1rem' }}>찜한 상품 ({wishes.length})</div>
+                  {wishes.length === 0 ? (
+                      <div style={{ color: '#ccc', fontSize: '14px' }}>찜한 상품이 없습니다</div>
+                  ) : (
+                      <div className="grid">
+                          {products.filter(p => wishes.includes(p.id)).map(p => (
+                              <Link key={p.id} href={`/products/${p.id}`} className="card">
+                                  <div className="card-img-wrap">
+                                      {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
+                                  </div>
+                                  <div className="card-body">
+                                      <div className="card-category">{p.category}</div>
+                                      <div className="card-name">{p.name}</div>
+                                      {p.price && <div className="card-price">{p.price}</div>}
+                                  </div>
+                              </Link>
+                          ))}
+                      </div>
+                  )}
+              </div>
+          )}
+
 
       <div className="hero-banner">
         <div>
