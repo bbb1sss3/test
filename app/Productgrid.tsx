@@ -189,9 +189,10 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
   let filtered = products
     .filter(p => {
-      if (active === '전체') return true;
-      if (active === 'NEW') return p.badge === 'NEW';
-      if (active === '추천') return p.badge === '인기' || p.badge === '추천';
+       if (active === '전체') return true;
+        if (active === 'NEW') return p.badge === 'NEW';
+        if (active === '추천') return p.badge === '추천';
+        if (active === '인기') return p.badge === '인기';
       return p.category === active;
     })
     .filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()) || p.category.toLowerCase().includes(search.toLowerCase()));
