@@ -51,7 +51,6 @@ const css = `
   .sort-btn { background: #fff; color: #888; border: 1px solid #eee; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .sort-btn.active { background: #111; color: #fff; border-color: #111; }
   .sort-btn:hover { border-color: #111; color: #111; }
-  .slider-wrap { position: relative; overflow: hidden; border-bottom: 1px solid #f0f0f0; background: #fff; }
   .slides { display: flex; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
   .slide { min-width: 100%; padding: 3rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; text-decoration: none; color: inherit; }
   .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
@@ -85,8 +84,8 @@ const css = `
   .badge-new { background: #e52c2c; color: #fff; }
   .badge-hot { background: #ff6b00; color: #fff; }
   .empty { text-align: center; padding: 5rem 2rem; color: #ccc; font-size: 15px; }
-  .footer { border-top: 1px solid #e8e8e8; padding: 1.25rem 1.5rem; text-align: center; }
-  .footer p { font-size: 11px; color: #bbb; line-height: 1.7; }
+.footer { background: #f7f7f7; border-top: 1px solid #e8e8e8; padding: 1.25rem 1.5rem; text-align: center; }
+.footer p { font-size: 11px; color: #bbb; line-height: 1.7; }
   @media (max-width: 768px) {
     .header { padding: 0 1rem; }
     .filter-wrap { padding: 0.75rem 1rem; }
@@ -165,12 +164,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               <span>{cat.emoji}</span>{cat.label}
             </button>
           ))}
-        </div>
-        <div className="sort-wrap">
-          {['기본', '낮은가격순', '높은가격순'].map(s => (
-            <button key={s} className={`sort-btn${sort === s ? ' active' : ''}`} onClick={() => setSort(s)}>{s}</button>
-          ))}
-        </div>
+        </div>       
       </div>
 
       {highlights.length > 0 && (
@@ -201,9 +195,14 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       )}
 
       <section className="section">
-        <div className="section-header">
-          {search ? `"${search}" 검색 결과` : active === '전체' ? '추천 제품' : active}
-        </div>
+              <div className="section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span>{search ? `"${search}" 검색 결과` : active === '전체' ? '추천 제품' : active}</span>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      {['기본', '낮은가격순', '높은가격순'].map(s => (
+                          <button key={s} className={`sort-btn${sort === s ? ' active' : ''}`} onClick={() => setSort(s)}>{s}</button>
+                      ))}
+                  </div>
+              </div>
         {filtered.length === 0 ? (
           <div className="empty">
             {search ? `"${search}"에 대한 검색 결과가 없습니다` : '해당 카테고리의 상품이 없습니다'}
