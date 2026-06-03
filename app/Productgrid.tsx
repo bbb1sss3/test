@@ -322,12 +322,12 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
       <section className="section">
         <div className="section-header">
-          <span>{search ? `"${search}" 검색 결과` : active === '전체' ? '추천 제품' : active}</span>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <span>{search ? `"${search}" 검색 결과` : active === '전체' ? '추천 제품' : active}</span>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             {['기본', '낮은가격순', '높은가격순'].map(s => (
-              <button key={s} className={`sort-btn${sort === s ? ' active' : ''}`} onClick={() => setSort(s)}>{s}</button>
+            <button key={s} className={`sort-btn${sort === s ? ' active' : ''}`} onClick={() => setSort(s)}>{s}</button>
             ))}
-          </div>
+        </div>
         </div>
         {filtered.length === 0 ? (
           <div className="empty">
