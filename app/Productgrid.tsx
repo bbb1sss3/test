@@ -84,8 +84,9 @@ const css = `
   .card-original-price { font-size: 12px; color: #aaa; text-decoration: line-through; margin-bottom: 2px; }
   .card-price { font-size: 16px; color: #111; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
   .badge { position: absolute; top: 8px; left: 8px; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; z-index: 1; }
-  .badge-new { background: #e52c2c; color: #fff; }
-  .badge-hot { background: #ff6b00; color: #fff; }
+.badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
+.badge-hot { background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
+.badge-pick { background: linear-gradient(135deg, #666, #999, #666); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
   .wish-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; z-index: 1; transition: all 0.15s; }
   .wish-btn:hover { transform: scale(1.1); }
   .empty { text-align: center; padding: 5rem 2rem; color: #ccc; font-size: 15px; }
@@ -339,7 +340,9 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                 localStorage.setItem('recent', JSON.stringify(updated));
               }}>
                 {p.badge && (
-                  <span className={`badge ${p.badge === 'NEW' ? 'badge-new' : 'badge-hot'}`}>{p.badge}</span>
+                  <span className={`badge ${p.badge === 'NEW' ? 'badge-new' : p.badge === '인기' ? 'badge-hot' : 'badge-pick'}`}>
+                    {p.badge === 'NEW' ? 'NEW' : p.badge === '인기' ? '🥇 BEST' : '⭐ 추천'}
+                    </span>
                 )}
                 <button className="wish-btn" onClick={(e) => toggleWish(p.id, e)}>
                   {wishes.includes(p.id) ? '❤️' : '🤍'}

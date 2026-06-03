@@ -76,8 +76,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-category { font-size: 12px; color: #e52c2c; font-weight: 700; }
     .product-name { font-size: 24px; font-weight: 800; color: #111; letter-spacing: -1px; line-height: 1.3; }
     .product-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
-.badge-hot { background: #ff6b00; color: #fff; border-radius: 20px; }
-.badge-new { background: #e52c2c; color: #fff; border-radius: 20px; }
+.badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
+.badge-hot { background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
+.badge-pick { background: linear-gradient(135deg, #666, #999, #666); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
     .product-desc { font-size: 14px; color: #666; line-height: 1.8; padding: 1rem; background: #f9f9f9; border-radius: 8px; }
     .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
@@ -126,9 +127,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
           <div className="product-info">
             <div className="product-category">{product.category}</div>
             {product.badge && (
-              <span className={`product-badge ${product.badge === 'NEW' ? 'badge-new' : 'badge-hot'}`}>
-                {product.badge}
-              </span>
+               <span className={`product-badge ${product.badge === 'NEW' ? 'badge-new' : product.badge === '인기' ? 'badge-hot' : 'badge-pick'}`}>
+                {product.badge === 'NEW' ? 'NEW' : product.badge === '인기' ? '🥇 BEST' : '⭐ 추천'}
+            </span>
             )}
             <div className="product-name">{product.name}</div>
             <Stars rating={product.rating} />
