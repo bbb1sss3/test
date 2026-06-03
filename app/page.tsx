@@ -1,8 +1,9 @@
-import { Client } from "@notionhq/client";
 import ProductGrid from "./Productgrid";
 
-export const dynamic = 'force-dynamic';
- 
+export const revalidate = 3600;
+
+import { Client } from "@notionhq/client";
+
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 const rawId = process.env.NOTION_DATABASE_ID!;
@@ -11,8 +12,20 @@ const dbId = rawId.includes('-')
   : rawId.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
 
 async function getProducts() {
-  const response = await notion.dataSources.query({ data_source_id: dbId });
-  return response.results.map((page: any) => ({
+  let allResults: any[] = [];
+  let cursor: string | undefined = undefined;
+
+  do {
+    const response = await notion.dataSources.query({
+      data_source_id: dbId,
+      start_cursor: cursor,
+      page_size: 100,
+    });
+    allResults = [...allResults, ...response.results];
+    cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+  } while (cursor);
+
+  return allResults.map((page: any) => ({
     id: page.id,
     name: page.properties.Name?.title?.[0]?.plain_text ?? '',
     category: page.properties.카테고리?.select?.name ?? '',
@@ -28,5 +41,9 @@ async function getProducts() {
 
 export default async function Home() {
   const products = await getProducts();
-  return <ProductGrid products={products} />;
+  return (
+    <div>
+      <ProductGrid products={products} />
+    </div>
+  );
 }

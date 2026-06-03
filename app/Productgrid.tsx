@@ -50,16 +50,16 @@ const css = `
   .sort-wrap { padding: 0 1.5rem 0.75rem; display: flex; gap: 0.5rem; }
   .sort-btn { background: #fff; color: #888; border: 1px solid #eee; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .sort-btn.active { background: #111; color: #fff; border-color: #111; }
-  .sort-btn:hover { border-color: #111; color: #111; }
-  .slides { display: flex; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
-  .slide { min-width: 100%; padding: 3rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; text-decoration: none; color: inherit; }
-  .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
-  .slide h2 { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
-  .slide h2 em { font-style: normal; color: #e52c2c; }
-  .slide-desc { font-size: 13px; color: #999; margin-bottom: 1.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; }
-  .slide-price { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -1px; }
-  .slide-img { width: 140px; height: 140px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-  .slide-emoji { font-size: 100px; flex-shrink: 0; line-height: 1; }
+  .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
+ .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
+.slide { min-width: 100%; width: 100%; padding: 3rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
+.slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
+.slide h2 { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
+.slide h2 em { font-style: normal; color: #e52c2c; }
+.slide-desc { font-size: 13px; color: #999; margin-bottom: 1.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; }
+.slide-price { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -1px; }
+.slide-img { width: 140px; height: 140px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.slide-emoji { font-size: 100px; flex-shrink: 0; line-height: 1; }
   .dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.2s; }
   .dot.active { background: #e52c2c; width: 18px; border-radius: 3px; }
@@ -84,7 +84,7 @@ const css = `
   .badge-new { background: #e52c2c; color: #fff; }
   .badge-hot { background: #ff6b00; color: #fff; }
   .empty { text-align: center; padding: 5rem 2rem; color: #ccc; font-size: 15px; }
-.footer { background: #f7f7f7; border-top: 1px solid #e8e8e8; padding: 1.25rem 1.5rem; text-align: center; }
+.footer { background: #f7f7f7; border-top: 1px solid #e8e8e8; padding: 0.6rem 1.5rem; text-align: center; }
 .footer p { font-size: 11px; color: #bbb; line-height: 1.7; }
   @media (max-width: 768px) {
     .header { padding: 0 1rem; }
