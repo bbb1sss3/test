@@ -53,7 +53,7 @@ const css = `
   .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
   .slider-wrap { position: relative; overflow: hidden; background: #fff; width: 100%; max-width: 100vw; }
  .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
-.slide { min-width: 100%; width: 100%; padding: 3rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
+.slide { min-width: 100%; width: 100%; padding: 3rem 2rem; display: flex; align-items: center; justify-content: center; gap: 4rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
 .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
 .slide h2 { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
 .slide h2 em { font-style: normal; color: #e52c2c; }
@@ -100,7 +100,7 @@ const css = `
     .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     main { min-height: unset; }
     .footer-pc { display: none; }
-  .footer-mobile { display: block; font-size: 11px; color: #bbb; line-height: 1.7; }
+  .footer-mobile { display: block; font-size: 9px; color: #bbb; line-height: 1.7; }
   }
 `;
 
