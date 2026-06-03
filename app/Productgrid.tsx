@@ -53,13 +53,14 @@ const css = `
   .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
   .slider-wrap { position: relative; overflow: hidden; background: #fff; width: 100%; max-width: 100vw; }
  .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
-.slide { min-width: 100%; width: 100%; padding: 3rem 2rem; display: flex; align-items: center; justify-content: center; gap: 4rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
+..slide { min-width: 100%; width: 100%; padding: 2rem 6rem; display: flex; align-items: center; justify-content: center; gap: 4rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
+
 .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
 .slide h2 { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
 .slide h2 em { font-style: normal; color: #e52c2c; }
 .slide-desc { font-size: 13px; color: #999; margin-bottom: 1.25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; }
 .slide-price { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -1px; }
-.slide-img { width: 140px; height: 140px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.slide-img { width: 220px; height: 220px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
 .slide-emoji { font-size: 100px; flex-shrink: 0; line-height: 1; }
   .dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.2s; }
@@ -85,8 +86,8 @@ const css = `
   .badge-new { background: #e52c2c; color: #fff; }
   .badge-hot { background: #ff6b00; color: #fff; }
   .empty { text-align: center; padding: 5rem 2rem; color: #ccc; font-size: 15px; }
-.footer { background: #f7f7f7; border-top: 1px solid #e8e8e8; padding: 0.6rem 1.5rem; text-align: center; }
-.footer p { font-size: 11px; color: #bbb; line-height: 1.7; }
+.footer { background: #111; border-top: none; padding: 0.75rem 1.5rem; text-align: center; }
+.footer p { font-size: 11px; color: #666; line-height: 1.7; }
 .footer-mobile { display: none; }
   @media (max-width: 768px) {
     .header { padding: 0 1rem; }
@@ -99,8 +100,11 @@ const css = `
     .section { padding: 1.25rem 1rem 3rem; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     main { min-height: unset; }
-    .footer-pc { display: none; }
-  .footer-mobile { display: block; font-size: 9px; color: #bbb; line-height: 1.7; }
+.footer-mobile { display: block; font-size: 10px; color: #666; line-height: 1.6; }
+  .footer-pc { display: none; }
+  .slide { padding: 1.5rem 1rem; gap: 1rem; }
+  .slide-img { width: 100px; height: 100px; }
+  .slide h2 { font-size: 18px; }
   }
 `;
 
@@ -234,7 +238,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
             <footer className="footer">
                 <p className="footer-pc">© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
-                <p className="footer-mobile">© 2026 Premy &nbsp;·&nbsp; 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있습니다.</p>
+                <p className="footer-mobile">© 2026 Premy &nbsp;·&nbsp; 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
             </footer>
         </main>
     );
