@@ -3,33 +3,33 @@
 import { useState, useEffect } from "react";
 
 type Product = {
-  id: string;
-  name: string;
-  category: string;
-  image: string;
-  link: string;
-  desc: string;
-  badge: string;
-  price: string;
-  discount: string;
-  rating: string;
+    id: string;
+    name: string;
+    category: string;
+    image: string;
+    link: string;
+    desc: string;
+    badge: string;
+    price: string;
+    discount: string;
+    rating: string;
 };
 
 const categories = [
-  { label: '전체', emoji: '🏠' },
-  { label: 'NEW', emoji: '🆕' },
-  { label: '추천', emoji: '⭐' },
-  { label: '노트북', emoji: '💻' },
-  { label: '데스크탑', emoji: '🖥️' },
-  { label: '모니터', emoji: '🖥️' },
-  { label: '냉장고', emoji: '❄️' },
-  { label: '세탁기/건조기', emoji: '🫧' },
-  { label: 'TV', emoji: '📺' },
-  { label: '청소기', emoji: '🌀' },
-  { label: '에어컨', emoji: '💨' },
-  { label: '안마의자', emoji: '💆' },
-  { label: '공기청정기', emoji: '🌬️' },
-  { label: '식기세척기', emoji: '🍽️' },
+    { label: '전체', emoji: '🏠' },
+    { label: 'NEW', emoji: '🆕' },
+    { label: '추천', emoji: '⭐' },
+    { label: '노트북', emoji: '💻' },
+    { label: '데스크탑', emoji: '🖥️' },
+    { label: '모니터', emoji: '🖥️' },
+    { label: '냉장고', emoji: '❄️' },
+    { label: '세탁기/건조기', emoji: '🫧' },
+    { label: 'TV', emoji: '📺' },
+    { label: '청소기', emoji: '🌀' },
+    { label: '에어컨', emoji: '💨' },
+    { label: '안마의자', emoji: '💆' },
+    { label: '공기청정기', emoji: '🌬️' },
+    { label: '식기세척기', emoji: '🍽️' },
 ];
 
 const css = `
@@ -87,6 +87,7 @@ const css = `
   .empty { text-align: center; padding: 5rem 2rem; color: #ccc; font-size: 15px; }
 .footer { background: #f7f7f7; border-top: 1px solid #e8e8e8; padding: 0.6rem 1.5rem; text-align: center; }
 .footer p { font-size: 11px; color: #bbb; line-height: 1.7; }
+.footer-mobile { display: none; }
   @media (max-width: 768px) {
     .header { padding: 0 1rem; }
     .filter-wrap { padding: 0.75rem 1rem; }
@@ -98,140 +99,143 @@ const css = `
     .section { padding: 1.25rem 1rem 3rem; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     main { min-height: unset; }
+    .footer-pc { display: none; }
+  .footer-mobile { display: block; font-size: 11px; color: #bbb; line-height: 1.7; }
   }
 `;
 
 function Stars({ rating }: { rating: string }) {
-  const num = parseFloat(rating);
-  if (!num) return null;
-  const full = Math.floor(num);
-  const half = num % 1 >= 0.5;
-  return (
-    <div className="card-rating">
-      {'★'.repeat(full)}{half ? '½' : ''}{'☆'.repeat(5 - full - (half ? 1 : 0))}
-      <span>{rating}</span>
-    </div>
-  );
+    const num = parseFloat(rating);
+    if (!num) return null;
+    const full = Math.floor(num);
+    const half = num % 1 >= 0.5;
+    return (
+        <div className="card-rating">
+            {'★'.repeat(full)}{half ? '½' : ''}{'☆'.repeat(5 - full - (half ? 1 : 0))}
+            <span>{rating}</span>
+        </div>
+    );
 }
 
 function parsePrice(price: string) {
-  return parseInt(price.replace(/[^0-9]/g, '') || '0');
+    return parseInt(price.replace(/[^0-9]/g, '') || '0');
 }
 
 export default function ProductGrid({ products }: { products: Product[] }) {
-  const [active, setActive] = useState('전체');
-  const [search, setSearch] = useState('');
-  const [sort, setSort] = useState('기본');
-  const [cur, setCur] = useState(0);
+    const [active, setActive] = useState('전체');
+    const [search, setSearch] = useState('');
+    const [sort, setSort] = useState('기본');
+    const [cur, setCur] = useState(0);
 
-  const highlights = products.slice(0, 4);
-  const total = highlights.length;
+    const highlights = products.slice(0, 4);
+    const total = highlights.length;
 
-  useEffect(() => {
-    if (total === 0) return;
-    const timer = setInterval(() => setCur(c => (c + 1) % total), 3500);
-    return () => clearInterval(timer);
-  }, [total]);
+    useEffect(() => {
+        if (total === 0) return;
+        const timer = setInterval(() => setCur(c => (c + 1) % total), 3500);
+        return () => clearInterval(timer);
+    }, [total]);
 
-  const go = (n: number) => setCur((n + total) % total);
+    const go = (n: number) => setCur((n + total) % total);
 
-  let filtered = products
-    .filter(p => { 
-      if (active === '전체') return true;
-      if (active === 'NEW') return p.badge === 'NEW';
-      if (active === '추천') return p.badge === '인기' || p.badge === '추천';
-      return p.category === active;
-    })
-    .filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()) || p.category.toLowerCase().includes(search.toLowerCase()));
+    let filtered = products
+        .filter(p => {
+            if (active === '전체') return true;
+            if (active === 'NEW') return p.badge === 'NEW';
+            if (active === '추천') return p.badge === '인기' || p.badge === '추천';
+            return p.category === active;
+        })
+        .filter(p => !search || p.name.toLowerCase().includes(search.toLowerCase()) || p.category.toLowerCase().includes(search.toLowerCase()));
 
-  if (sort === '낮은가격순') filtered = [...filtered].sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
-  if (sort === '높은가격순') filtered = [...filtered].sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
+    if (sort === '낮은가격순') filtered = [...filtered].sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
+    if (sort === '높은가격순') filtered = [...filtered].sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
 
-  return (
-    <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      <style dangerouslySetInnerHTML={{ __html: css }} />
+    return (
+        <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <style dangerouslySetInnerHTML={{ __html: css }} />
 
-      <header className="header">
-        <div className="logo">PRE<span>MY</span></div>
-        <div className="search-wrap">
-          <input className="search-input" type="text" placeholder="상품 검색..." value={search} onChange={e => setSearch(e.target.value)} />
-          <span className="search-icon">🔍</span>
-        </div>
-      </header>
+            <header className="header">
+                <div className="logo">PRE<span>MY</span></div>
+                <div className="search-wrap">
+                    <input className="search-input" type="text" placeholder="상품 검색..." value={search} onChange={e => setSearch(e.target.value)} />
+                    <span className="search-icon">🔍</span>
+                </div>
+            </header>
 
-      <div className="filter-area">
-        <div className="filter-wrap">
-          {categories.map(cat => (
-            <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
-              <span>{cat.emoji}</span>{cat.label}
-            </button>
-          ))}
-        </div>       
-      </div>
+            <div className="filter-area">
+                <div className="filter-wrap">
+                    {categories.map(cat => (
+                        <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
+                            <span>{cat.emoji}</span>{cat.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
 
-          {highlights.length > 0 && (
-              <div className="slider-wrap">
-                  <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
-                      {highlights.map((p) => (
-                          <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="slide">
-                              <div style={{ flex: 1, minWidth: 0 }}>
-                                  <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
-                                  <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
-                                  <p className="slide-desc">{p.desc}</p>
-                                  <div className="slide-price">{p.price}</div>
-                              </div>
-                              <div style={{ flexShrink: 0 }}>
-                                  {p.image ? <img src={p.image} alt={p.name} className="slide-img" /> : <span className="slide-emoji">🛒</span>}
-                              </div>
-                          </a>
-                      ))}
-                  </div>
-              </div>
+            {highlights.length > 0 && (
+                <div className="slider-wrap">
+                    <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
+                        {highlights.map((p) => (
+                            <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="slide">
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                    <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
+                                    <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
+                                    <p className="slide-desc">{p.desc}</p>
+                                    <div className="slide-price">{p.price}</div>
+                                </div>
+                                <div style={{ flexShrink: 0 }}>
+                                    {p.image ? <img src={p.image} alt={p.name} className="slide-img" /> : <span className="slide-emoji">🛒</span>}
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
 
-          )}
-         
+            )}
 
-      <section className="section">
-              <div className="section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span>{search ? `"${search}" 검색 결과` : active === '전체' ? '추천 제품' : active}</span>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      {['기본', '낮은가격순', '높은가격순'].map(s => (
-                          <button key={s} className={`sort-btn${sort === s ? ' active' : ''}`} onClick={() => setSort(s)}>{s}</button>
-                      ))}
-                  </div>
-              </div>
-        {filtered.length === 0 ? (
-          <div className="empty">
-            {search ? `"${search}"에 대한 검색 결과가 없습니다` : '해당 카테고리의 상품이 없습니다'}
-          </div>
-        ) : (
-          <div className="grid">
-            {filtered.map((p) => (
-              <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="card">
-                {p.badge && (
-                  <span className={`badge ${p.badge === 'NEW' ? 'badge-new' : 'badge-hot'}`}>{p.badge}</span>
+
+            <section className="section">
+                <div className="section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span>{search ? `"${search}" 검색 결과` : active === '전체' ? '추천 제품' : active}</span>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        {['기본', '낮은가격순', '높은가격순'].map(s => (
+                            <button key={s} className={`sort-btn${sort === s ? ' active' : ''}`} onClick={() => setSort(s)}>{s}</button>
+                        ))}
+                    </div>
+                </div>
+                {filtered.length === 0 ? (
+                    <div className="empty">
+                        {search ? `"${search}"에 대한 검색 결과가 없습니다` : '해당 카테고리의 상품이 없습니다'}
+                    </div>
+                ) : (
+                    <div className="grid">
+                        {filtered.map((p) => (
+                            <a key={p.id} href={p.link} target="_blank" rel="noopener noreferrer" className="card">
+                                {p.badge && (
+                                    <span className={`badge ${p.badge === 'NEW' ? 'badge-new' : 'badge-hot'}`}>{p.badge}</span>
+                                )}
+                                <div className="card-img-wrap">
+                                    {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
+                                </div>
+                                <div className="card-body">
+                                    {p.category && <div className="card-category">{p.category}</div>}
+                                    <div className="card-name">{p.name}</div>
+                                    {p.desc && <div className="card-desc">{p.desc}</div>}
+                                    <Stars rating={p.rating} />
+                                    {p.discount && <div className="card-discount">{p.discount} 할인</div>}
+                                    {p.price && <div className="card-price">{p.price}</div>}
+                                    <div className="card-cta">쿠팡에서 보기</div>
+                                </div>
+                            </a>
+                        ))}
+                    </div>
                 )}
-                <div className="card-img-wrap">
-                  {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
-                </div>
-                <div className="card-body">
-                  {p.category && <div className="card-category">{p.category}</div>}
-                  <div className="card-name">{p.name}</div>
-                  {p.desc && <div className="card-desc">{p.desc}</div>}
-                  <Stars rating={p.rating} />
-                  {p.discount && <div className="card-discount">{p.discount} 할인</div>}
-                  {p.price && <div className="card-price">{p.price}</div>}
-                  <div className="card-cta">쿠팡에서 보기</div>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
-      </section>
+            </section>
 
-      <footer className="footer">
-        <p>© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
-      </footer>
-    </main>
-  );
+            <footer className="footer">
+                <p className="footer-pc">© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
+                <p className="footer-mobile">© 2026 Premy &nbsp;·&nbsp; 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있습니다.</p>
+            </footer>
+        </main>
+    );
 }
