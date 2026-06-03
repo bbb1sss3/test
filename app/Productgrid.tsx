@@ -106,6 +106,8 @@ const css = `
   .card-img-wrap { height: 140px; aspect-ratio: unset; overflow: hidden; }
   .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
   .hero-banner { display: none; }
+   .hero-banner { display: none !important; }
+  .grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 .hero-banner { padding: 2rem; background: #111; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
 .hero-banner h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.2; }
