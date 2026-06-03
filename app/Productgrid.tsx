@@ -275,7 +275,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                                     <Stars rating={p.rating} />
                                     {p.discount && <div className="card-discount">{p.discount} 할인</div>}
                                     {p.price && <div className="card-price">{p.price}</div>}
-                                    <div className="card-cta">쿠팡에서 보기</div>
+                                    
                                 </div>
                             </a>
                         ))}
