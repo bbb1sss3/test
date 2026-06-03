@@ -135,9 +135,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             ))}
           </div>
           {total > 1 && (
-            <>
-              <div className="arrow arrow-prev" onClick={() => go(cur - 1)}>‹</div>
-              <div className="arrow arrow-next" onClick={() => go(cur + 1)}>›</div>
+            <>        
               <div className="dots">
                 {highlights.map((_, i) => (
                   <div key={i} className={`dot${cur === i ? ' active' : ''}`} onClick={() => go(i)} />
