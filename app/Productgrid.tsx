@@ -13,6 +13,7 @@ type Product = {
     price: string;
     discount: string;
     rating: string;
+    originalPrice: string;
 };
 
 const categories = [
@@ -90,6 +91,7 @@ const css = `
 .footer { background: #111; border-top: none; padding: 0.75rem 1.5rem; text-align: center; }
 .footer p { font-size: 11px; color: #666; line-height: 1.7; }
 .footer-mobile { display: none; }
+.card-original-price { font-size: 12px; color: #aaa; text-decoration: line-through; margin-bottom: 2px; }
  @media (max-width: 768px) {
   .header { padding: 0 1rem; }
   .filter-wrap { padding: 0.75rem 1rem; }
@@ -268,14 +270,14 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                                 <div className="card-img-wrap">
                                     {p.image ? <img src={p.image} alt={p.name} /> : '🛒'}
                                 </div>
-                                <div className="card-body">
-                                    {p.category && <div className="card-category">{p.category}</div>}
-                                    <div className="card-name">{p.name}</div>
-                                    {p.desc && <div className="card-desc">{p.desc}</div>}
-                                    <Stars rating={p.rating} />
-                                    {p.discount && <div className="card-discount">{p.discount} 할인</div>}
-                                    {p.price && <div className="card-price">{p.price}</div>}
-                                    
+                               <div className="card-body">
+                                {p.category && <div className="card-category">{p.category}</div>}
+                                <div className="card-name">{p.name}</div>
+                                {p.desc && <div className="card-desc">{p.desc}</div>}
+                                <Stars rating={p.rating} />
+                                {p.discount && <div className="card-discount">{p.discount} 할인</div>}
+                                {p.originalPrice && <div className="card-original-price">{p.originalPrice}</div>}
+                                {p.price && <div className="card-price">{p.price}</div>}
                                 </div>
                             </a>
                         ))}

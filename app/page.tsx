@@ -36,6 +36,7 @@ async function getProducts() {
     price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
     discount: page.properties.할인율?.rich_text?.[0]?.plain_text ?? '',
     rating: page.properties.별점?.rich_text?.[0]?.plain_text ?? '',
+    originalPrice: page.properties.원가?.rich_text?.[0]?.plain_text ?? '',
   }));
 }
 
