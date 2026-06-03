@@ -106,14 +106,18 @@ const css = `
   .slide { padding: 1.5rem 1rem; gap: 1rem; }
   .slide-img { width: 100px; height: 100px; }
   .slide h2 { font-size: 18px; }
+  .hero-banner { display: none; } 
+.card-img-wrap { height: 140px; aspect-ratio: unset; }
   }
   .hero-banner { padding: 2rem; background: #111; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
 .hero-banner h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1.5px; line-height: 1.2; }
 .hero-banner h2 em { font-style: normal; color: #e52c2c; }
 .hero-banner p { font-size: 12px; color: #666; margin-top: 0.5rem; }
 .hero-badge { background: #e52c2c; color: #fff; font-size: 12px; font-weight: 800; padding: 8px 20px; border-radius: 4px; white-space: nowrap; }
-@media (max-width: 768px) { .hero-banner { display: none; } }
-@media (min-width: 769px) { .slider-wrap { display: none; } .dots { display: none !important; } }
+@media (min-width: 769px) {
+  .slider-wrap { display: none; }
+  .dots { display: none !important; }
+}
 `;
 
 function Stars({ rating }: { rating: string }) {
