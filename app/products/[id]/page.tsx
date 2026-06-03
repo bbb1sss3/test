@@ -86,8 +86,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
     .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
-   .share-btn { background: #fff; border: 2px solid #111; color: #111; padding: 12px 20px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; }
-    .share-btn:hover { background: #111; color: #fff; }
+.share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 12px 20px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; }
+.share-btn:hover { background: #e52c2c; color: #fff; }
     .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 16px; font-size: 16px; font-weight: 800; border-radius: 8px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; }
     .related-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 1.25rem; }
     .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
