@@ -53,7 +53,7 @@ const css = `
   .sort-btn:hover { border-color: #111; color: #fff; background: #111; }
   .slider-wrap { position: relative; overflow: hidden; background: #fff; width: 100%; max-width: 100vw; }
  .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); }
-..slide { min-width: 100%; width: 100%; padding: 2rem 6rem; display: flex; align-items: center; justify-content: center; gap: 4rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
+.slide { min-width: 100%; width: 100%; padding: 2rem 6rem; display: flex; align-items: center; justify-content: center; gap: 4rem; text-decoration: none; color: inherit; box-sizing: border-box; overflow: hidden; }
 
 .slide-tag { display: inline-block; font-size: 10px; font-weight: 800; color: #e52c2c; border: 1.5px solid #e52c2c; padding: 3px 10px; border-radius: 3px; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase; }
 .slide h2 { font-size: 30px; font-weight: 900; color: #111; letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 0.5rem; }
@@ -238,7 +238,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
             <footer className="footer">
                 <p className="footer-pc">© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
-                <p className="footer-mobile">© 2026 Premy &nbsp;·&nbsp; 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
+                <p className="footer-mobile">© 2026 Premy &nbsp;·쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
             </footer>
         </main>
     );
