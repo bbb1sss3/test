@@ -38,6 +38,8 @@ const categories = [
   { label: '식기세척기' },
 ];
 
+const [showFilter, setShowFilter] = useState(false);
+
 const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
@@ -122,7 +124,7 @@ const css = `
 
   .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
   .back-to-top:hover { background: #e52c2c; }
-
+.filter-toggle { display: none; }
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
     .filter-wrap { padding: 0.75rem 1rem; }
@@ -143,6 +145,11 @@ const css = `
     .slider-wrap { margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
     .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .back-to-top { bottom: 1.5rem; right: 1rem; }
+      .filter-toggle { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; font-size: 13px; font-weight: 700; color: #111; cursor: pointer; background: none; border: none; width: 100%; }
+  .filter-toggle-arrow { font-size: 12px; color: #aaa; transition: transform 0.2s; }
+  .filter-toggle-arrow.open { transform: rotate(180deg); }
+  .filter-list { display: none; }
+  .filter-list.open { display: flex; }
   }
   @media (min-width: 769px) {
     .slider-wrap { display: none; }
@@ -244,15 +251,19 @@ export default function ProductGrid({ products }: { products: Product[] }) {
         </div>
       </header>
 
-      <div className="filter-area">
-        <div className="filter-wrap">
-          {categories.map(cat => (
-            <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
-              {cat.label}
-            </button>
-          ))}
-        </div>
+     <div className="filter-area">
+      <button className="filter-toggle" onClick={() => setShowFilter(!showFilter)}>
+        <span>카테고리 {active !== '전체' ? `· ${active}` : ''}</span>
+        <span className={`filter-toggle-arrow${showFilter ? ' open' : ''}`}>▼</span>
+      </button>
+      <div className={`filter-wrap filter-list${showFilter ? ' open' : ''}`}>
+        {categories.map(cat => (
+          <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => { setActive(cat.label); setShowFilter(false); }}>
+            {cat.label}
+          </button>
+        ))}
       </div>
+    </div>
 
       {showWish && (
         <div style={{ background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
