@@ -211,7 +211,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <header className="header">
-        <Link href="/" className="logo">PRE<span>MY</span></Link>
+       <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
         <div className="search-wrap">
           <input className="search-input" type="text" placeholder="상품 검색..." value={search} onChange={e => setSearch(e.target.value)} />
           <span className="search-icon">🔍</span>
@@ -384,8 +384,8 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       </section>
 
       <footer className="footer">
-        <p className="footer-pc">© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
-        <p className="footer-mobile">© 2026 Premy &nbsp;· 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
+        <p className="footer-pc">© 2026 Premy(프리미) &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
+        <p className="footer-mobile">© 2026 Premy(프리미)  &nbsp;· 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
       </footer>
       <a href="#" className="back-to-top">↑</a>
     </main>

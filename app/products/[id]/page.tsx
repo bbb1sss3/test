@@ -134,7 +134,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .hanmadi-role { font-size: 10px; color: #aaa; }
     .hanmadi-quote { font-size: 32px; color: #e52c2c; line-height: 0.5; margin-bottom: 0.5rem; font-family: Georgia; }
     .hanmadi-label { display: inline-block; font-size: 10px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); padding: 3px 12px; border-radius: 4px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
-    .hanmadi-text { font-size: 14px; color: #333; line-height: 1.8; font-style: italic; }
+    .hanmadi-text { font-size: 16px; color: #333; line-height: 1.8; font-style: italic; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
     .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
     .compare-box { background: #f9f9f9; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #f0f0f0; }
@@ -163,7 +163,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <header className="header">
-        <Link href="/" className="logo">PRE<span>MY</span></Link>
+        <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
       </header>
 
       <div className="breadcrumb">
@@ -271,7 +271,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
       </div>
 
       <footer className="footer">
-        <p>© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
+        <p>© 2026 Premy(프리미) &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
       </footer>
 
       {/* 맨 위로 버튼 */}
