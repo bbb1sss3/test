@@ -125,7 +125,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .related-name { font-size: 12px; color: #111; font-weight: 600; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
     .related-price { font-size: 13px; color: #111; font-weight: 900; margin-top: 4px; }
     .footer { border-top: 1px solid #e8e8e8; padding: 1rem 2rem; text-align: center; background: #111; }
-    .footer p { font-size: 11px; color: #666; line-height: 1.7; }
+    .footer p { font-size: 12px; color: #666; line-height: 1.8; }
     .hanmadi { background: #fff; border-radius: 12px; padding: 1.5rem 1.75rem; position: relative; overflow: hidden; border-top: 4px solid #e52c2c; margin-bottom: 1rem; border: 1px solid #f0f0f0;  }
     .hanmadi-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
     .hanmadi-avatar { width: 36px; height: 36px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
