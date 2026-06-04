@@ -110,6 +110,8 @@ const css = `
   .hero-banner h2 em { font-style: normal; color: #e52c2c; }
   .hero-banner p { font-size: 12px; color: #444; margin-top: 0.5rem; }
   .hero-badge { background: #e52c2c; color: #fff; font-size: 12px; font-weight: 800; padding: 8px 20px; border-radius: 4px; white-space: nowrap; }
+  .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
+.back-to-top:hover { background: #e52c2c; }
   @media (max-width: 768px) {
     .header { padding: 0 1rem; }
     .filter-wrap { padding: 0.75rem 1rem; }
@@ -142,7 +144,7 @@ function Stars({ rating }: { rating: string }) {
   const half = num % 1 >= 0.5;
   return (
     <div className="card-rating">
-      {'★'.repeat(full)}{half ? '½' : ''}{'☆'.repeat(5 - full - (half ? 1 : 0))}
+      {'★'.repeat(half ? full + 1 : full)}{'☆'.repeat(half ? 4 - full : 5 - full)}
       <span>{rating}</span>
     </div>
   );
@@ -385,6 +387,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
         <p className="footer-pc">© 2026 Premy &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
         <p className="footer-mobile">© 2026 Premy &nbsp;· 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
       </footer>
+      <a href="#" className="back-to-top">↑</a>
     </main>
   );
 }

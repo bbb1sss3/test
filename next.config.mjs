@@ -1,15 +1,13 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'image.coupangcdn.com',
-      'thumbnail.coupangcdn.com',
-      'thumbnail6.coupangcdn.com',
-      'thumbnail7.coupangcdn.com',
+    remotePatterns: [
+      { protocol: 'https', hostname: 'image.coupangcdn.com' },
+      { protocol: 'https', hostname: 'thumbnail.coupangcdn.com' },
+      { protocol: 'https', hostname: 'thumbnail6.coupangcdn.com' },
+      { protocol: 'https', hostname: 'thumbnail7.coupangcdn.com' },
+      { protocol: 'https', hostname: 'ads-partners.coupang.com' },
     ],
   },
 };
-
-
 
 export default nextConfig;
