@@ -42,8 +42,8 @@ const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
   .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; gap: 1rem; }
-  .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
-  .logo span { color: #e52c2c; }
+ .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
+    .logo span { color: #e52c2c; }
   .search-wrap { flex: 1; max-width: 400px; position: relative; }
   .search-input { width: 100%; padding: 8px 36px 8px 14px; border: 1.5px solid #e8e8e8; border-radius: 20px; font-size: 13px; outline: none; transition: border 0.15s; }
   .search-input:focus { border-color: #e52c2c; }
