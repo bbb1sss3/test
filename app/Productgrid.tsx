@@ -124,6 +124,8 @@ const css = `
 
   .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
   .back-to-top:hover { background: #e52c2c; }
+  .filter-hidden { display: none; }
+.filter-more { display: none; }
 .filter-toggle { display: none; }
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
@@ -150,10 +152,14 @@ const css = `
   .filter-toggle-arrow.open { transform: rotate(180deg); }
   .filter-list { display: none; }
   .filter-list.open { display: flex; }
+   .filter-hidden { display: none; }
+  .filter-more { display: flex; }
   }
   @media (min-width: 769px) {
     .slider-wrap { display: none; }
     .dots { display: none !important; }
+      .filter-hidden { display: flex !important; }
+  .filter-more { display: none !important; }
   }
 `;
 
@@ -252,18 +258,22 @@ export default function ProductGrid({ products }: { products: Product[] }) {
         </div>
       </header>
 
-     <div className="filter-area">
-      <div className="filter-wrap">
-        {(showAllFilter ? categories : categories.slice(0, 8)).map(cat => (
-          <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
-            {cat.label}
-          </button>
-        ))}
-        <button className="filter-btn" onClick={() => setShowAllFilter(!showAllFilter)}>
-          {showAllFilter ? '접기 ▲' : '더보기 ▼'}
+    <div className="filter-area">
+    <div className="filter-wrap">
+      {categories.map((cat, i) => (
+        <button 
+          key={cat.label} 
+          className={`filter-btn${active === cat.label ? ' active' : ''}${!showAllFilter && i >= 4 ? ' filter-hidden' : ''}`} 
+          onClick={() => setActive(cat.label)}
+        >
+          {cat.label}
         </button>
-      </div>
+      ))}
+      <button className="filter-btn filter-more" onClick={() => setShowAllFilter(!showAllFilter)}>
+        {showAllFilter ? '접기 ▲' : '더보기 ▼'}
+      </button>
     </div>
+  </div>
 
       {showWish && (
         <div style={{ background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
