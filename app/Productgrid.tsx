@@ -67,7 +67,7 @@ const css = `
   .dots { display: flex; justify-content: center; gap: 6px; padding: 0.75rem 0; background: #fff; }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.2s; }
   .dot.active { background: #e52c2c; width: 18px; border-radius: 3px; }
-  .section { padding: 1.5rem 1.5rem 3rem; flex: 1; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .section { padding: 1.5rem 1.5rem 3rem; flex: 1; width: 100%; }
   .section-header { margin-bottom: 1rem; font-size: 15px; font-weight: 800; color: #111; display: flex; align-items: center; justify-content: space-between; }
   .sort-btn { background: #fff; color: #888; border: 1px solid #eee; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .sort-btn.active { background: #111; color: #fff; border-color: #111; }
