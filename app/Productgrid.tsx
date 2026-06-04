@@ -38,7 +38,7 @@ const categories = [
   { label: '식기세척기' },
 ];
 
-const [showFilter, setShowFilter] = useState(false);
+
 
 const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -175,6 +175,7 @@ function parsePrice(price: string) {
 }
 
 export default function ProductGrid({ products }: { products: Product[] }) {
+  const [showFilter, setShowFilter] = useState(false);
   const [active, setActive] = useState('전체');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('기본');
