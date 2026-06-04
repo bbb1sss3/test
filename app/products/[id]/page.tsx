@@ -87,13 +87,14 @@ export default async function ProductPage({ params }: { params: { id: string } }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
     .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0 2rem; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
-    .logo { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
+   .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
     .logo span { color: #e52c2c; }
-.breadcrumb { padding: 1rem 2rem; font-size: 13px; color: #888; display: flex; align-items: center; justify-content: center; gap: 8px; overflow: hidden; white-space: nowrap; }
-.breadcrumb a { color: #555; text-decoration: none; font-weight: 600; }
+.breadcrumb { padding: 1rem 2rem; font-size: 14px; color: #555; display: flex; align-items: center; gap: 8px; overflow: hidden; white-space: nowrap; }
+.breadcrumb a { color: #333; text-decoration: none; font-weight: 700; }
+.breadcrumb a:hover { color: #e52c2c; }
     .breadcrumb span:last-child { overflow: hidden; text-overflow: ellipsis; }
     .breadcrumb a { color: #555; text-decoration: none; font-weight: 600; }
-    .breadcrumb a:hover { color: #111; }
+
     .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
     .product-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
    .product-img { aspect-ratio: 1; background: #f9f9f9; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 80px; position: sticky; top: 80px; }
@@ -113,9 +114,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .delivery-badge { display: flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
     .badge-rocket { background: #e3f2fd; color: #1565c0; }
     .badge-free { background: #e8f5e9; color: #2e7d32; }
-    .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
+    .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
     .share-btn:hover { background: #e52c2c; color: #fff; }
-    .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 16px; font-size: 16px; font-weight: 800; border-radius: 8px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; }
+    .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 16px; font-size: 16px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
     .related-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 1.25rem; }
     .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
     .related-card { text-decoration: none; display: block; }
@@ -153,6 +154,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
       .compare-box { padding: 0.875rem; }
       .compare-text { font-size: 12px; }
       .back-to-top { bottom: 1.5rem; right: 1rem; }
+        .product-img { position: static; }
     }
   `;
 
