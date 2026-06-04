@@ -290,7 +290,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
       <footer className="footer">
         <div className="footer-inner">
-          <p>© 2026 Premy(프리미) &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
+          <p>© 2026 Premy(프리미) &nbsp;·&nbsp; 본 사이트는 쿠팡 파트너스 제휴 마케팅 프로그램에 참여하고 있으며, 링크를 통해 구매 시 일정 수수료를 받을 수 있습니다.<br></br> 단, 구매자에게 추가 비용이 발생하지 않습니다. 최종 가격은 쿠팡에서 확인하시기 바랍니다.</p>
         </div>
       </footer>
 
