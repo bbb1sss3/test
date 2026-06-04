@@ -139,7 +139,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
     .compare-box { background: #f9f9f9; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #f0f0f0; }
     .compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 1px; margin-bottom: 0.5rem; }
-    .compare-text { font-size: 13px; color: #666; line-height: 1.8; white-space: pre-wrap; }
+    .compare-text { font-size: 16px; color: #666; line-height: 1.8; white-space: pre-wrap; }
     .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
     .back-to-top:hover { background: #e52c2c; }
     @media (max-width: 768px) {
