@@ -175,7 +175,7 @@ function parsePrice(price: string) {
 }
 
 export default function ProductGrid({ products }: { products: Product[] }) {
-  const [showFilter, setShowFilter] = useState(false);
+  const [showAllFilter, setShowAllFilter] = useState(false);
   const [active, setActive] = useState('전체');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('기본');
@@ -253,16 +253,15 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       </header>
 
      <div className="filter-area">
-      <button className="filter-toggle" onClick={() => setShowFilter(!showFilter)}>
-        <span>카테고리 {active !== '전체' ? `· ${active}` : ''}</span>
-        <span className={`filter-toggle-arrow${showFilter ? ' open' : ''}`}>▼</span>
-      </button>
-      <div className={`filter-wrap filter-list${showFilter ? ' open' : ''}`}>
-        {categories.map(cat => (
-          <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => { setActive(cat.label); setShowFilter(false); }}>
+      <div className="filter-wrap">
+        {(showAllFilter ? categories : categories.slice(0, 8)).map(cat => (
+          <button key={cat.label} className={`filter-btn${active === cat.label ? ' active' : ''}`} onClick={() => setActive(cat.label)}>
             {cat.label}
           </button>
         ))}
+        <button className="filter-btn" onClick={() => setShowAllFilter(!showAllFilter)}>
+          {showAllFilter ? '접기 ▲' : '더보기 ▼'}
+        </button>
       </div>
     </div>
 
