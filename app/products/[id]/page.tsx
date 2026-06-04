@@ -106,7 +106,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
     .badge-hot { background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
     .badge-pick { background: linear-gradient(135deg, #666, #999, #666); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-    .product-desc { font-size: 14px; color: #666; line-height: 1.8; padding: 1rem; background: #f9f9f9; border-radius: 8px; white-space: pre-wrap; }
+    .product-desc { font-size: 14px; color: #666; line-height: 2; padding: 1rem; background: #f9f9f9; border-radius: 8px; white-space: pre-wrap; }
     .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
     .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
@@ -116,7 +116,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .badge-free { background: #e8f5e9; color: #2e7d32; }
     .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
     .share-btn:hover { background: #e52c2c; color: #fff; }
-    .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 16px; font-size: 16px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
+    .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 18px; font-size: 17px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
     .related-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 1.25rem; }
     .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
     .related-card { text-decoration: none; display: block; }
