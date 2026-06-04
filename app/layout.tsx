@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     type: 'website',
   },
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 
