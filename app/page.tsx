@@ -1,3 +1,4 @@
+'use client'
 import ProductGrid from "./Productgrid";
 
 export const revalidate = 60;
