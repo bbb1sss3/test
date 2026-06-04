@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Client } from "@notionhq/client";
 import Link from "next/link";
 import ShareButton from "./ShareButton";
-export const revalidate = 60;
+export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
