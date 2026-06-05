@@ -164,8 +164,11 @@ export default async function ProductPage({ params }: { params: { id: string } }
       .product-name { font-size: 20px; }
       .product-price { font-size: 24px; }
       .related-grid { grid-template-columns: repeat(2, 1fr); }
-      .hanmadi { padding: 1.25rem; }
-      .hanmadi-text { font-size: 18px; }
+      .hanmadi { padding: 1.5rem; }
+  .hanmadi-header { gap: 10px; }
+  .hanmadi-avatar { width: 36px; height: 36px; font-size: 18px; }
+  .hanmadi-text { font-size: 16px; line-height: 1.6; }
+  .hanmadi-badge { font-size: 8px; padding: 3px 8px; }
       .tag { font-size: 11px; padding: 4px 10px; }
       .compare-box { padding: 0.875rem; }
       .desc-box { padding: 0.875rem; }
