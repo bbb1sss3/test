@@ -168,7 +168,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 .hanmadi-name { font-size: 15px; font-weight: 700; color: #ffffff; letter-spacing: 0.8px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 .hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
 .hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); }
-.hanmadi-text { font-size: 20px; color: #ecf0f1; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; text-shadow: 0 2px 4px rgba(0,0,0,0.3); text-align: left; margin-top: 10px; }
+.hanmadi-text { font-size: 18px; color: #ecf0f1; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; text-shadow: 0 2px 4px rgba(0,0,0,0.3); text-align: left; margin-top: 10px; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
     .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
