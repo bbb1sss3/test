@@ -108,7 +108,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
    .desc-box { background: #fff; border-radius: 8px;  margin-bottom: 0.5rem; }
 .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
-.product-desc { font-size: 15px; color: #666; line-height: 1.9; white-space: pre-wrap; background: none; padding: 0; border: none; border-radius: 0; }
+.product-desc { font-size: 15px; color: #666; line-height: 2; white-space: pre-wrap; background: none; padding: 0; border: none; border-radius: 0; }
    .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
     .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
@@ -123,13 +123,16 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 18px; font-size: 17px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
     .cta-btn:hover { background: #c62020; }
 
-.hanmadi { background: #fafafa; border-radius: 12px; padding: 1.5rem; border: 1px solid #eee; margin-bottom: 1rem; }
-.hanmadi-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; }
-.hanmadi-avatar { width: 40px; height: 40px; background: #e52c2c; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; font-weight: 900; flex-shrink: 0; font-family: 'Arial Black', sans-serif; }
-.hanmadi-name { font-size: 13px; font-weight: 800; color: #111; }
-.hanmadi-role { font-size: 11px; color: #aaa; }
-.hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #B8860B, #D4A017); color: #fff; font-size: 9px; font-weight: 800; padding: 3px 10px; border-radius: 20px; letter-spacing: 1px; }
-.hanmadi-text { font-size: 16px; color: #222; line-height: 1.9; font-style: italic; }
+ .hanmadi { background: linear-gradient(145deg, #202d3a, #1b2631); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,0.2); position: relative; overflow: hidden; }
+.hanmadi::before { content: ""; position: absolute; top: -10px; left: -30px; width: 120px; height: 35px; background: linear-gradient(135deg, #FFD700 0%, #D4A017 50%, #B8860B 100%); transform: rotate(-45deg); box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); z-index: 1; animation: shine 3s infinite linear; }
+.hanmadi::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%); pointer-events: none; }
+@keyframes shine { 0% { opacity: 0.8; } 50% { opacity: 1; box-shadow: 0 0 30px rgba(255, 215, 0, 0.9); } 100% { opacity: 0.8; } }
+.hanmadi-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.hanmadi-avatar { width: 44px; height: 44px; background: radial-gradient(circle at 30% 30%, #fff, #bbb); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #1b2631; font-size: 22px; font-weight: 900; font-family: 'Arial Black', sans-serif; box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 5px rgba(255,255,255,0.5); }
+.hanmadi-name { font-size: 15px; font-weight: 700; color: #ffffff; letter-spacing: 0.8px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
+.hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); }
+.hanmadi-text { font-size: 18px; color: #ecf0f1; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; text-shadow: 0 2px 4px rgba(0,0,0,0.3); text-align: left; margin-top: 10px; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
     .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
@@ -239,7 +242,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                   <div className="hanmadi-name">PREMY 에디터</div>
                   <div className="hanmadi-role">프리미엄 가전 큐레이터</div>
                 </div>
-                <div className="hanmadi-badge">✦ PICK</div>
+               
               </div>
               <div className="hanmadi-text">{product.hanmadi}</div>
             </div>

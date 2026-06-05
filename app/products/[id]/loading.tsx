@@ -19,7 +19,7 @@ export default function Loading() {
           PRE<span style={{ color: '#e52c2c' }}>MY</span>
         </div>
         <div className="bar"><div className="bar-inner" /></div>
-        <div className="bar-sub">잠시만 기다려주세요</div>
+        <div className="bar-sub">상품 정보를 불러오는 중..</div>
       </div>
     </div>
   );
