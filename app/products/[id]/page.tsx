@@ -241,6 +241,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         line-height: 1.7;     /* 1.7 정도로 설정하여 글줄이 빽빽하지 않게 유지 */
         padding: 16px 10px;   /* 좌우 여백 확보 */
     }
+        .hanmadi-text { font-size: 17px; line-height: 1.6; }
         .compare-text {
         font-size: 16px;      /* 모바일에서는 14px도 적절함 */
         line-height: 1.6;
