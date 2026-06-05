@@ -53,24 +53,16 @@ function CompareTable({ text }: { text: string }) {
   const headers = rows[0];
   const dataRows = rows.slice(1);
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+    <table>
       <thead>
         <tr>
-          {headers.map((h, i) => (
-            <th key={i} style={{ padding: '8px 12px', background: '#111', color: i === 1 ? '#D4A017' : '#fff', fontWeight: 800, textAlign: 'left', fontSize: '11px', letterSpacing: '1px' }}>
-              {i === 1 ? `✦ ${h}` : h}
-            </th>
-          ))}
+          {headers.map((h, i) => <th key={i}>{h}</th>)}
         </tr>
       </thead>
       <tbody>
         {dataRows.map((row, i) => (
-          <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#f9f9f9' }}>
-            {row.map((cell, j) => (
-              <td key={j} style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', color: j === 1 ? '#111' : '#555', fontWeight: j === 1 ? 700 : 400 }}>
-                {cell}
-              </td>
-            ))}
+          <tr key={i}>
+            {row.map((cell, j) => <td key={j}>{cell}</td>)}
           </tr>
         ))}
       </tbody>
@@ -265,6 +257,14 @@ export default async function ProductPage({ params }: { params: { id: string } }
     /* 추가: 내용이 길 경우를 대비한 여백 */
     padding: 10px 0;
 }
+    .compare-box table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.compare-box thead th { padding: 10px 14px; background: #111; color: #fff; font-weight: 800; text-align: left; font-size: 12px; letter-spacing: 1px; }
+.compare-box thead th:first-child { color: #aaa; }
+.compare-box thead th:nth-child(2) { color: #D4A017; }
+.compare-box tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 14px; }
+.compare-box tbody td:first-child { color: #111; font-weight: 700; background: #fafafa; }
+.compare-box tbody td:nth-child(2) { color: #111; font-weight: 700; }
+.compare-box tbody tr:hover { background: #f9f9f9; }
       /* 모바일 전용 설정 */
 @media (max-width: 768px) {
     .product-desc {
@@ -278,6 +278,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
         line-height: 1.6;
          padding: 5px 10px; 
     }
+           .compare-box table { font-size: 12px; }
+  .compare-box thead th { padding: 8px 10px; font-size: 11px; }
+  .compare-box tbody td { padding: 8px 10px; font-size: 12px; }
 }
 }
   `;
