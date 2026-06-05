@@ -118,7 +118,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     white-space: pre-wrap;
     word-break: keep-all;
     
-    padding: 20px;
+    padding: 30px;
     margin: 0 auto;
     max-width: 850px;
 }
@@ -239,7 +239,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-desc {
         font-size: 16px;      /* 15px로 상향 */
         line-height: 1.7;     /* 1.7 정도로 설정하여 글줄이 빽빽하지 않게 유지 */
-        padding: 16px 20px;   /* 좌우 여백 확보 */
+        padding: 16px 40px;   /* 좌우 여백 확보 */
     }
         .compare-text {
         font-size: 16px;      /* 모바일에서는 14px도 적절함 */
