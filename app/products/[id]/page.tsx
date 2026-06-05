@@ -212,7 +212,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .hanmadi { padding: 1.5rem; }
     .hanmadi-header { gap: 10px; }
     .hanmadi-avatar { width: 30px; height: 30px; font-size: 15px; }
-    .hanmadi-text { font-size: 20px; line-height: 1.6; }
+    .hanmadi-text { font-size: 17px; line-height: 1.6; }
     .hanmadi-badge { font-size: 8px; padding: 3px 8px; }
       .tag { font-size: 11px; padding: 4px 10px; }
       .compare-box { padding: 0.875rem; }
