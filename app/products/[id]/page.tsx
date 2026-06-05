@@ -257,30 +257,21 @@ export default async function ProductPage({ params }: { params: { id: string } }
     /* 추가: 내용이 길 경우를 대비한 여백 */
     padding: 10px 0;
 }
-    .compare-box table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.compare-box thead th { padding: 10px 14px; background: #111; color: #fff; font-weight: 800; text-align: left; font-size: 12px; letter-spacing: 1px; }
+  .compare-box table { width: 100%; border-collapse: collapse; font-size: 16px; }
+.compare-box thead th { padding: 10px 14px; background: #111; color: #fff; font-weight: 800; text-align: left; font-size: 14px; letter-spacing: 1px; }
 .compare-box thead th:first-child { color: #aaa; }
 .compare-box thead th:nth-child(2) { color: #D4A017; }
-.compare-box tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 14px; }
+.compare-box tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 16px; }
 .compare-box tbody td:first-child { color: #111; font-weight: 700; background: #fafafa; }
 .compare-box tbody td:nth-child(2) { color: #111; font-weight: 700; }
 .compare-box tbody tr:hover { background: #f9f9f9; }
-      /* 모바일 전용 설정 */
 @media (max-width: 768px) {
-    .product-desc {
-        font-size: 17px;      /* 15px로 상향 */
-        line-height: 1.7;     /* 1.7 정도로 설정하여 글줄이 빽빽하지 않게 유지 */
-        padding: 16px 10px;   /* 좌우 여백 확보 */
-    }
-        .hanmadi-text { font-size: 17px; line-height: 1.6; }
-        .compare-text {
-        font-size: 16px;      /* 모바일에서는 14px도 적절함 */
-        line-height: 1.6;
-         padding: 5px 10px; 
-    }
-           .compare-box table { font-size: 12px; }
-  .compare-box thead th { padding: 8px 10px; font-size: 11px; }
-  .compare-box tbody td { padding: 8px 10px; font-size: 12px; }
+  .product-desc { font-size: 16px; line-height: 1.7; padding: 16px 10px; }
+  .hanmadi-text { font-size: 17px; line-height: 1.6; }
+  .compare-text { font-size: 16px; line-height: 1.6; padding: 5px 10px; }
+  .compare-box table { font-size: 13px; }
+  .compare-box thead th { padding: 8px 10px; font-size: 12px; }
+  .compare-box tbody td { padding: 8px 10px; font-size: 13px; }
 }
 }
   `;
