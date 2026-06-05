@@ -47,6 +47,37 @@ async function getRelated(category: string, currentId: string) {
     .slice(0, 4);
 }
 
+function CompareTable({ text }: { text: string }) {
+  const rows = text.trim().split('\n').map(row => row.split('|'));
+  if (rows.length < 2) return <div className="compare-text">{text}</div>;
+  const headers = rows[0];
+  const dataRows = rows.slice(1);
+  return (
+    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+      <thead>
+        <tr>
+          {headers.map((h, i) => (
+            <th key={i} style={{ padding: '8px 12px', background: '#111', color: i === 1 ? '#D4A017' : '#fff', fontWeight: 800, textAlign: 'left', fontSize: '11px', letterSpacing: '1px' }}>
+              {i === 1 ? `✦ ${h}` : h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {dataRows.map((row, i) => (
+          <tr key={i} style={{ background: i % 2 === 0 ? '#fff' : '#f9f9f9' }}>
+            {row.map((cell, j) => (
+              <td key={j} style={{ padding: '8px 12px', borderBottom: '1px solid #f0f0f0', color: j === 1 ? '#111' : '#555', fontWeight: j === 1 ? 700 : 400 }}>
+                {cell}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function Stars({ rating }: { rating: string }) {
   const num = parseFloat(rating);
   if (!num) return null;
@@ -333,11 +364,11 @@ export default async function ProductPage({ params }: { params: { id: string } }
             )}
 
             {product.compare && (
-              <div className="compare-box">
-                <div className="compare-title">COMPARISON</div>
-                <div className="product-desc">{product.compare}</div>
-              </div>
-            )}
+            <div className="compare-box">
+              <div className="compare-title">COMPARISON</div>
+              <CompareTable text={product.compare} />
+            </div>
+          )}
 
             <ShareButton name={product.name} />
             <a href={product.link} target="_blank" rel="noopener noreferrer" className="cta-btn">
