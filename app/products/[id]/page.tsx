@@ -156,7 +156,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
   .hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
   .hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; }
   .hanmadi-text { font-size: 18px; color: #ecf0f1; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; }
-
+  .hanmadi-text::before { content: '"'; font-size: 22px; color: #D4A017; font-family: Georgia, serif; line-height: 0; vertical-align: -6px; margin-right: 4px; }
+  .hanmadi-text::after { content: '"'; font-size: 22px; color: #D4A017; font-family: Georgia, serif; line-height: 0; vertical-align: -6px; margin-left: 4px; }
   .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
   .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
 
@@ -205,6 +206,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .hanmadi-role { font-size: 10px; }
     .hanmadi-badge { font-size: 8px; padding: 3px 8px; }
     .hanmadi-text { font-size: 16px; line-height: 1.7;font-style: italic; }
+    .hanmadi-text::before, .hanmadi-text::after { font-size: 20px; vertical-align: -5px; }
     .tag { font-size: 11px; padding: 4px 10px; }
     .compare-text { font-size: 16px; line-height: 1.6; padding: 5px 10px; }
     .compare-box table { font-size: 13px; }
