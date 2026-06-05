@@ -108,7 +108,20 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
    .desc-box { background: #fff; border-radius: 8px;  margin-bottom: 0.5rem; }
 .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
-.product-desc { font-size: 15px; color: #666; line-height: 2; white-space: pre-wrap; background: none; padding: 0; border: none; border-radius: 0; }
+.product-desc {
+    /* 기본 설정 (PC 기준) */
+    font-size: 17px; 
+    color: #333;
+    line-height: 1.8; /* 줄 간격을 넓게 유지 */
+    letter-spacing: -0.02em; /* 약간 좁은 자간으로 깔끔함 강조 */
+    
+    white-space: pre-wrap;
+    word-break: keep-all;
+    
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
    .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
     .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
@@ -208,6 +221,32 @@ export default async function ProductPage({ params }: { params: { id: string } }
       .product-desc { font-size: 16px; }
       .back-to-top { bottom: 1.5rem; right: 1rem; }
     }
+      .compare-text {
+    /* 읽기 편한 폰트 설정 */
+    font-size: 17px;
+    color: #444;              /* #666보다 조금 더 진한 색으로 가독성 개선 */
+    line-height: 1.8;         /* 2.0은 줄 간격이 너무 넓어 호흡이 끊길 수 있음 */
+    letter-spacing: -0.01em;  /* 한글 자간 조정 */
+    
+    white-space: pre-wrap;
+    word-break: keep-all;     /* 단어 단위 줄바꿈 */
+    
+    /* 추가: 내용이 길 경우를 대비한 여백 */
+    padding: 10px 0;
+}
+      /* 모바일 전용 설정 */
+@media (max-width: 768px) {
+    .product-desc {
+        font-size: 16px;      /* 15px로 상향 */
+        line-height: 1.7;     /* 1.7 정도로 설정하여 글줄이 빽빽하지 않게 유지 */
+        padding: 16px 20px;   /* 좌우 여백 확보 */
+    }
+        .compare-text {
+        font-size: 16px;      /* 모바일에서는 14px도 적절함 */
+        line-height: 1.6;
+    }
+}
+}
   `;
 
   return (
