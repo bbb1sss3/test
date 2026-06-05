@@ -334,7 +334,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
             {product.compare && (
               <div className="compare-box">
                 <div className="compare-title">COMPARISON</div>
-                <div className="compare-text">{product.compare}</div>
+                <div className="product-desc">{product.compare}</div>
               </div>
             )}
 
