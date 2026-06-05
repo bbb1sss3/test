@@ -112,7 +112,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     /* 기본 설정 (PC 기준) */
     font-size: 17px; 
     color: #333;
-    line-height: 1.8; /* 줄 간격을 넓게 유지 */
+    line-height: 1.7; /* 줄 간격을 넓게 유지 */
     letter-spacing: -0.02em; /* 약간 좁은 자간으로 깔끔함 강조 */
     
     white-space: pre-wrap;
@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     
     padding: 20px;
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 850px;
 }
    .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
     .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
@@ -239,7 +239,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-desc {
         font-size: 16px;      /* 15px로 상향 */
         line-height: 1.7;     /* 1.7 정도로 설정하여 글줄이 빽빽하지 않게 유지 */
-        padding: 5px 10px;   /* 좌우 여백 확보 */
+        padding: 16px 20px;   /* 좌우 여백 확보 */
     }
         .compare-text {
         font-size: 16px;      /* 모바일에서는 14px도 적절함 */
