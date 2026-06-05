@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
 .product-desc {
     /* 기본 설정 (PC 기준) */
-    font-size: 17px; 
+    font-size: 20px; 
     color: #333;
     line-height: 1.7; /* 줄 간격을 넓게 유지 */
     letter-spacing: -0.02em; /* 약간 좁은 자간으로 깔끔함 강조 */
@@ -145,7 +145,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 .hanmadi-name { font-size: 15px; font-weight: 700; color: #ffffff; letter-spacing: 0.8px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 .hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
 .hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); }
-.hanmadi-text { font-size: 17px; color: #ecf0f1; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; text-shadow: 0 2px 4px rgba(0,0,0,0.3); text-align: left; margin-top: 10px; }
+.hanmadi-text { font-size: 20px; color: #ecf0f1; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; text-shadow: 0 2px 4px rgba(0,0,0,0.3); text-align: left; margin-top: 10px; }
 
     .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
     .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
@@ -212,7 +212,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .hanmadi { padding: 1.5rem; }
     .hanmadi-header { gap: 10px; }
     .hanmadi-avatar { width: 30px; height: 30px; font-size: 15px; }
-    .hanmadi-text { font-size: 17px; line-height: 1.6; }
+    .hanmadi-text { font-size: 20px; line-height: 1.6; }
     .hanmadi-badge { font-size: 8px; padding: 3px 8px; }
       .tag { font-size: 11px; padding: 4px 10px; }
       .compare-box { padding: 0.875rem; }
