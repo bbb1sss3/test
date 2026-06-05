@@ -154,7 +154,33 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
     .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
     .back-to-top:hover { background: #e52c2c; }
+.hanmadi { background: linear-gradient(145deg, #202d3a, #1b2631); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,0.2); position: relative; overflow: hidden; }
 
+.hanmadi::before { 
+    content: ""; 
+    position: absolute; 
+    top: -10px; 
+    left: -30px; 
+    width: 120px; 
+    height: 35px; 
+    background: linear-gradient(135deg, #FFD700 0%, #D4A017 50%, #B8860B 100%); 
+    transform: rotate(-45deg); 
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); 
+    z-index: 1; /* 밴드는 아래로 */
+    animation: shine 3s infinite linear; 
+    pointer-events: none; /* 클릭 방해 방지 */
+}
+
+.hanmadi-header { 
+    position: relative; /* z-index 적용을 위해 */
+    z-index: 2; /* 헤더를 밴드보다 위로 */
+    display: flex; 
+    align-items: center; 
+    gap: 15px; 
+    margin-bottom: 1.5rem; 
+    padding-bottom: 1rem; 
+    border-bottom: 1px solid rgba(255,255,255,0.05); 
+}
     @media (max-width: 768px) {
       .header-inner { padding: 0 1rem; }
       .breadcrumb { padding: 1rem; }
@@ -164,7 +190,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
       .product-name { font-size: 20px; }
       .product-price { font-size: 24px; }
       .related-grid { grid-template-columns: repeat(2, 1fr); }
-      .hanmadi { padding: 1.5rem; }
+      
+.hanmadi { padding: 1.5rem; }
   .hanmadi-header { gap: 10px; }
   .hanmadi-avatar { width: 36px; height: 36px; font-size: 18px; }
   .hanmadi-text { font-size: 16px; line-height: 1.6; }
