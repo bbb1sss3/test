@@ -131,8 +131,20 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
   .desc-box { background: #fff; border-radius: 8px; margin-bottom: 0.5rem; }
   .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
-  .product-desc { font-size: 18px; color: #333; line-height: 1.7; letter-spacing: -0.02em; white-space: pre-wrap; word-break: keep-all; padding: 30px; margin: 0 auto; max-width: 850px; }
-
+ 
+.product-desc {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.8; /* 가독성을 위해 1.7 -> 1.8로 살짝 상향 추천 */
+    letter-spacing: -0.02em;
+    white-space: pre-wrap;
+    word-break: keep-all;
+    padding: 30px 20px; /* 상하 여백을 좌우보다 넓게 주면 더 정돈되어 보임 */
+    margin: 20px auto; 
+    max-width: 850px;
+    
+  
+}
   .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
   .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
   .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
@@ -156,22 +168,44 @@ export default async function ProductPage({ params }: { params: { id: string } }
   .hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
   .hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; }
   .hanmadi-text { font-size: 18px; color: #ecf0f1; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; }
-  .hanmadi-text::before { content: '"'; font-size: 22px; color: #D4A017; font-family: Georgia, serif; line-height: 0; vertical-align: -6px; margin-right: 4px; }
-  .hanmadi-text::after { content: '"'; font-size: 22px; color: #D4A017; font-family: Georgia, serif; line-height: 0; vertical-align: -6px; margin-left: 4px; }
+  .hanmadi-text::before { content: '"'; font-size: 24px; color: #ecf0f1; font-family: Georgia, serif; line-height: 0; vertical-align: -6px; margin-right: 4px; }
+  .hanmadi-text::after { content: '"'; font-size: 24px; color: #ecf0f1; font-family: Georgia, serif; line-height: 0; vertical-align: -6px; margin-left: 4px; }
   .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
   .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
 
   .compare-box { background: #fff; border-radius: 8px; margin-bottom: 1rem; }
   .compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
   .compare-text { font-size: 18px; color: #444; line-height: 1.8; letter-spacing: -0.01em; white-space: pre-wrap; word-break: keep-all; padding: 10px 0; }
-  .compare-box table { width: 100%; border-collapse: collapse; font-size: 16px; }
-  .compare-box thead th { padding: 10px 14px; background: #111; color: #fff; font-weight: 800; text-align: left; font-size: 14px; letter-spacing: 1px; }
-  .compare-box thead th:first-child { color: #aaa; }
-  .compare-box thead th:nth-child(2) { color: #D4A017; }
-  .compare-box tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 16px; }
-  .compare-box tbody td:first-child { color: #111; font-weight: 700; background: #fafafa; }
-  .compare-box tbody td:nth-child(2) { color: #111; font-weight: 700; }
-  .compare-box tbody tr:hover { background: #f9f9f9; }
+ /* PC 및 가독성 개선 */
+.compare-box thead th {
+    padding: 16px 14px;
+    background: #111;
+    color: #fff;
+    font-weight: 700;
+    text-align: center; /* 중앙 정렬이 더 깔끔함 */
+    font-size: 14px;
+}
+
+.compare-box tbody td {
+    padding: 18px 14px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    text-align: center; /* 데이터는 중앙 정렬이 비교하기 쉬움 */
+}
+
+/* 핵심: 첫 번째 열 고정 느낌 및 가독성 강조 */
+.compare-box tbody td:first-child {
+    background: #fcfcfc;
+    font-weight: 800;
+    text-align: left; /* 항목명은 왼쪽 정렬 */
+    width: 25%;
+}
+
+.compare-box tbody td:nth-child(2) {
+    background: #fffdf5; /* 강조할 열(한성) 배경색 살짝 추가 */
+    color: #D4A017;
+    font-weight: 800;
+}
 
   .related-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 1.25rem; }
   .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
@@ -197,7 +231,23 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-name { font-size: 20px; }
     .product-price { font-size: 24px; }
     .related-grid { grid-template-columns: repeat(2, 1fr); }
-    .product-desc { font-size: 16px; line-height: 1.7; padding: 16px 10px; }
+.product-desc {
+        /* 1. 폰트 크기: 너무 크지도 작지도 않은 16px */
+        font-size: 16px;
+        
+        /* 2. 패딩: 좌우 여백을 주어 글자가 화면 끝에 붙지 않게 함 */
+        padding: 20px 15px;
+        
+        /* 3. 줄 간격: 모바일은 한 줄이 짧으므로 줄 간격을 여유 있게 */
+        line-height: 1.7;
+        
+        /* 4. 마진: 위아래 간격을 주어 다른 요소와 분리 */
+        margin: 15px auto;
+        
+        /* 5. 너비: 화면 너비를 100%로 쓰되, 여백(padding) 계산 고려 */
+        width: 100%;
+        box-sizing: border-box;
+    }
     .hanmadi { padding: 1rem; }
     .hanmadi::before { width: 70px; height: 20px; top: -5px; left: -20px; }
     .hanmadi-header { gap: 10px; }
@@ -209,9 +259,18 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .hanmadi-text::before, .hanmadi-text::after { font-size: 20px; vertical-align: -5px; }
     .tag { font-size: 11px; padding: 4px 10px; }
     .compare-text { font-size: 16px; line-height: 1.6; padding: 5px 10px; }
-    .compare-box table { font-size: 13px; }
-    .compare-box thead th { padding: 8px 10px; font-size: 12px; }
-    .compare-box tbody td { padding: 8px 10px; font-size: 13px; }
+.compare-box table { 
+        font-size: 13px; 
+        line-height: 1.4; /* 텍스트 줄 간격 확보 */
+    }
+    .compare-box thead th { 
+        padding: 10px 8px; /* 위아래 패딩을 살짝 키워 터치 영역 확보 */
+        font-size: 12px; 
+    }
+    .compare-box tbody td { 
+        padding: 12px 8px; /* 글자가 많을 때 행 높이를 확보해 가독성 개선 */
+        word-break: keep-all; /* 단어 단위로 줄바꿈하여 가독성 증대 */
+    }
     .back-to-top { bottom: 1.5rem; right: 1rem; }
   }
 `;

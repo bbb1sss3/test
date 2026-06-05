@@ -1,6 +1,6 @@
 import ProductGrid from "./Productgrid";
 
-export const revalidate = 60;
+export const revalidate = 600;
 
 import { Client } from "@notionhq/client";
 
