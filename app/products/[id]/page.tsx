@@ -104,182 +104,115 @@ export default async function ProductPage({ params }: { params: { id: string } }
   const related = await getRelated(product.category, product.id);
 
   const css = `
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
 
-    .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; display: flex; align-items: center; height: 100%; }
-    .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
-    .logo span { color: #e52c2c; }
+  .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; display: flex; align-items: center; height: 100%; }
+  .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
+  .logo span { color: #e52c2c; }
 
-.breadcrumb { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; font-size: 14px; color: #555; display: flex; align-items: center; justify-content: flex-start; gap: 8px; overflow: hidden; white-space: nowrap; }
-    .breadcrumb span:last-child { overflow: hidden; text-overflow: ellipsis; }
-    .breadcrumb a { color: #333; text-decoration: none; font-weight: 700; }
-    .breadcrumb a:hover { color: #e52c2c; }
+  .breadcrumb { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; font-size: 14px; color: #555; display: flex; align-items: center; justify-content: flex-start; gap: 8px; overflow: hidden; white-space: nowrap; }
+  .breadcrumb span:last-child { overflow: hidden; text-overflow: ellipsis; }
+  .breadcrumb a { color: #333; text-decoration: none; font-weight: 700; }
+  .breadcrumb a:hover { color: #e52c2c; }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .product-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
-    .product-img { aspect-ratio: 1; background: #f9f9f9; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 80px; position: sticky; top: 80px; }
-    .product-img img { width: 100%; height: 100%; object-fit: cover; }
-    .product-info { display: flex; flex-direction: column; gap: 12px; }
-    .product-category { font-size: 12px; color: #333; font-weight: 700; }
-    .product-name { font-size: 24px; font-weight: 800; color: #111; letter-spacing: -1px; line-height: 1.3; }
-    .product-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
-    .badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
-    .badge-hot { background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
-    .badge-pick { background: linear-gradient(135deg, #666, #999, #666); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .product-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+  .product-img { aspect-ratio: 1; background: #f9f9f9; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 80px; position: sticky; top: 80px; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; }
+  .product-info { display: flex; flex-direction: column; gap: 12px; }
+  .product-category { font-size: 12px; color: #333; font-weight: 700; }
+  .product-name { font-size: 24px; font-weight: 800; color: #111; letter-spacing: -1px; line-height: 1.3; }
+  .product-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; }
+  .badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
+  .badge-hot { background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
+  .badge-pick { background: linear-gradient(135deg, #666, #999, #666); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
-   .desc-box { background: #fff; border-radius: 8px;  margin-bottom: 0.5rem; }
-.desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
-.product-desc {
-    /* 기본 설정 (PC 기준) */
-    font-size: 18px; 
-    color: #333;
-    line-height: 1.7; /* 줄 간격을 넓게 유지 */
-    letter-spacing: -0.02em; /* 약간 좁은 자간으로 깔끔함 강조 */
-    
-    white-space: pre-wrap;
-    word-break: keep-all;
-    
-    padding: 30px;
-    margin: 0 auto;
-    max-width: 850px;
-}
-   .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
-    .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
-    .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
+  .desc-box { background: #fff; border-radius: 8px; margin-bottom: 0.5rem; }
+  .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
+  .product-desc { font-size: 18px; color: #333; line-height: 1.7; letter-spacing: -0.02em; white-space: pre-wrap; word-break: keep-all; padding: 30px; margin: 0 auto; max-width: 850px; }
 
-    .delivery-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .delivery-badge { display: flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-    .badge-rocket { background: #e3f2fd; color: #1565c0; }
-    .badge-free { background: #e8f5e9; color: #2e7d32; }
+  .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
+  .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
+  .product-price { font-size: 28px; font-weight: 900; color: #111; letter-spacing: -1px; }
 
-    .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
-    .share-btn:hover { background: #e52c2c; color: #fff; }
-    .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 18px; font-size: 17px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
-    .cta-btn:hover { background: #c62020; }
+  .delivery-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .delivery-badge { display: flex; align-items: center; gap: 4px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+  .badge-rocket { background: #e3f2fd; color: #1565c0; }
+  .badge-free { background: #e8f5e9; color: #2e7d32; }
 
- .hanmadi { background: linear-gradient(145deg, #202d3a, #1b2631); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,0.2); position: relative; overflow: hidden; }
-.hanmadi::before { content: ""; position: absolute; top: -10px; left: -30px; width: 120px; height: 35px; background: linear-gradient(135deg, #FFD700 0%, #D4A017 50%, #B8860B 100%); transform: rotate(-45deg); box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); z-index: 1; animation: shine 3s infinite linear; }
-.hanmadi::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%); pointer-events: none; }
-@keyframes shine { 0% { opacity: 0.8; } 50% { opacity: 1; box-shadow: 0 0 30px rgba(255, 215, 0, 0.9); } 100% { opacity: 0.8; } }
-.hanmadi-header { display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.hanmadi-avatar { width: 44px; height: 44px; background: radial-gradient(circle at 30% 30%, #fff, #bbb); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #1b2631; font-size: 22px; font-weight: 900; font-family: 'Arial Black', sans-serif; box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 5px rgba(255,255,255,0.5); }
-.hanmadi-name { font-size: 15px; font-weight: 700; color: #ffffff; letter-spacing: 0.8px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-.hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
-.hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); }
-.hanmadi-text { font-size: 18px; color: #ecf0f1; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; text-shadow: 0 2px 4px rgba(0,0,0,0.3); text-align: left; margin-top: 10px; }
+  .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
+  .share-btn:hover { background: #e52c2c; color: #fff; }
+  .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 18px; font-size: 17px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
+  .cta-btn:hover { background: #c62020; }
 
-    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-    .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
-.compare-box { background: #fff; border-radius: 8px; margin-bottom: 1rem; }
-.compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
-.compare-text { font-size: 15px; color: #666; line-height: 2; white-space: pre-wrap; }
+  .hanmadi { background: linear-gradient(145deg, #202d3a, #1b2631); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+  .hanmadi::before { content: ""; position: absolute; top: -5px; left: -25px; width: 90px; height: 25px; background: linear-gradient(135deg, #FFD700 0%, #D4A017 50%, #B8860B 100%); transform: rotate(-45deg); box-shadow: 0 0 15px rgba(255,215,0,0.5); z-index: 1; animation: shine 3s infinite linear; pointer-events: none; }
+  @keyframes shine { 0% { opacity: 0.8; } 50% { opacity: 1; box-shadow: 0 0 30px rgba(255,215,0,0.9); } 100% { opacity: 0.8; } }
+  .hanmadi-header { position: relative; z-index: 2; display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .hanmadi-avatar { width: 44px; height: 44px; background: radial-gradient(circle at 30% 30%, #fff, #bbb); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #1b2631; font-size: 22px; font-weight: 900; font-family: 'Arial Black', sans-serif; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+  .hanmadi-name { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.8px; }
+  .hanmadi-role { font-size: 11px; color: #95a5a6; text-transform: uppercase; letter-spacing: 1.2px; }
+  .hanmadi-badge { margin-left: auto; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #000; font-size: 10px; font-weight: 900; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase; }
+  .hanmadi-text { font-size: 18px; color: #ecf0f1; font-style: italic; line-height: 1.8; letter-spacing: 0.04em; }
 
-    .related-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 1.25rem; }
-    .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-    .related-card { text-decoration: none; display: block; }
-    .related-img { aspect-ratio: 1; background: #f9f9f9; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 8px; }
-    .related-img img { width: 100%; height: 100%; object-fit: cover; }
-    .related-name { font-size: 12px; color: #111; font-weight: 600; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-    .related-price { font-size: 13px; color: #111; font-weight: 900; margin-top: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
 
-    .footer { border-top: 1px solid #e8e8e8; background: #111; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; text-align: center; }
-    .footer p { font-size: 12px; color: #999; line-height: 1.8; }
-
-    .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
-    .back-to-top:hover { background: #e52c2c; }
-.hanmadi { background: linear-gradient(145deg, #202d3a, #1b2631); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 1px rgba(255,255,255,0.2); position: relative; overflow: hidden; }
-
-.hanmadi::before { 
-    content: ""; 
-    position: absolute; 
-    top: -5px; 
-    left: -25px; 
-    width: 90px; 
-    height: 25px; 
-    background: linear-gradient(135deg, #FFD700 0%, #D4A017 50%, #B8860B 100%); 
-    transform: rotate(-45deg); 
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); 
-    z-index: 1; 
-    animation: shine 3s infinite linear; 
-    pointer-events: none; 
-}
-
-.hanmadi-header { 
-    position: relative; /* z-index 적용을 위해 */
-    z-index: 2; /* 헤더를 밴드보다 위로 */
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    margin-bottom: 1.5rem; 
-    padding-bottom: 1rem; 
-    border-bottom: 1px solid rgba(255,255,255,0.05); 
-}
-    @media (max-width: 768px) {
-      .header-inner { padding: 0 1rem; }
-      .breadcrumb { padding: 1rem; }
-      .container { padding: 1rem; }
-      .product-wrap { grid-template-columns: 1fr; gap: 1.5rem; }
-      .product-img { position: static; }
-      .product-name { font-size: 20px; }
-      .product-price { font-size: 24px; }
-      .related-grid { grid-template-columns: repeat(2, 1fr); }
-.hanmadi::before { 
-        width: 70px; 
-        height: 20px; 
-        top: -5px; 
-        left: -20px; 
-    }
-    .hanmadi { padding: 1.5rem; }
-    .hanmadi-header { gap: 10px; }
-    .hanmadi-avatar { width: 30px; height: 30px; font-size: 15px; }
-    .hanmadi-text { font-size: 18px; line-height: 1.6; }
-    .hanmadi-badge { font-size: 8px; padding: 3px 8px; }
-      .tag { font-size: 11px; padding: 4px 10px; }
-      .compare-box { padding: 0.875rem; }
-      .desc-box { padding: 0.875rem; }
-      .compare-text { font-size: 16px; }
-      .product-desc { font-size: 16px; }
-      .back-to-top { bottom: 1.5rem; right: 1rem; }
-    }
-      .compare-text {
-    /* 읽기 편한 폰트 설정 */
-    font-size: 17px;
-    color: #444;              /* #666보다 조금 더 진한 색으로 가독성 개선 */
-    line-height: 1.8;         /* 2.0은 줄 간격이 너무 넓어 호흡이 끊길 수 있음 */
-    letter-spacing: -0.01em;  /* 한글 자간 조정 */
-    
-    white-space: pre-wrap;
-    word-break: keep-all;     /* 단어 단위 줄바꿈 */
-    
-    /* 추가: 내용이 길 경우를 대비한 여백 */
-    padding: 10px 0;
-}
+  .compare-box { background: #fff; border-radius: 8px; margin-bottom: 1rem; }
+  .compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
+  .compare-text { font-size: 18px; color: #444; line-height: 1.8; letter-spacing: -0.01em; white-space: pre-wrap; word-break: keep-all; padding: 10px 0; }
   .compare-box table { width: 100%; border-collapse: collapse; font-size: 16px; }
-.compare-box thead th { padding: 10px 14px; background: #111; color: #fff; font-weight: 800; text-align: left; font-size: 14px; letter-spacing: 1px; }
-.compare-box thead th:first-child { color: #aaa; }
-.compare-box thead th:nth-child(2) { color: #D4A017; }
-.compare-box tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 16px; }
-.compare-box tbody td:first-child { color: #111; font-weight: 700; background: #fafafa; }
-.compare-box tbody td:nth-child(2) { color: #111; font-weight: 700; }
-.compare-box tbody tr:hover { background: #f9f9f9; }
-@media (max-width: 768px) {
-  .product-desc { font-size: 16px; line-height: 1.7; padding: 16px 10px; }
-  .hanmadi-text { font-size: 17px; line-height: 1.6; }
-  .compare-text { font-size: 16px; line-height: 1.6; padding: 5px 10px; }
-  .compare-box table { font-size: 13px; }
-  .compare-box thead th { padding: 8px 10px; font-size: 12px; }
-  .compare-box tbody td { padding: 8px 10px; font-size: 13px; }
+  .compare-box thead th { padding: 10px 14px; background: #111; color: #fff; font-weight: 800; text-align: left; font-size: 14px; letter-spacing: 1px; }
+  .compare-box thead th:first-child { color: #aaa; }
+  .compare-box thead th:nth-child(2) { color: #D4A017; }
+  .compare-box tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; color: #555; font-size: 16px; }
+  .compare-box tbody td:first-child { color: #111; font-weight: 700; background: #fafafa; }
+  .compare-box tbody td:nth-child(2) { color: #111; font-weight: 700; }
+  .compare-box tbody tr:hover { background: #f9f9f9; }
+
+  .related-title { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 1.25rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .related-card { text-decoration: none; display: block; }
+  .related-img { aspect-ratio: 1; background: #f9f9f9; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 8px; }
+  .related-img img { width: 100%; height: 100%; object-fit: cover; }
+  .related-name { font-size: 12px; color: #111; font-weight: 600; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .related-price { font-size: 13px; color: #111; font-weight: 900; margin-top: 4px; }
+
+  .footer { border-top: 1px solid #e8e8e8; background: #111; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; text-align: center; }
+  .footer p { font-size: 12px; color: #999; line-height: 1.8; }
+
+  .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
+  .back-to-top:hover { background: #e52c2c; }
+
+  @media (max-width: 768px) {
+    .header-inner { padding: 0 1rem; }
+    .breadcrumb { padding: 1rem; }
+    .container { padding: 1rem; }
+    .product-wrap { grid-template-columns: 1fr; gap: 1.5rem; }
+    .product-img { position: static; }
+    .product-name { font-size: 20px; }
+    .product-price { font-size: 24px; }
+    .related-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-desc { font-size: 16px; line-height: 1.7; padding: 16px 10px; }
     .hanmadi { padding: 1rem; }
-  .hanmadi-avatar { width: 32px; height: 32px; font-size: 14px; }
-  .hanmadi-name { font-size: 12px; }
-  .hanmadi-role { font-size: 10px; }
-  .hanmadi-text { font-size: 17px; line-height: 1.7; }
-}
-}
-  `;
+    .hanmadi::before { width: 70px; height: 20px; top: -5px; left: -20px; }
+    .hanmadi-header { gap: 10px; }
+    .hanmadi-avatar { width: 32px; height: 32px; font-size: 14px; }
+    .hanmadi-name { font-size: 12px; }
+    .hanmadi-role { font-size: 10px; }
+    .hanmadi-badge { font-size: 8px; padding: 3px 8px; }
+    .hanmadi-text { font-size: 16px; line-height: 1.7; }
+    .tag { font-size: 11px; padding: 4px 10px; }
+    .compare-text { font-size: 16px; line-height: 1.6; padding: 5px 10px; }
+    .compare-box table { font-size: 13px; }
+    .compare-box thead th { padding: 8px 10px; font-size: 12px; }
+    .compare-box tbody td { padding: 8px 10px; font-size: 13px; }
+    .back-to-top { bottom: 1.5rem; right: 1rem; }
+  }
+`;
 
   return (
     <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
