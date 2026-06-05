@@ -272,6 +272,11 @@ export default async function ProductPage({ params }: { params: { id: string } }
   .compare-box table { font-size: 13px; }
   .compare-box thead th { padding: 8px 10px; font-size: 12px; }
   .compare-box tbody td { padding: 8px 10px; font-size: 13px; }
+    .hanmadi { padding: 1rem; }
+  .hanmadi-avatar { width: 32px; height: 32px; font-size: 14px; }
+  .hanmadi-name { font-size: 12px; }
+  .hanmadi-role { font-size: 10px; }
+  .hanmadi-text { font-size: 17px; line-height: 1.7; }
 }
 }
   `;
