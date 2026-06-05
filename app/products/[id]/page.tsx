@@ -130,7 +130,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
   .badge-pick { background: linear-gradient(135deg, #666, #999, #666); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
   .desc-box { background: #fff; border-radius: 8px; margin-bottom: 0.5rem; }
-  .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
+  .desc-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase;  padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
  
 .product-desc {
     font-size: 18px;
@@ -139,8 +139,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     letter-spacing: -0.02em;
     white-space: pre-wrap;
     word-break: keep-all;
-    padding: 30px 20px; /* 상하 여백을 좌우보다 넓게 주면 더 정돈되어 보임 */
-    margin: 20px auto; 
+     padding: 20px; /* 상하 여백을 좌우보다 넓게 주면 더 정돈되어 보임 */       
     max-width: 850px;
     
   
@@ -176,7 +175,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
     
     /* 여기서 위로 끌어올립니다 */
     position: relative;
-    top: -10px; /* 이 값을 조절해서 원하는 만큼 위로 올리세요 (-5px ~ -20px) */
+  
 }
 
 .hanmadi-text::before {
@@ -202,7 +201,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
   .tag { background: #fff; border: 1.5px solid #e8e8e8; color: #555; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
 
   .compare-box { background: #fff; border-radius: 8px; margin-bottom: 1rem; }
-  .compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
+  .compare-title { font-size: 11px; font-weight: 800; color: #111; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.3rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
   .compare-text { font-size: 18px; color: #444; line-height: 1.8; letter-spacing: -0.01em; white-space: pre-wrap; word-break: keep-all; padding: 10px 0; }
  /* PC 및 가독성 개선 */
 .compare-box thead th {
@@ -267,10 +266,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         padding: 20px 15px;
         
         /* 3. 줄 간격: 모바일은 한 줄이 짧으므로 줄 간격을 여유 있게 */
-        line-height: 1.7;
-        
-        /* 4. 마진: 위아래 간격을 주어 다른 요소와 분리 */
-        margin: 15px auto;
+        line-height: 1.7;     
         
         /* 5. 너비: 화면 너비를 100%로 쓰되, 여백(padding) 계산 고려 */
         width: 100%;
@@ -299,6 +295,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         padding: 12px 8px; /* 글자가 많을 때 행 높이를 확보해 가독성 개선 */
         word-break: keep-all; /* 단어 단위로 줄바꿈하여 가독성 증대 */
     }
+         .compare-title { margin-bottom: 1.3rem;}
     .back-to-top { bottom: 1.5rem; right: 1rem; }
   }
 `;
