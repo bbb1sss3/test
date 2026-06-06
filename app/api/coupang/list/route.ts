@@ -27,16 +27,23 @@ export async function GET(request: NextRequest) {
       cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
     } while (cursor);
 
-    const products = allResults.map((page: any) => ({
-      id: page.id,
-      name: page.properties.Name?.title?.[0]?.plain_text ?? '',
-      category: page.properties.카테고리?.select?.name ?? '',
-      image: page.properties.이미지?.url ?? '',
-      price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
-      isRocket: page.properties.로켓배송?.checkbox ?? false,
-      isFreeShipping: page.properties.무료배송?.checkbox ?? false,
-      badge: page.properties.뱃지?.select?.name ?? '',
-    }));
+   const products = allResults.map((page: any) => ({
+  id: page.id,
+  name: page.properties.Name?.title?.[0]?.plain_text ?? '',
+  category: page.properties.카테고리?.select?.name ?? '',
+  image: page.properties.이미지?.url ?? '',
+  price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
+  originalPrice: page.properties.원가?.rich_text?.[0]?.plain_text ?? '',
+  discount: page.properties.할인율?.rich_text?.[0]?.plain_text ?? '',
+  rating: page.properties.별점?.rich_text?.[0]?.plain_text ?? '',
+  desc: page.properties.설명?.rich_text?.[0]?.plain_text ?? '',
+  hanmadi: page.properties.한마디?.rich_text?.[0]?.plain_text ?? '',
+  tag: page.properties.태그?.rich_text?.[0]?.plain_text ?? '',
+  compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
+  isRocket: page.properties.로켓배송?.checkbox ?? false,
+  isFreeShipping: page.properties.무료배송?.checkbox ?? false,
+  badge: page.properties.뱃지?.select?.name ?? '',
+}));
 
     return NextResponse.json({ products });
   } catch (error: any) {
