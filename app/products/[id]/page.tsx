@@ -260,7 +260,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
   .back-to-top:hover { background: #e52c2c; }
 .product-desc h2 { font-size: 17px; font-weight: 800; color: #111; }
 .product-desc h3 { font-size: 15px; font-weight: 700; color: #333; }
-  .product-desc p { margin-bottom: 0.75rem; }
+
 
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
@@ -273,7 +273,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .related-grid { grid-template-columns: repeat(2, 1fr); }
      .product-desc h2 { font-size: 15px;  }
      .product-desc h3 { font-size: 13px; }
-     .product-desc p { margin-bottom: 0.5rem; }
+     .tags { flex-wrap: wrap; }
+  .tag { word-break: break-all; }
+   
 .product-desc {
         /* 1. 폰트 크기: 너무 크지도 작지도 않은 16px */
         font-size: 16px;
