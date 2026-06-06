@@ -87,9 +87,15 @@ function Stars({ rating }: { rating: string }) {
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
-  const metaDesc = product.desc 
-    ? product.desc.replace(/##\s*/g, '').slice(0, 125) + '... 장단점, 타사 비교 정보를 확인해보세요.'
-    : `${product.name} 장단점, 타사 비교 정보를 확인해보세요. 프리미 에디터 직접 선별.`;
+  const cleanDesc = product.desc.replace(/##[^\n]*/g, '').replace(/\n+/g, ' ').trim();
+  const sentences = cleanDesc.match(/[^.!?]+[.!?]+/g) || [];
+  let metaDesc = '';
+  const suffix = ' 장단점, 타사 비교 정보를 확인해보세요.';
+  for (const s of sentences) {
+    if ((metaDesc + s + suffix).length > 150) break;
+    metaDesc += s;
+  }
+  metaDesc = (metaDesc || cleanDesc.slice(0, 120)) + suffix;
   const keywords = product.tag 
      ? product.tag.split(',').map((t: string) => t.trim().replace('#', '')).join(',')
      : `${product.category}추천,프리미엄가전,${product.name}`;
