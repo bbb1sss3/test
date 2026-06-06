@@ -287,6 +287,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         /* 5. 너비: 화면 너비를 100%로 쓰되, 여백(padding) 계산 고려 */
         width: 100%;
         box-sizing: border-box;
+        overflow-x: hidden; word-break: break-all;
     }
     .hanmadi { padding: 1rem; }
     .hanmadi::before { width: 70px; height: 20px; top: -5px; left: -20px; }
