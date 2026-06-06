@@ -404,7 +404,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
             <ShareButton name={product.name} />
             <a href={product.link} target="_blank" rel="noopener noreferrer" className="cta-btn">
-              쿠팡 최저가 보러가기
+              {product.name} 쿠팡 최저가 확인
             </a>
           </div>
         </div>
