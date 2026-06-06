@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Client } from "@notionhq/client";
 import Link from "next/link";
 import ShareButton from "./ShareButton";
+import ReactMarkdown from 'react-markdown';
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -85,16 +86,24 @@ function Stars({ rating }: { rating: string }) {
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
+  const metaDesc = product.desc 
+    ? product.desc.slice(0, 155) + '...' 
+    : `${product.category} 추천 - ${product.name}. 프리미 에디터가 직접 선별한 프리미엄 가전입니다.`;
+  const keywords = product.tag 
+    ? `${product.tag}, ${product.category}추천, 쿠팡추천, 프리미엄가전` 
+    : `${product.category}추천, 쿠팡추천, 프리미엄가전, ${product.name}`;
+
   return {
-    title: `${product.name} | Premy`,
-    description: product.desc || `${product.category} 추천 - ${product.name}`,
-    keywords: product.tag || `${product.category}, 쿠팡추천, 프리미엄가전`,
+    title: `${product.name} | Premy(프리미) - 프리미엄 가전 큐레이션`,
+    description: metaDesc,
+    keywords,
     openGraph: {
-      title: `${product.name} | Premy`,
-      description: product.desc || `${product.category} 추천 - ${product.name}`,
-      images: product.image ? [{ url: product.image }] : [],
+      title: `${product.name} | Premy(프리미)`,
+      description: metaDesc,
+      images: product.image ? [{ url: product.image, alt: product.name }] : [],
       locale: 'ko_KR',
       type: 'website',
+      siteName: 'Premy(프리미)',
     },
   };
 }
@@ -248,6 +257,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
   .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
   .back-to-top:hover { background: #e52c2c; }
+  .product-desc h2 { font-size: 17px; font-weight: 800; color: #111; margin: 1.5rem 0 0.5rem; }
+  .product-desc h3 { font-size: 15px; font-weight: 700; color: #333; margin: 1rem 0 0.5rem; }
+  .product-desc p { margin-bottom: 0.75rem; }
 
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
@@ -352,11 +364,13 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
            
            {product.desc && (
-              <div className="desc-box">
-                <div className="desc-title">DESCRIPTION</div>
-                <div className="product-desc">{product.desc}</div>
+            <div className="desc-box">
+              <div className="desc-title">DESCRIPTION</div>
+              <div className="product-desc">
+                <ReactMarkdown>{product.desc}</ReactMarkdown>
               </div>
-            )}
+            </div>
+          )}
            
 
            {product.hanmadi && (
