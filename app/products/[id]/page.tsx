@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     : `${product.name} 장단점, 타사 비교 정보를 확인해보세요. 프리미 에디터 직접 선별.`;
   const keywords = product.tag 
      ? product.tag.split(',').map((t: string) => t.trim().replace('#', '')).join(',')
-     : `${product.category}추천,쿠팡추천,프리미엄가전,${product.name}`;
+     : `${product.category}추천,프리미엄가전,${product.name}`;
 
   return {
     title: `${product.name} | Premy(프리미) - 프리미엄 가전 큐레이션`,
