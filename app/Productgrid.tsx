@@ -36,6 +36,7 @@ const categories = [
   { label: '안마의자' },
   { label: '공기청정기' },
   { label: '식기세척기' },
+  { label: '태블릿' },
 ];
 
 
