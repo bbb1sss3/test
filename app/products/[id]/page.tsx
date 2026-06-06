@@ -31,6 +31,7 @@ async function getProduct(id: string) {
     compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
     isRocket: page.properties.로켓배송?.checkbox ?? false,
     isFreeShipping: page.properties.무료배송?.checkbox ?? false,
+    keyword: page.properties.키워드?.rich_text?.[0]?.plain_text ?? '',
   };
 }
 
@@ -404,7 +405,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
             <ShareButton name={product.name} />
             <a href={product.link} target="_blank" rel="noopener noreferrer" className="cta-btn">
-              {product.name} 쿠팡 최저가 확인
+              {product.keyword || product.category} 쿠팡 최저가 확인
             </a>
           </div>
         </div>
