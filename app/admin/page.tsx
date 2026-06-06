@@ -72,7 +72,7 @@ const css = `
   .count-badge { background: #f0f0f0; color: #555; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
 `;
 
-const CATEGORIES = ['노트북', '데스크탑', '모니터', '냉장고', '세탁기/건조기', 'TV', '청소기', '에어컨', '안마의자', '공기청정기', '식기세척기'];
+const CATEGORIES = ['노트북', '데스크탑', '모니터', '태블릿', '냉장고', '세탁기/건조기', 'TV', '청소기', '에어컨', '안마의자', '공기청정기', '식기세척기'];
 const BADGES = ['', 'NEW', '인기', '추천'];
 
 const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '' };
