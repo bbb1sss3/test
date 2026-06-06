@@ -88,8 +88,8 @@ function Stars({ rating }: { rating: string }) {
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const product = await getProduct(params.id);
   const metaDesc = product.desc 
-    ? product.desc.slice(0, 155) + '...' 
-    : `${product.category} 추천 - ${product.name}. 프리미 에디터가 직접 선별한 프리미엄 가전입니다.`;
+     ? product.desc.slice(0, 120) + '... 장단점, 타사 비교 정보를 확인해보세요.'
+    : `${product.name} 장단점, 타사 비교 정보를 확인해보세요. 프리미 에디터 직접 선별.`;
   const keywords = product.tag 
     ? `${product.tag}, ${product.category}추천, 쿠팡추천, 프리미엄가전` 
     : `${product.category}추천, 쿠팡추천, 프리미엄가전, ${product.name}`;
@@ -258,8 +258,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
   .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
   .back-to-top:hover { background: #e52c2c; }
-  .product-desc h2 { font-size: 17px; font-weight: 800; color: #111; margin: 1.5rem 0 0.5rem; }
-  .product-desc h3 { font-size: 15px; font-weight: 700; color: #333; margin: 1rem 0 0.5rem; }
+.product-desc h2 { font-size: 17px; font-weight: 800; color: #111; margin: 1.5rem 0 0.25rem; }
+.product-desc h3 { font-size: 15px; font-weight: 700; color: #333; margin: 1rem 0 0.25rem; }
   .product-desc p { margin-bottom: 0.75rem; }
 
   @media (max-width: 768px) {
@@ -271,6 +271,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
     .product-name { font-size: 20px; }
     .product-price { font-size: 24px; }
     .related-grid { grid-template-columns: repeat(2, 1fr); }
+     .product-desc h2 { font-size: 15px; margin: 1rem 0 0.25rem; }
+     .product-desc h3 { font-size: 13px; margin: 0.75rem 0 0.25rem; }
+     .product-desc p { margin-bottom: 0.5rem; }
 .product-desc {
         /* 1. 폰트 크기: 너무 크지도 작지도 않은 16px */
         font-size: 16px;
@@ -398,7 +401,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
 
             {product.compare && (
             <div className="compare-box">
-              <div className="compare-title">COMPARISON</div>
+              <h2 className="compare-title">COMPARISON</h2>
               <CompareTable text={product.compare} />
             </div>
           )}
