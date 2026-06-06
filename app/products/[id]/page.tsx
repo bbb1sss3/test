@@ -289,6 +289,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         box-sizing: border-box;
         overflow-x: hidden; word-break: break-all;
     }
+      h2.compare-title { font-size: 11px; margin: 0 0 0.5rem 0; }
     .hanmadi { padding: 1rem; }
     .hanmadi::before { width: 70px; height: 20px; top: -5px; left: -20px; }
     .hanmadi-header { gap: 10px; }
