@@ -416,14 +416,28 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </div>
 
            
-           {product.desc && (
-            <div className="desc-box">
-              <div className="desc-title">DESCRIPTION</div>
-              <div className="product-desc">
-                <ReactMarkdown>{product.desc}</ReactMarkdown>
+            {product.desc && (
+              <div className="desc-box">
+                <div className="desc-title">DESCRIPTION</div>
+                <div className="product-desc">
+                  <ReactMarkdown
+                    components={{
+                      ul: ({ children }) => (
+                        <ul style={{ margin: '0.2em 0', paddingLeft: '1.2em' }}>{children}</ul>
+                      ),
+                      li: ({ children }) => (
+                        <li style={{ margin: '0.1em 0', lineHeight: '1.6' }}>{children}</li>
+                      ),
+                      p: ({ children }) => (
+                        <p style={{ margin: '0.4em 0' }}>{children}</p>
+                      ),
+                    }}
+                  >
+                    {product.desc}
+                  </ReactMarkdown>
+                </div>
               </div>
-            </div>
-          )}
+            )}
            
 
            {product.hanmadi && (
