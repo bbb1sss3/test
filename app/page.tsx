@@ -41,6 +41,7 @@ async function getProducts() {
     hanmadi: page.properties.한마디?.rich_text?.[0]?.plain_text ?? '',
     tag: page.properties.태그?.rich_text?.[0]?.plain_text ?? '',
     compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
+     slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
   }));
 }
 

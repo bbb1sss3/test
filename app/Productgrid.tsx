@@ -18,6 +18,7 @@ type Product = {
   hanmadi: string;
   tag: string;
   compare: string;
+  slug?: string;
 };
 
 const categories = [
@@ -285,7 +286,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             ) : (
               <div className="grid">
                 {products.filter(p => wishes.includes(p.id)).map(p => (
-                  <Link key={p.id} href={`/products/${p.id}`} className="card">
+                  <Link key={p.id} href={`/products/${p.slug || p.id}`} className="card">
                     <div className="card-img-wrap">
                       {p.image
                         ? <Image src={p.image} alt={p.name} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -336,7 +337,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
         <div className="slider-wrap">
           <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
             {highlights.map((p) => (
-              <Link key={p.id} href={`/products/${p.id}`} className="slide">
+              <Link key={p.id} href={`/products/${p.slug || p.id}`} className="slide">
                 {p.image && <Image src={p.image} alt={p.name} className="slide-bg" fill style={{ objectFit: 'cover', filter: 'brightness(0.6)' }} />}
                 <div className="slide-content">
                   <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
@@ -355,7 +356,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <div className="recent-title">최근 본 상품</div>
           <div className="recent-list">
             {recent.map(p => (
-              <Link key={p.id} href={`/products/${p.id}`} className="recent-item">
+              <Link key={p.id} href={`/products/${p.slug || p.id}`} className="recent-item">
                 <div className="recent-img">
                   {p.image
                     ? <Image src={p.image} alt={p.name} width={80} height={80} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -386,7 +387,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           ) : (
             <div className="grid">
               {filtered.map((p) => (
-                <Link key={p.id} href={`/products/${p.id}`} className="card" onClick={() => {
+                <Link key={p.id} href={`/products/${p.slug || p.id}`} className="card" onClick={() => {
                   const saved = localStorage.getItem('recent');
                   const ids = saved ? JSON.parse(saved) as string[] : [];
                   const updated = [p.id, ...ids.filter(id => id !== p.id)].slice(0, 10);

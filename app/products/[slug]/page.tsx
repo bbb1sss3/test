@@ -44,6 +44,7 @@ async function getRelated(category: string, currentId: string) {
       category: page.properties.카테고리?.select?.name ?? '',
       image: page.properties.이미지?.url ?? '',
       price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
+      slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
     }))
     .filter(p => p.category === category && p.id !== currentId)
     .slice(0, 4);
@@ -85,8 +86,8 @@ function Stars({ rating }: { rating: string }) {
   );
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+export async function generateMetadata({ params }: {params: { slug: string } }) {
+  const product = await getProduct(params.slug);
   const cleanDesc = product.desc.replace(/##[^\n]*/g, '').replace(/\n+/g, ' ').trim();
   const sentences = cleanDesc.match(/[^.!?]+[.!?]+/g) || [];
   let metaDesc = '';
@@ -115,8 +116,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+export default async function ProductPage({ params }: {params: { slug: string } }) {
+  const product = await getProduct(params.slug);
   const related = await getRelated(product.category, product.id);
 
   const css = `
@@ -428,7 +429,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
             <div className="related-title">연관 상품</div>
             <div className="related-grid">
               {related.map(p => (
-                <Link key={p.id} href={`/products/${p.id}`} className="related-card">
+                <Link key={p.id} href={`/products/${p.slug || p.id}`} className="related-card">
                   <div className="related-img">
                     {p.image
                       ? <Image src={p.image} alt={p.name} width={200} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
