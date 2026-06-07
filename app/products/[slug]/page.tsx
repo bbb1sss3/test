@@ -462,7 +462,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
           <a href={product.link} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn">
             {product.keyword || product.category} 쿠팡 최저가 확인
           </a>
-          <p style={{ fontSize: '11px', color: '#aaa', textAlign: 'center', marginTop: '8px' }}>
+          <p style={{ fontSize: '12px', color: '#aaa', textAlign: 'center', marginTop: '8px' }}>
             이 링크는 쿠팡 파트너스 제휴 링크로, 구매 시 판매자로부터 일정 수수료를 받을 수 있습니다. 구매자에게는 추가 비용이 발생하지 않습니다.
           </p>
         </div>
