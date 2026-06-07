@@ -22,12 +22,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
   } while (cursor);
 
-  const productUrls = allResults.map((page: any) => ({
-    url: `https://premy.co.kr/products/${page.id}`,
+ const productUrls = allResults.map((page: any) => {
+  const slug = page.properties.슬러그?.rich_text?.[0]?.plain_text;
+  return {
+    url: `https://premy.co.kr/products/${slug || page.id}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
     priority: 0.8,
-  }));
+  };
+});
 
   return [
     {
