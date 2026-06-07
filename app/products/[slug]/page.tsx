@@ -459,7 +459,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
           )}
 
            <ShareButton name={product.name} />
-          <a href={product.link} target="_blank" rel="noopener noreferrer" className="cta-btn">
+          <a href={product.link} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn">
             {product.keyword || product.category} 쿠팡 최저가 확인
           </a>
           <p style={{ fontSize: '11px', color: '#aaa', textAlign: 'center', marginTop: '8px' }}>
