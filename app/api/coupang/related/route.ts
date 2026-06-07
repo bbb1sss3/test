@@ -10,7 +10,14 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get('category') || '';
   const currentId = searchParams.get('currentId') || '';
 
-  const response = await notion.dataSources.query({ data_source_id: dbId });
+  const response = await notion.dataSources.query({
+    data_source_id: dbId,
+    filter: {
+      property: '카테고리',
+      select: { equals: category },
+    },
+  });
+
   const related = response.results
     .map((page: any) => ({
       id: page.id,
@@ -20,7 +27,7 @@ export async function GET(request: NextRequest) {
       price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
       slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
     }))
-    .filter((p: any) => p.category === category && p.id !== currentId)
+    .filter((p: any) => p.id !== currentId)
     .slice(0, 4);
 
   return NextResponse.json(related);
