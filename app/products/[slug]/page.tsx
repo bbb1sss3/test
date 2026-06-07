@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { notFound } from 'next/navigation';
 import ScrollTop from './ScrollTop';
 import RelatedProducts from './RelatedProducts';
+import React from 'react'
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -426,7 +427,13 @@ export default async function ProductPage({ params }: { params: { slug: string }
                         <ul style={{ margin: '0.2em 0', paddingLeft: '1.2em' }}>{children}</ul>
                       ),
                       li: ({ children }) => (
-                        <li style={{ margin: '0.1em 0', lineHeight: '1.6' }}>{children}</li>
+                        <li style={{ margin: '0', lineHeight: '1.6' }}>
+                          {React.Children.map(children, child =>
+                            React.isValidElement(child) && (child as any).type === 'p'
+                              ? (child as any).props.children
+                              : child
+                          )}
+                        </li>
                       ),
                       p: ({ children }) => (
                         <p style={{ margin: '0.4em 0' }}>{children}</p>
