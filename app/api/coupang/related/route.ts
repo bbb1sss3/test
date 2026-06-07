@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
       property: '카테고리',
       select: { equals: category },
     },
+    sorts: [{ timestamp: 'created_time', direction: 'descending' }],
   });
 
   const related = response.results
