@@ -75,7 +75,7 @@ const css = `
 const CATEGORIES = ['노트북', '데스크탑', '모니터', '태블릿', '냉장고', '세탁기/건조기', 'TV', '청소기', '에어컨', '안마의자', '공기청정기', '식기세척기'];
 const BADGES = ['', 'NEW', '인기', '추천'];
 
-const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '' };
+const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '', slug: '' };
 
 export default function AdminPage() {
   const [password, setPassword] = useState('');
@@ -199,6 +199,7 @@ export default function AdminPage() {
       hanmadi: p.hanmadi || '',
       tag: p.tag || '',
       compare: p.compare || '',
+      slug: p.slug || '',
     });
   };
 
@@ -228,6 +229,10 @@ export default function AdminPage() {
           <option value="">선택하세요</option>
           {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
+      </div>
+      <div className="form-group">
+        <label className="form-label">슬러그</label>
+        <input className="input" value={f.slug || ''} onChange={e => setF((prev: any) => ({ ...prev, slug: e.target.value }))} placeholder="예: samsung-bespoke-rs84db5002cw" />
       </div>
       <div className="form-group">
         <label className="form-label">뱃지</label>
