@@ -298,7 +298,14 @@ export default async function ProductPage({ params }: { params: { slug: string }
   .back-to-top:hover { background: #e52c2c; }
 .product-desc h2 { font-size: 17px; font-weight: 800; color: #111; }
 .product-desc h3 { font-size: 15px; font-weight: 700; color: #333; }
-
+.product-desc ul {
+  margin: 0.4em 0;
+  padding-left: 1.4em;
+}
+.product-desc li {
+  margin: 0.2em 0;
+  line-height: 1.6;
+}
 
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
