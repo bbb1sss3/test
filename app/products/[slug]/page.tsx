@@ -299,9 +299,19 @@ export default async function ProductPage({ params }: { params: { slug: string }
   .back-to-top:hover { background: #e52c2c; }
 .product-desc h2 { font-size: 17px; font-weight: 800; color: #111; margin: 0.3em 0 0 0; }
 .product-desc h3 { font-size: 15px; font-weight: 700; color: #333; }
-.product-desc ul { margin: 0.2em 0; padding-left: 1.2em; }
-.product-desc li { margin: 0; line-height: 1.6; }
-.product-desc li > p { margin: 0; padding: 0; }
+.product-desc ul {
+  margin: 0;
+  padding-left: 1.2em;
+  list-style-type: disc;
+}
+.product-desc li {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+.product-desc li + li {
+  margin-top: 0;
+}
 
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
