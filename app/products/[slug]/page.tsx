@@ -5,6 +5,7 @@ import ShareButton from "./ShareButton";
 import ReactMarkdown from 'react-markdown';
 import { notFound } from 'next/navigation';
 import ScrollTop from './ScrollTop';
+import RelatedProducts from './RelatedProducts';
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -74,20 +75,7 @@ async function getProduct(slug: string) {
   };
 }
 
-async function getRelated(category: string, currentId: string) {
-  const response = await notion.dataSources.query({ data_source_id: dbId });
-  return response.results
-    .map((page: any) => ({
-      id: page.id,
-      name: page.properties.Name?.title?.[0]?.plain_text ?? '',
-      category: page.properties.카테고리?.select?.name ?? '',
-      image: page.properties.이미지?.url ?? '',
-      price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
-      slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
-    }))
-    .filter(p => p.category === category && p.id !== currentId)
-    .slice(0, 4);
-}
+
 
 function CompareTable({ text }: { text: string }) {
   const rows = text.trim().split('\n').map(row => row.split('|'));
@@ -125,6 +113,8 @@ function Stars({ rating }: { rating: string }) {
   );
 }
 
+
+
 export async function generateMetadata({ params }: {params: { slug: string } }) {
   const product = await getProduct(params.slug);  
   if (!product) return { title: 'Premy(프리미)' };
@@ -159,7 +149,7 @@ export async function generateMetadata({ params }: {params: { slug: string } }) 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
   const product = await getProduct(params.slug);
   if (!product) notFound();
-  const related = await getRelated(product!.category, product!.id);
+
 
   const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -468,25 +458,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
         </div>
         </div>
 
-        {related.length > 0 && (
-          <div>
-            <div className="related-title">연관 상품</div>
-            <div className="related-grid">
-              {related.map(p => (
-                <Link key={p.id} href={`/products/${p.slug || p.id}`} className="related-card">
-                  <div className="related-img">
-                    {p.image
-                      ? <Image src={p.image} alt={p.name} width={200} height={200} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      : '🛒'
-                    }
-                  </div>
-                  <div className="related-name">{p.name}</div>
-                  <div className="related-price">{p.price}</div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+         <RelatedProducts category={product!.category} currentId={product!.id} />
       </div>
 
       <footer className="footer">
