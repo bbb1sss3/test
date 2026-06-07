@@ -297,7 +297,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   .back-to-top { position: fixed; bottom: 2rem; right: 2rem; background: #111; color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 100; text-decoration: none; }
   .back-to-top:hover { background: #e52c2c; }
-.product-desc h2 { font-size: 17px; font-weight: 800; color: #111; margin-top: 1em; margin-bottom: 0.3em; }
+.product-desc h2 { font-size: 17px; font-weight: 800; color: #111; margin: 0.3em 0 0 0; }
 .product-desc h3 { font-size: 15px; font-weight: 700; color: #333; }
 .product-desc ul { margin: 0.2em 0; padding-left: 1.2em; }
 .product-desc li { margin: 0; line-height: 1.6; }
