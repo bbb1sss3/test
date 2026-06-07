@@ -491,7 +491,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
       <footer className="footer">
         <div className="footer-inner">
-          <p>© 2026 Premy(프리미) &nbsp;·&nbsp; </p>
+          <p>© 2026 Premy(프리미)</p>
         </div>
       </footer>
         <ScrollTop />
