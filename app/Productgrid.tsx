@@ -251,8 +251,8 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           </div>
           <button
             onClick={() => {
+              if (!showWish) window.scrollTo({ top: 0, behavior: 'smooth' });
               setShowWish(!showWish);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '22px', position: 'relative', flexShrink: 0 }}
           >
