@@ -194,17 +194,20 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
   const highlights = products.filter(p => p.badge === '인기').slice(0, 4);
   const total = highlights.length;
-
+  const [showTop, setShowTop] = useState(false);
   useEffect(() => {
-    const saved = localStorage.getItem('wishes');
-    if (saved) setWishes(JSON.parse(saved));
-    const savedRecent = localStorage.getItem('recent');
-    if (savedRecent) {
-      const ids = JSON.parse(savedRecent) as string[];
-      const recentProducts = ids.map(id => products.find(p => p.id === id)).filter(Boolean) as Product[];
-      setRecent(recentProducts);
-    }
-  }, [products]);
+  const saved = localStorage.getItem('wishes');
+  if (saved) setWishes(JSON.parse(saved));
+  const savedRecent = localStorage.getItem('recent');
+  if (savedRecent) {
+    const ids = JSON.parse(savedRecent) as string[];
+    const recentProducts = ids.map(id => products.find(p => p.id === id)).filter(Boolean) as Product[];
+    setRecent(recentProducts);
+  }
+  const handleScroll = () => setShowTop(window.scrollY > 300);
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, [products]);
 
   useEffect(() => {
     if (total === 0) return;
@@ -429,7 +432,9 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <p className="footer-mobile">© 2026 Premy(프리미) &nbsp;· 쿠팡 파트너스 활동의 일환으로 수수료를 받을 수 있음.</p>
         </div>
       </footer>
-      <a href="#" className="back-to-top">↑</a>
+      {showTop && (
+        <button className="back-to-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>↑</button>
+      )}
     </main>
   );
 }
