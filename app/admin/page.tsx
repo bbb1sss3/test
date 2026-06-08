@@ -77,6 +77,60 @@ const BADGES = ['', 'NEW', '인기', '추천'];
 
 const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '', slug: '' };
 
+ const FormFields = ({ f, setF }: { f: typeof emptyForm, setF: any }) => (
+    <div className="form-grid">
+      <div className="form-group">
+        <label className="form-label">카테고리</label>
+        <select className="select" value={f.category} onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}>
+          <option value="">선택하세요</option>
+          {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+        </select>
+      </div>
+      <div className="form-group">
+        <label className="form-label">슬러그</label>
+        <input className="input" value={f.slug || ''} onChange={e => setF((prev: any) => ({ ...prev, slug: e.target.value }))} placeholder="예: samsung-bespoke-rs84db5002cw" />
+      </div>
+      <div className="form-group">
+        <label className="form-label">뱃지</label>
+        <select className="select" value={f.badge} onChange={e => setF((prev: any) => ({ ...prev, badge: e.target.value }))}>
+          {BADGES.map(b => <option key={b} value={b}>{b || '없음'}</option>)}
+        </select>
+      </div>
+      <div className="form-group">
+        <label className="form-label">가격</label>
+        <input className="input" value={f.price} onChange={e => setF((prev: any) => ({ ...prev, price: e.target.value }))} placeholder="예: 1,690,000원~" />
+      </div>
+      <div className="form-group">
+        <label className="form-label">원가</label>
+        <input className="input" value={f.originalPrice} onChange={e => setF((prev: any) => ({ ...prev, originalPrice: e.target.value }))} placeholder="예: 2,690,000원" />
+      </div>
+      <div className="form-group">
+        <label className="form-label">할인율</label>
+        <input className="input" value={f.discount} onChange={e => setF((prev: any) => ({ ...prev, discount: e.target.value }))} placeholder="예: 37%" />
+      </div>
+      <div className="form-group">
+        <label className="form-label">별점</label>
+        <input className="input" value={f.rating} onChange={e => setF((prev: any) => ({ ...prev, rating: e.target.value }))} placeholder="예: 4.5" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">설명 (SEO용)</label>
+        <textarea className="textarea" value={f.desc} onChange={e => setF((prev: any) => ({ ...prev, desc: e.target.value }))} placeholder="상품 설명 (300자 이상 권장)" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">에디터 한마디</label>
+        <textarea className="textarea" value={f.hanmadi} onChange={e => setF((prev: any) => ({ ...prev, hanmadi: e.target.value }))} placeholder="솔직한 추천 이유 2문장" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">태그 (쉼표로 구분)</label>
+        <input className="input" value={f.tag} onChange={e => setF((prev: any) => ({ ...prev, tag: e.target.value }))} placeholder="예: #신혼부부필수템, #4인가족추천" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">경쟁 모델 비교</label>
+        <textarea className="textarea" value={f.compare} onChange={e => setF((prev: any) => ({ ...prev, compare: e.target.value }))} placeholder="항목|모델A|모델B|모델C" />
+      </div>
+    </div>
+  );
+
 export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -221,59 +275,7 @@ export default function AdminPage() {
     }
   };
 
-  const FormFields = ({ f, setF }: { f: typeof emptyForm, setF: any }) => (
-    <div className="form-grid">
-      <div className="form-group">
-        <label className="form-label">카테고리</label>
-        <select className="select" value={f.category} onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}>
-          <option value="">선택하세요</option>
-          {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </div>
-      <div className="form-group">
-        <label className="form-label">슬러그</label>
-        <input className="input" value={f.slug || ''} onChange={e => setF((prev: any) => ({ ...prev, slug: e.target.value }))} placeholder="예: samsung-bespoke-rs84db5002cw" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">뱃지</label>
-        <select className="select" value={f.badge} onChange={e => setF((prev: any) => ({ ...prev, badge: e.target.value }))}>
-          {BADGES.map(b => <option key={b} value={b}>{b || '없음'}</option>)}
-        </select>
-      </div>
-      <div className="form-group">
-        <label className="form-label">가격</label>
-        <input className="input" value={f.price} onChange={e => setF((prev: any) => ({ ...prev, price: e.target.value }))} placeholder="예: 1,690,000원~" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">원가</label>
-        <input className="input" value={f.originalPrice} onChange={e => setF((prev: any) => ({ ...prev, originalPrice: e.target.value }))} placeholder="예: 2,690,000원" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">할인율</label>
-        <input className="input" value={f.discount} onChange={e => setF((prev: any) => ({ ...prev, discount: e.target.value }))} placeholder="예: 37%" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">별점</label>
-        <input className="input" value={f.rating} onChange={e => setF((prev: any) => ({ ...prev, rating: e.target.value }))} placeholder="예: 4.5" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">설명 (SEO용)</label>
-        <textarea className="textarea" value={f.desc} onChange={e => setF((prev: any) => ({ ...prev, desc: e.target.value }))} placeholder="상품 설명 (300자 이상 권장)" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">에디터 한마디</label>
-        <textarea className="textarea" value={f.hanmadi} onChange={e => setF((prev: any) => ({ ...prev, hanmadi: e.target.value }))} placeholder="솔직한 추천 이유 2문장" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">태그 (쉼표로 구분)</label>
-        <input className="input" value={f.tag} onChange={e => setF((prev: any) => ({ ...prev, tag: e.target.value }))} placeholder="예: #신혼부부필수템, #4인가족추천" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">경쟁 모델 비교</label>
-        <textarea className="textarea" value={f.compare} onChange={e => setF((prev: any) => ({ ...prev, compare: e.target.value }))} placeholder="항목|모델A|모델B|모델C" />
-      </div>
-    </div>
-  );
+ 
 
   if (!isLoggedIn) {
     return (
