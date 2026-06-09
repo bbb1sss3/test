@@ -43,6 +43,8 @@ export async function GET(request: NextRequest) {
   isRocket: page.properties.로켓배송?.checkbox ?? false,
   isFreeShipping: page.properties.무료배송?.checkbox ?? false,
   badge: page.properties.뱃지?.select?.name ?? '',
+  slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
+iherbLink: page.properties.아이허브링크?.url ?? '',
 }));
 
     return NextResponse.json({ products });
