@@ -417,7 +417,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                   <div className="card-body">
                     {p.category && <div className="card-category">{p.category}</div>}
                     <div className="card-name">{p.name}</div>
-                    {p.desc && <div className="card-desc">{p.desc}</div>}
+                   {p.desc && <div className="card-desc">{p.desc.replace(/##[^\n]*/g, '').replace(/\n+/g, ' ').trim().slice(0, 100)}</div>}
                     <Stars rating={p.rating} />
                     {p.discount && <div className="card-discount">{p.discount} 할인</div>}
                     {p.originalPrice && <div className="card-original-price">{p.originalPrice}</div>}
