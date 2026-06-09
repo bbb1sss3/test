@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
   }
 
   const { pageId, form } = await request.json();
-  
+
 
   try {
     await notion.pages.update({
@@ -25,6 +25,9 @@ export async function POST(request: NextRequest) {
         한마디: { rich_text: [{ text: { content: form.hanmadi || '' } }] },
         태그: { rich_text: [{ text: { content: form.tag || '' } }] },
         비교: { rich_text: [{ text: { content: form.compare || '' } }] },
+        슬러그: { rich_text: [{ text: { content: form.slug || '' } }] },
+        ...(form.iherbLink ? { 아이허브링크: { url: form.iherbLink } } : {}),
+        ...(form.imageUrl ? { 이미지: { url: form.imageUrl } } : {}),
         ...(form.badge !== undefined ? { 뱃지: form.badge ? { select: { name: form.badge } } : { select: null } } : {}),
       } as any,
     });

@@ -18,7 +18,7 @@ const dbId = rawId.includes('-')
 
 async function getProduct(slug: string) {
   const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
-  
+
   if (isUUID) {
     const page = await notion.pages.retrieve({ page_id: slug }) as any;
     return {
@@ -40,6 +40,7 @@ async function getProduct(slug: string) {
       isFreeShipping: page.properties.무료배송?.checkbox ?? false,
       keyword: page.properties.키워드?.rich_text?.[0]?.plain_text ?? '',
       slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
+      iherbLink: page.properties.아이허브링크?.url ?? '',
     };
   }
 
@@ -73,6 +74,7 @@ async function getProduct(slug: string) {
     isFreeShipping: page.properties.무료배송?.checkbox ?? false,
     keyword: page.properties.키워드?.rich_text?.[0]?.plain_text ?? '',
     slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
+    iherbLink: page.properties.아이허브링크?.url ?? '',
   };
 }
 
@@ -116,8 +118,8 @@ function Stars({ rating }: { rating: string }) {
 
 
 
-export async function generateMetadata({ params }: {params: { slug: string } }) {
-  const product = await getProduct(params.slug);  
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const product = await getProduct(params.slug);
   if (!product) return { title: 'Premy(프리미)' };
   const cleanDesc = (product.desc || '').replace(/##[^\n]*/g, '').replace(/\n+/g, ' ').trim()
   const sentences = cleanDesc.match(/[^.!?]+[.!?]+/g) || [];
@@ -128,9 +130,9 @@ export async function generateMetadata({ params }: {params: { slug: string } }) 
     metaDesc += s;
   }
   metaDesc = (metaDesc || cleanDesc.slice(0, 120)) + suffix;
-  const keywords = product.tag 
-     ? product.tag.split(',').map((t: string) => t.trim().replace('#', '')).join(',')
-     : `${product.category}추천,프리미엄가전,${product.name}`;
+  const keywords = product.tag
+    ? product.tag.split(',').map((t: string) => t.trim().replace('#', '')).join(',')
+    : `${product.category}추천,프리미엄가전,${product.name}`;
 
   return {
     title: `${product.name} | Premy(프리미) - 프리미엄 가전 큐레이션`,
@@ -381,10 +383,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
         </div>
       </header>
 
-      
+
 
       <div className="container" style={{ flex: 1 }}>
-          <div className="breadcrumb">
+        <div className="breadcrumb">
           <Link href="/">홈</Link>
           <span>›</span>
           <span>{product.category}</span>
@@ -409,29 +411,29 @@ export default async function ProductPage({ params }: { params: { slug: string }
             </div>
             <div className="product-name">{product.name}</div>
             <Stars rating={product.rating} />
-               {(product.isRocket || product.isFreeShipping) && (
+            {(product.isRocket || product.isFreeShipping) && (
               <div className="delivery-badges">
                 {product.isRocket && <div className="delivery-badge badge-rocket">🚀 로켓배송</div>}
                 {product.isFreeShipping && <div className="delivery-badge badge-free">✓ 무료배송</div>}
               </div>
             )}
-             <div>
+            <div>
               {product.originalPrice && <div className="product-original-price">{product.originalPrice}</div>}
               {product.discount && <div className="product-discount">{product.discount} 할인</div>}
               {product.price && <div className="product-price">{product.price}</div>}
             </div>
 
-           
+
             {product.desc && (
               <div className="desc-box">
                 <div className="desc-title">DESCRIPTION</div>
                 <div className="product-desc">
                   <ReactMarkdown
                     components={{
-                      ul: ({ children }) => (
+                     ul: ({ children }: { children: React.ReactNode }) => (
                         <ul style={{ margin: '0.2em 0', paddingLeft: '1.2em' }}>{children}</ul>
                       ),
-                      li: ({ children }) => (
+                      li: ({ children }: { children: React.ReactNode }) => (
                         <li style={{ margin: '0', lineHeight: '1.6' }}>
                           {React.Children.map(children, child =>
                             React.isValidElement(child) && (child as any).type === 'p'
@@ -440,7 +442,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                           )}
                         </li>
                       ),
-                      p: ({ children }) => (
+                      p: ({ children }: { children: React.ReactNode }) => (
                         <p style={{ margin: '0.4em 0' }}>{children}</p>
                       ),
                     }}
@@ -450,21 +452,21 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 </div>
               </div>
             )}
-           
 
-           {product.hanmadi && (
-            <div className="hanmadi">
-              <div className="hanmadi-header">
-                <div className="hanmadi-avatar">P</div>
-                <div>
-                  <div className="hanmadi-name">PREMY 에디터</div>
-                  <div className="hanmadi-role">프리미엄 가전 큐레이터</div>
+
+            {product.hanmadi && (
+              <div className="hanmadi">
+                <div className="hanmadi-header">
+                  <div className="hanmadi-avatar">P</div>
+                  <div>
+                    <div className="hanmadi-name">PREMY 에디터</div>
+                    <div className="hanmadi-role">프리미엄 가전 큐레이터</div>
+                  </div>
+
                 </div>
-               
+                <div className="hanmadi-text">{product.hanmadi}</div>
               </div>
-              <div className="hanmadi-text">{product.hanmadi}</div>
-            </div>
-          )}
+            )}
 
             {product.tag && (
               <div className="tags">
@@ -475,23 +477,28 @@ export default async function ProductPage({ params }: { params: { slug: string }
             )}
 
             {product.compare && (
-            <div className="compare-box">
-              <h2 className="compare-title">COMPARISON</h2>
-              <CompareTable text={product.compare} />
-            </div>
-          )}
+              <div className="compare-box">
+                <h2 className="compare-title">COMPARISON</h2>
+                <CompareTable text={product.compare} />
+              </div>
+            )}
 
-           <ShareButton name={product.name} />
-          <a href={product.link} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn">
-            {product.keyword || product.category} 쿠팡 최저가 확인
-          </a>
-          <p style={{ fontSize: '12px', color: '#aaa', textAlign: 'center', marginTop: '8px' }}>
-            이 링크는 쿠팡 파트너스 제휴 링크로, 구매 시 판매자로부터 일정 수수료를 받을 수 있습니다. 구매자에게는 추가 비용이 발생하지 않습니다.
-          </p>
-        </div>
+            <ShareButton name={product.name} />
+            <a href={product.link} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn">
+              {product.keyword || product.category} 쿠팡 최저가 확인
+            </a>
+            {product.iherbLink && (
+              <a href={product.iherbLink} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn" style={{ background: '#2d8a4e', marginTop: '8px' }}>
+                 {product.keyword || product.category} 아이허브 최저가 확인
+              </a>
+            )}
+            <p style={{ fontSize: '12px', color: '#aaa', textAlign: 'center', marginTop: '8px' }}>
+              이 링크는 쿠팡 파트너스 제휴 링크로, 구매 시 판매자로부터 일정 수수료를 받을 수 있습니다. 구매자에게는 추가 비용이 발생하지 않습니다.
+            </p>
+          </div>
         </div>
 
-         <RelatedProducts category={product!.category} currentId={product!.id} />
+        <RelatedProducts category={product!.category} currentId={product!.id} />
       </div>
 
       <footer className="footer">
@@ -499,8 +506,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
           <p>© 2026 Premy(프리미)</p>
         </div>
       </footer>
-        <ScrollTop />
-      
+      <ScrollTop />
+
     </main>
   );
 }

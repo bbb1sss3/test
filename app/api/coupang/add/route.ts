@@ -50,6 +50,7 @@ export async function POST(request: NextRequest) {
         비교: { rich_text: [{ text: { content: form.compare || '' } }] },
         슬러그: { rich_text: [{ text: { content: form.slug || '' } }] },
         ...(form.badge ? { 뱃지: { select: { name: form.badge } } } : {}),
+        ...(form.iherbLink ? { 아이허브링크: { url: form.iherbLink } } : {}),
       } as any,
     });
 

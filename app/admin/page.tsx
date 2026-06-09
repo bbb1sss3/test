@@ -72,10 +72,11 @@ const css = `
   .count-badge { background: #f0f0f0; color: #555; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
 `;
 
-const CATEGORIES = ['노트북', '데스크탑', '모니터', '태블릿', '냉장고', '세탁기/건조기', 'TV', '청소기', '에어컨', '안마의자', '공기청정기', '식기세척기'];
+const CATEGORIES = ['노트북', '데스크탑', '모니터', '태블릿', '냉장고', '세탁기/건조기', 'TV', '청소기', '에어컨', '안마의자', '공기청정기', '식기세척기','영양제'];
 const BADGES = ['', 'NEW', '인기', '추천'];
 
-const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '', slug: '' };
+
+const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '', slug: '', iherbLink: '', imageUrl: '' };
 
  const FormFields = ({ f, setF }: { f: typeof emptyForm, setF: any }) => (
     <div className="form-grid">
@@ -127,6 +128,14 @@ const emptyForm = { category: '', badge: '', price: '', originalPrice: '', disco
       <div className="form-group form-full">
         <label className="form-label">경쟁 모델 비교</label>
         <textarea className="textarea" value={f.compare} onChange={e => setF((prev: any) => ({ ...prev, compare: e.target.value }))} placeholder="항목|모델A|모델B|모델C" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">아이허브 링크</label>
+        <input className="input" value={f.iherbLink || ''} onChange={e => setF((prev: any) => ({ ...prev, iherbLink: e.target.value }))} placeholder="https://kr.iherb.com/..." />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">이미지 URL</label>
+        <input className="input" value={f.imageUrl || ''} onChange={e => setF((prev: any) => ({ ...prev, imageUrl: e.target.value }))} placeholder="https://..." />
       </div>
     </div>
   );
@@ -254,6 +263,8 @@ export default function AdminPage() {
       tag: p.tag || '',
       compare: p.compare || '',
       slug: p.slug || '',
+      iherbLink: p.iherbLink || '',
+    imageUrl: p.image || '',
     });
   };
 
