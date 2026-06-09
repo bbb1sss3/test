@@ -490,7 +490,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               </a>
             )}
             {product.iherbLink && (
-              <a href={product.iherbLink} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn" style={{ background: '#2d8a4e', marginTop: '8px' }}>
+              <a href={product.iherbLink} target="_blank" rel="noopener noreferrer sponsored" className="cta-btn" style={{ background: '#2d8a4e' }}>
                 {product.keyword || product.category} 아이허브 최저가 확인
               </a>
             )}
