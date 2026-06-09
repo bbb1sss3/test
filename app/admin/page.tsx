@@ -133,10 +133,7 @@ const emptyForm = { category: '', badge: '', price: '', originalPrice: '', disco
         <label className="form-label">아이허브 링크</label>
         <input className="input" value={f.iherbLink || ''} onChange={e => setF((prev: any) => ({ ...prev, iherbLink: e.target.value }))} placeholder="https://kr.iherb.com/..." />
       </div>
-      <div className="form-group form-full">
-        <label className="form-label">이미지 URL</label>
-        <input className="input" value={f.imageUrl || ''} onChange={e => setF((prev: any) => ({ ...prev, imageUrl: e.target.value }))} placeholder="https://..." />
-      </div>
+      
     </div>
   );
 
