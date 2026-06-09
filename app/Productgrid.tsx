@@ -38,6 +38,7 @@ const categories = [
   { label: '공기청정기' },
   { label: '식기세척기' },
   { label: '태블릿' },
+  { label: '영양제' },
 ];
 
 
