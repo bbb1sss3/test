@@ -132,10 +132,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   metaDesc = (metaDesc || cleanDesc.slice(0, 120)) + suffix;
   const keywords = product.tag
     ? product.tag.split(',').map((t: string) => t.trim().replace('#', '')).join(',')
-    : `${product.category}추천,프리미엄가전,${product.name}`;
+    : `${product.category}추천,프리미제품,${product.name}`;
 
   return {
-    title: `${product.name} | Premy(프리미) - 프리미엄 가전 큐레이션`,
+    title: `${product.name} | Premy(프리미) - 프리미엄 제품 큐레이션`,
     description: metaDesc,
     keywords,
     openGraph: {
@@ -460,7 +460,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   <div className="hanmadi-avatar">P</div>
                   <div>
                     <div className="hanmadi-name">PREMY 에디터</div>
-                    <div className="hanmadi-role">프리미엄 가전 큐레이터</div>
+                    <div className="hanmadi-role">프리미엄 제품 큐레이터</div>
                   </div>
 
                 </div>
