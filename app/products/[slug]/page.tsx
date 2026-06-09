@@ -430,20 +430,20 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 <div className="product-desc">
                   <ReactMarkdown
                     components={{
-                     ul: ({ children }: { children: React.ReactNode }) => (
-                        <ul style={{ margin: '0.2em 0', paddingLeft: '1.2em' }}>{children}</ul>
+                      ul: (props) => (
+                        <ul style={{ margin: '0.2em 0', paddingLeft: '1.2em' }}>{props.children}</ul>
                       ),
-                      li: ({ children }: { children: React.ReactNode }) => (
+                      li: (props) => (
                         <li style={{ margin: '0', lineHeight: '1.6' }}>
-                          {React.Children.map(children, child =>
+                          {React.Children.map(props.children as React.ReactNode, child =>
                             React.isValidElement(child) && (child as any).type === 'p'
                               ? (child as any).props.children
                               : child
                           )}
                         </li>
                       ),
-                      p: ({ children }: { children: React.ReactNode }) => (
-                        <p style={{ margin: '0.4em 0' }}>{children}</p>
+                      p: (props) => (
+                        <p style={{ margin: '0.4em 0' }}>{props.children}</p>
                       ),
                     }}
                   >
