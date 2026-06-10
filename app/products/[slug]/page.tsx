@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation';
 import ScrollTop from './ScrollTop';
 import RelatedProducts from './RelatedProducts';
 import React from 'react'
+import { unstable_cache } from 'next/cache';
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -16,11 +17,46 @@ const dbId = rawId.includes('-')
   ? rawId
   : rawId.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
 
-async function getProduct(slug: string) {
-  const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+const getProduct = unstable_cache(
+  async (slug: string) => {
+    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+    
+    if (isUUID) {
+      const page = await notion.pages.retrieve({ page_id: slug }) as any;
+      return {
+        id: page.id,
+        name: page.properties.Name?.title?.[0]?.plain_text ?? '',
+        category: page.properties.카테고리?.select?.name ?? '',
+        image: page.properties.이미지?.url ?? '',
+        link: page.properties.쿠팡링크?.url ?? '',
+        desc: page.properties.설명?.rich_text?.[0]?.plain_text ?? '',
+        badge: page.properties.뱃지?.select?.name ?? '',
+        price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
+        discount: page.properties.할인율?.rich_text?.[0]?.plain_text ?? '',
+        rating: page.properties.별점?.rich_text?.[0]?.plain_text ?? '',
+        originalPrice: page.properties.원가?.rich_text?.[0]?.plain_text ?? '',
+        hanmadi: page.properties.한마디?.rich_text?.[0]?.plain_text ?? '',
+        tag: page.properties.태그?.rich_text?.[0]?.plain_text ?? '',
+        compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
+        isRocket: page.properties.로켓배송?.checkbox ?? false,
+        isFreeShipping: page.properties.무료배송?.checkbox ?? false,
+        keyword: page.properties.키워드?.rich_text?.[0]?.plain_text ?? '',
+        slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
+        iherbLink: page.properties.아이허브링크?.url ?? '',
+      };
+    }
 
-  if (isUUID) {
-    const page = await notion.pages.retrieve({ page_id: slug }) as any;
+    const response = await notion.dataSources.query({
+      data_source_id: dbId,
+      filter: {
+        property: '슬러그',
+        rich_text: { equals: slug },
+      },
+    });
+
+    if (!response.results.length) return null;
+    const page = response.results[0] as any;
+
     return {
       id: page.id,
       name: page.properties.Name?.title?.[0]?.plain_text ?? '',
@@ -42,41 +78,10 @@ async function getProduct(slug: string) {
       slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
       iherbLink: page.properties.아이허브링크?.url ?? '',
     };
-  }
-
-  const response = await notion.dataSources.query({
-    data_source_id: dbId,
-    filter: {
-      property: '슬러그',
-      rich_text: { equals: slug },
-    },
-  });
-
-  if (!response.results.length) return null;
-  const page = response.results[0] as any;
-
-  return {
-    id: page.id,
-    name: page.properties.Name?.title?.[0]?.plain_text ?? '',
-    category: page.properties.카테고리?.select?.name ?? '',
-    image: page.properties.이미지?.url ?? '',
-    link: page.properties.쿠팡링크?.url ?? '',
-    desc: page.properties.설명?.rich_text?.[0]?.plain_text ?? '',
-    badge: page.properties.뱃지?.select?.name ?? '',
-    price: page.properties.가격?.rich_text?.[0]?.plain_text ?? '',
-    discount: page.properties.할인율?.rich_text?.[0]?.plain_text ?? '',
-    rating: page.properties.별점?.rich_text?.[0]?.plain_text ?? '',
-    originalPrice: page.properties.원가?.rich_text?.[0]?.plain_text ?? '',
-    hanmadi: page.properties.한마디?.rich_text?.[0]?.plain_text ?? '',
-    tag: page.properties.태그?.rich_text?.[0]?.plain_text ?? '',
-    compare: page.properties.비교?.rich_text?.[0]?.plain_text ?? '',
-    isRocket: page.properties.로켓배송?.checkbox ?? false,
-    isFreeShipping: page.properties.무료배송?.checkbox ?? false,
-    keyword: page.properties.키워드?.rich_text?.[0]?.plain_text ?? '',
-    slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? '',
-    iherbLink: page.properties.아이허브링크?.url ?? '',
-  };
-}
+  },
+  ['product'],
+  { revalidate: 3600 }
+);
 
 
 
