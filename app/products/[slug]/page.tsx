@@ -383,7 +383,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
     <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
-      <header className="header">
+    <header className="header">
        <div className="header-inner">
          <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>  
     
