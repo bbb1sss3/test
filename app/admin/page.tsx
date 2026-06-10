@@ -18,7 +18,7 @@ const css = `
   .input-row { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
   .input { flex: 1; padding: 10px 14px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 14px; outline: none; }
   .input:focus { border-color: #e52c2c; }
-  .textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 13px; outline: none; resize: vertical; min-height: 80px; }
+  .textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 13px; outline: none; resize: vertical; min-height: 580px; }
   .textarea:focus { border-color: #e52c2c; }
   .select { width: 100%; padding: 10px 14px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 14px; outline: none; background: #fff; }
   .select:focus { border-color: #e52c2c; }
