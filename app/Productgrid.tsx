@@ -135,8 +135,9 @@ const css = `
 .filter-toggle { display: none; }
   @media (max-width: 768px) {
     .header-inner { padding: 0 1rem; }
-      .filter-wrap { flex-wrap: nowrap; padding: 0.75rem 1rem; }
-  .filter-more { order: -1; }
+    .filter-wrap { flex-wrap: nowrap; padding: 0.75rem 1rem; }
+  .filter-more { display: none; }
+ 
     .slide { height: 200px; padding: 1.5rem 1rem; gap: 1rem; }
     .slide h2 { font-size: 18px; }
     .slide-desc { white-space: normal; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 100%; }
@@ -283,9 +284,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             {cat.label}
           </button>
         ))}
-        <button className="filter-btn filter-more" onClick={() => setShowAllFilter(!showAllFilter)}>
-          {showAllFilter ? '접기 ▲' : '더보기 ▼'}
-        </button>
+       
       </div>
   </div>
 
