@@ -149,10 +149,9 @@ const css = `
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     main { min-height: unset; }
     .footer-mobile { display: block; font-size: 10px; color: #666; line-height: 1.6; }
-    .footer-pc { display: none; }
-    .hero-banner { display: none !important; }
+    .footer-pc { display: none; } 
     .recent-wrap { padding: 0.75rem 1rem; margin-top: 0; }
-    .slider-wrap { margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
+   .slider-wrap { display: none; }
     .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .back-to-top { bottom: 1.5rem; right: 1rem; }
       .filter-toggle { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; font-size: 13px; font-weight: 700; color: #111; cursor: pointer; background: none; border: none; width: 100%; }
@@ -166,7 +165,7 @@ const css = `
   @media (min-width: 769px) {
     .slider-wrap { display: none; }
     .dots { display: none !important; }
-      .filter-hidden { display: flex !important; }
+    .filter-hidden { display: flex !important; }
   .filter-more { display: none !important; }
   }
 `;
@@ -321,7 +320,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <div>
             <p style={{ fontSize: '10px', fontWeight: 800, color: '#e52c2c', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '0.75rem' }}>✦ PREMY PICK</p>
             <h2>살 거면 제대로,<br /><em>프리미엄만</em> 모았습니다</h2>
-            <p>노트북 · 냉장고 · TV · 청소기 · 생활가전</p>
+            <p>노트북 · 냉장고 · TV · 청소기 · 생활가전· 영양제</p>
           </div>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             <div style={{ textAlign: 'center' }}>
