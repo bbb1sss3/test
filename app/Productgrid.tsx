@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer } from 'lucide-react';
-
+import { Search, Heart } from 'lucide-react'; 
 type Product = {
   id: string;
   name: string;
@@ -255,21 +255,21 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
           <div className="search-wrap">
             <input className="search-input" type="text" placeholder="상품 검색..." value={search} onChange={e => setSearch(e.target.value)} />
-            <span className="search-icon">🔍</span>
+            <span className="search-icon"><Search size={14} color="#aaa" /></span>
           </div>
           <button
             onClick={() => {
               if (!showWish) window.scrollTo({ top: 0, behavior: 'smooth' });
               setShowWish(!showWish);
             }}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '22px', position: 'relative', flexShrink: 0 }}
-          >
-            ❤️
-            {wishes.length > 0 && (
-              <span style={{ position: 'absolute', top: '-4px', right: '-4px', background: '#e52c2c', color: '#fff', fontSize: '10px', fontWeight: 800, borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {wishes.length}
-              </span>
-            )}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center' }}
+            >
+              <Heart size={22} color={wishes.length > 0 ? '#e52c2c' : '#aaa'} fill={wishes.length > 0 ? '#e52c2c' : 'none'} />
+              {wishes.length > 0 && (
+                <span style={{ position: 'absolute', top: '-4px', right: '-4px', background: '#e52c2c', color: '#fff', fontSize: '10px', fontWeight: 800, borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {wishes.length}
+                </span>
+              )}
           </button>
         </div>
       </header>
