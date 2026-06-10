@@ -137,7 +137,7 @@ const css = `
     .header-inner { padding: 0 1rem; }
     .filter-wrap { flex-wrap: nowrap; padding: 0.75rem 1rem; }
   .filter-more { display: none; }
- 
+ .filter-hidden { display: inline-flex !important; }
     .slide { height: 200px; padding: 1.5rem 1rem; gap: 1rem; }
     .slide h2 { font-size: 18px; }
     .slide-desc { white-space: normal; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 100%; }
@@ -274,19 +274,18 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
     <div className="filter-area">
       <div className="filter-wrap">
-        {categories.map((cat, i) => (
+        {categories.map((cat) => (
           <button 
             key={cat.label} 
-            className={`filter-btn${active === cat.label ? ' active' : ''}${!showAllFilter && i >= 4 ? ' filter-hidden' : ''}`} 
+            className={`filter-btn${active === cat.label ? ' active' : ''}`} 
             onClick={() => setActive(cat.label)}
           >
             <cat.icon size={12} strokeWidth={2} />
             {cat.label}
           </button>
         ))}
-       
       </div>
-  </div>
+    </div>
 
       {showWish && (
         <div style={{ background: '#fff', borderBottom: '1px solid #f0f0f0' }}>
