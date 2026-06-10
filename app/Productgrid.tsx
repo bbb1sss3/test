@@ -98,14 +98,14 @@ const css = `
   .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
   .card:hover .card-img-wrap img { transform: scale(1.05); }
   .card-body { display: flex; flex-direction: column; flex: 1; }
-  .card-category { font-size: 11px; color: #aaa; margin-bottom: 3px; }
-  .card-name { font-size: 13px; color: #111; font-weight: 600; line-height: 1.45; margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-  .card-desc { font-size: 11px; color: #aaa; margin-bottom: 6px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
-  .card-rating { font-size: 11px; color: #f5a623; margin-bottom: 4px; }
-  .card-rating span { color: #aaa; margin-left: 2px; }
-  .card-discount { font-size: 12px; color: #e52c2c; font-weight: 700; margin-bottom: 2px; }
-  .card-original-price { font-size: 12px; color: #aaa; text-decoration: line-through; margin-bottom: 2px; }
-  .card-price { font-size: 16px; color: #111; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+.card-category { font-size: 11px; color: #aaa; margin-bottom: 3px; }
+.card-name { font-size: 14px; color: #111; font-weight: 700; line-height: 1.45; margin-bottom: 4px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.card-desc { font-size: 12px; color: #777; margin-bottom: 6px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.card-rating { font-size: 11px; color: #f5a623; margin-bottom: 4px; }
+.card-rating span { color: #aaa; margin-left: 2px; }
+.card-discount { font-size: 12px; color: #e52c2c; font-weight: 700; margin-bottom: 2px; }
+.card-original-price { font-size: 12px; color: #aaa; text-decoration: line-through; margin-bottom: 2px; }
+.card-price { font-size: 16px; color: #111; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
   .badge { position: absolute; top: 8px; left: 8px; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; z-index: 1; }
   .badge-new { background: linear-gradient(135deg, #e52c2c, #ff6b6b); color: #fff; border-radius: 20px; box-shadow: 0 2px 8px rgba(229,44,44,0.4); }
   .badge-hot { background: linear-gradient(135deg, #B8860B, #D4A017, #B8860B); color: #fff; border-radius: 4px; box-shadow: 0 2px 8px rgba(184,134,11,0.4); }
