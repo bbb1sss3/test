@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer } from 'lucide-react';
 import { Search, Heart } from 'lucide-react'; 
+import { useRouter } from 'next/navigation';
+
 type Product = {
   id: string;
   name: string;
@@ -173,6 +175,8 @@ const css = `
   }
 `;
 
+const router = useRouter();
+
 function Stars({ rating }: { rating: string }) {
   const num = parseFloat(rating);
   if (!num) return null;
@@ -258,10 +262,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             <span className="search-icon"><Search size={14} color="#aaa" /></span>
           </div>
           <button
-            onClick={() => {
-              if (!showWish) window.scrollTo({ top: 0, behavior: 'smooth' });
-              setShowWish(!showWish);
-            }}
+            onClick={() => router.push('/wishlist')}
             style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center' }}
             >
               <Heart size={22} color={wishes.length > 0 ? '#e52c2c' : '#aaa'} fill={wishes.length > 0 ? '#e52c2c' : 'none'} />
