@@ -50,14 +50,6 @@ const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
 
-  .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
-  .header-inner { max-width: 1100px; width: 100%; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 100%; }
-   .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
-    .logo span { color: #e52c2c; }
-.search-wrap { flex: 1; max-width: 400px; position: relative; margin-left: auto; }
-  .search-input { width: 100%; padding: 8px 36px 8px 14px; border: 1.5px solid #e8e8e8; border-radius: 20px; font-size: 13px; outline: none; transition: border 0.15s; }
-  .search-input:focus { border-color: #e52c2c; }
-  .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 14px; pointer-events: none; }
 
 .filter-area { background: #fff; border-bottom: 1px solid #f0f0f0; position: sticky; top: 56px; z-index: 99; }
 .filter-wrap { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
