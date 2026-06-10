@@ -121,7 +121,7 @@ const css = `
   .recent-item { flex-shrink: 0; width: 80px; text-decoration: none; }
   .recent-img { width: 80px; height: 80px; background: #f9f9f9; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 4px; }
   .recent-img img { width: 100%; height: 100%; object-fit: cover; }
-  .recent-name { font-size: 10px; color: #555; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .recent-name { font-size: 12px; color: #555; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
   .footer { border-top: 1px solid #e8e8e8; background: #111; }
   .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1.5rem; text-align: center; }
