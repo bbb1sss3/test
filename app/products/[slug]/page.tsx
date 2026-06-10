@@ -210,7 +210,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
   .badge-rocket { background: #e3f2fd; color: #1565c0; }
   .badge-free { background: #e8f5e9; color: #2e7d32; }
 
-  .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
+  .share-btn { background: #fff; border: 2px solid #e52c2c; color: #e52c2c; padding: 14px 20px; border-radius: 50px; font-size: 17px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; transition: all 0.2s; box-shadow: 0 2px 8px rgba(229,44,44,0.15); }
   .share-btn:hover { background: #e52c2c; color: #fff; }
   .cta-btn { background: #e52c2c; color: #fff; border: none; width: 100%; padding: 18px; font-size: 17px; font-weight: 800; border-radius: 50px; cursor: pointer; text-align: center; text-decoration: none; display: block; margin-top: auto; box-shadow: 0 4px 12px rgba(229,44,44,0.3); }
   .cta-btn:hover { background: #c62020; }
