@@ -9,6 +9,7 @@ import RelatedProducts from './RelatedProducts';
 import React from 'react'
 import { unstable_cache } from 'next/cache';
 import { Search, Heart } from 'lucide-react';
+import WishButton from './WishButton';
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -489,6 +490,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 <CompareTable text={product.compare} />
               </div>
             )}
+          
+
+            
+              <WishButton id={product.id} />
 
             <ShareButton name={product.name} />
             {product.link && (
