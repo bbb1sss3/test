@@ -385,11 +385,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
       <header className="header">
   <div className="header-inner">
-    <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
-   
-    <Link href="/wishlist" style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-      <Heart size={22} color="#aaa" />
-    </Link>
+    <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>  
+    
   </div>
 </header>
 
