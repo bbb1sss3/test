@@ -14,7 +14,7 @@ export default function ShareButton({ name }: { name: string }) {
         }
       }}
     >
-      <Share2 size={16} /> 공유하기
+      <Share2 size={17} /> 공유하기
     </button>
   );
 }
