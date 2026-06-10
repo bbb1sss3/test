@@ -21,11 +21,16 @@ export default function WishlistClient({ products }: { products: any[] }) {
     localStorage.setItem('wishes', JSON.stringify(updated));
   };
 
-  const handleShare = (slug: string, id: string) => {
-    navigator.clipboard.writeText(`${window.location.origin}/products/${slug || id}`);
+const handleShare = (slug: string, id: string) => {
+  const url = `${window.location.origin}/products/${slug || id}`;
+  if (navigator.share) {
+    navigator.share({ title: '', url });
+  } else {
+    navigator.clipboard.writeText(url);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
-  };
+  }
+};
 
   return (
     <main style={{ background: '#fff', minHeight: '100vh' }}>
