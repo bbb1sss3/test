@@ -40,33 +40,33 @@ export default function WishlistClient({ products }: { products: any[] }) {
   return (
     <main style={{ background: '#fff', minHeight: '100vh' }}>
      <header className="header">
-  <div className="header-inner">
-    <Link href="/" className="logo">
-      PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small>
-    </Link>
-    <div className="search-wrap">
-      <input
-        className="search-input"
-        type="text"
-        placeholder="상품 검색..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-      />
-      <span className="search-icon"><Search size={14} color="#aaa" /></span>
-    </div>
-    <button
-      onClick={() => router.push('/wishlist')}
-      style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center' }}
-    >
-      <Heart size={22} color="#e52c2c" fill="#e52c2c" />
-      {wishes.length > 0 && (
-        <span style={{ position: 'absolute', top: '-4px', right: '-4px', background: '#e52c2c', color: '#fff', fontSize: '10px', fontWeight: 800, borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {wishes.length}
-        </span>
-      )}
-    </button>
-  </div>
-</header>
+      <div className="header-inner">
+        <Link href="/" className="logo">
+          PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small>
+        </Link>
+        <div className="search-wrap">
+          <input
+            className="search-input"
+            type="text"
+            placeholder="상품 검색..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <span className="search-icon"><Search size={14} color="#aaa" /></span>
+        </div>
+        <button
+          onClick={() => router.push('/wishlist')}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center' }}
+        >
+          <Heart size={22} color="#e52c2c" fill="#e52c2c" />
+          {wishes.length > 0 && (
+            <span style={{ position: 'absolute', top: '-4px', right: '-4px', background: '#e52c2c', color: '#fff', fontSize: '10px', fontWeight: 800, borderRadius: '50%', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {wishes.length}
+            </span>
+          )}
+        </button>
+      </div>
+    </header>
 
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem 1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem' }}>

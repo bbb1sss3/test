@@ -8,6 +8,7 @@ import ScrollTop from './ScrollTop';
 import RelatedProducts from './RelatedProducts';
 import React from 'react'
 import { unstable_cache } from 'next/cache';
+import { Search, Heart } from 'lucide-react';
 export const revalidate = 3600;
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -383,10 +384,17 @@ export default async function ProductPage({ params }: { params: { slug: string }
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <header className="header">
-        <div className="header-inner">
-          <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
-        </div>
-      </header>
+  <div className="header-inner">
+    <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
+    <div className="search-wrap">
+      <input className="search-input" type="text" placeholder="상품 검색..." readOnly onClick={() => window.location.href = '/'} style={{ cursor: 'pointer' }} />
+      <span className="search-icon"><Search size={14} color="#aaa" /></span>
+    </div>
+    <Link href="/wishlist" style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+      <Heart size={22} color="#aaa" />
+    </Link>
+  </div>
+</header>
 
 
 
