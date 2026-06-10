@@ -1,4 +1,5 @@
 'use client';
+import { Share2 } from 'lucide-react';
 
 export default function ShareButton({ name }: { name: string }) {
   return (
@@ -13,7 +14,7 @@ export default function ShareButton({ name }: { name: string }) {
         }
       }}
     >
-      🔗 공유하기
+      <Share2 size={16} /> 공유하기
     </button>
   );
 }
