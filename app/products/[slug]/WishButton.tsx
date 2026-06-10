@@ -20,9 +20,9 @@ export default function WishButton({ id }: { id: string }) {
   };
 
   return (
-    <button onClick={toggle} style={{ background: 'none', border: '1.5px solid #e8e8e8', borderRadius: '50px', padding: '10px 20px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', fontWeight: 700, color: wished ? '#e52c2c' : '#555', width: '100%', justifyContent: 'center' }}>
-      <Heart size={16} color={wished ? '#e52c2c' : '#555'} fill={wished ? '#e52c2c' : 'none'} />
-      {wished ? '찜 취소' : '찜하기'}
+    <button onClick={toggle} style={{ background: 'none', border: '1.5px solid #e8e8e8', borderRadius: '50px', padding: '10px 20px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '17px', fontWeight: 700, color: '#e52c2c', width: '100%', justifyContent: 'center' }}>
+    <Heart size={16} color={wished ? '#e52c2c' : '#e52c2c'} fill={wished ? '#e52c2c' : 'none'} />
+    {wished ? '찜 취소' : '찜하기'}
     </button>
   );
 }
