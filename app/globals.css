@@ -15,7 +15,7 @@ body {
 
    * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #111; }
-
+html { scrollbar-gutter: stable; }
   .header { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 0; display: flex; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
   .header-inner { max-width: 1100px; width: 100%; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 100%; }
    .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
