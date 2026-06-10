@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer } from 'lucide-react';
 
 type Product = {
   id: string;
@@ -22,23 +23,23 @@ type Product = {
 };
 
 const categories = [
-  { label: '전체' },
-  { label: 'NEW' },
-  { label: '추천' },
-  { label: '인기' },
-  { label: '노트북' },
-  { label: '데스크탑' },
-  { label: '모니터' },
-  { label: '냉장고' },
-  { label: '세탁기/건조기' },
-  { label: 'TV' },
-  { label: '청소기' },
-  { label: '에어컨' },
-  { label: '안마의자' },
-  { label: '공기청정기' },
-  { label: '식기세척기' },
-  { label: '태블릿' },
-  { label: '영양제' },
+  { label: '전체', icon: Home },
+  { label: 'NEW', icon: Sparkles },
+  { label: '추천', icon: Star },
+  { label: '인기', icon: Flame },
+  { label: '노트북', icon: Laptop },
+  { label: '데스크탑', icon: Computer },
+  { label: '모니터', icon: Monitor },
+  { label: '냉장고', icon: Refrigerator },
+  { label: '세탁기/건조기', icon: WashingMachine },
+  { label: 'TV', icon: Tv },
+  { label: '청소기', icon: Wind },
+  { label: '에어컨', icon: AirVent },
+  { label: '안마의자', icon: Sofa },
+  { label: '공기청정기', icon: Wind },
+  { label: '식기세척기', icon: UtensilsCrossed },
+  { label: '태블릿', icon: Tablet },
+  { label: '영양제', icon: Pill },
 ];
 
 
@@ -270,24 +271,21 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       </header>
 
     <div className="filter-area">
-    <div className="filter-wrap">
-      {categories.map((cat, i) => (
-        <button 
-          key={cat.label} 
-          className={`filter-btn${active === cat.label ? ' active' : ''}${!showAllFilter && i >= 4 ? ' filter-hidden' : ''}`} 
-          onClick={() => setActive(cat.label)}
-        >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-            <line x1="7" y1="7" x2="7.01" y2="7"/>
-          </svg>
-          {cat.label}
+      <div className="filter-wrap">
+        {categories.map((cat, i) => (
+          <button 
+            key={cat.label} 
+            className={`filter-btn${active === cat.label ? ' active' : ''}${!showAllFilter && i >= 4 ? ' filter-hidden' : ''}`} 
+            onClick={() => setActive(cat.label)}
+          >
+            <cat.icon size={12} strokeWidth={2} />
+            {cat.label}
+          </button>
+        ))}
+        <button className="filter-btn filter-more" onClick={() => setShowAllFilter(!showAllFilter)}>
+          {showAllFilter ? '접기 ▲' : '더보기 ▼'}
         </button>
-      ))}
-      <button className="filter-btn filter-more" onClick={() => setShowAllFilter(!showAllFilter)}>
-        {showAllFilter ? '접기 ▲' : '더보기 ▼'}
-      </button>
-    </div>
+      </div>
   </div>
 
       {showWish && (
