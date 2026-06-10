@@ -161,6 +161,9 @@ const css = `
   .filter-list.open { display: flex; }
    .filter-hidden { display: none; }
   .filter-more { display: flex; }
+  .hero-banner-inner { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.25rem 1rem; }
+  .hero-banner h2 { font-size: 22px; letter-spacing: -1px; }
+  .hero-banner p { font-size: 11px; }
   }
   @media (min-width: 769px) {
     .slider-wrap { display: none; }
