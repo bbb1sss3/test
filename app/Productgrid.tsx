@@ -59,8 +59,10 @@ const css = `
 .filter-area { background: #fff; border-bottom: 1px solid #f0f0f0; position: sticky; top: 56px; z-index: 99; }
 .filter-wrap { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
   .filter-wrap::-webkit-scrollbar { display: none; }
-  .filter-btn { background: #fff; color: #555; border: 1px solid #ddd; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.15s; }
-  .filter-btn.active, .filter-btn:hover { background: #e52c2c; color: #fff; border-color: #e52c2c; }
+ .filter-btn { background: #fff; color: #555; border: 1.5px solid #e8e8e8; padding: 6px 14px 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.15s; display: inline-flex; align-items: center; gap: 5px; }
+.filter-btn.active, .filter-btn:hover { background: #e52c2c; color: #fff; border-color: #e52c2c; }
+.filter-btn svg { flex-shrink: 0; opacity: 0.6; }
+.filter-btn.active svg, .filter-btn:hover svg { opacity: 1; }
 
   .slider-wrap { position: relative; overflow: hidden; background: #fff; width: 100%; max-width: 100vw; }
   .slides { display: flex; width: 100%; transition: transform 0.5s cubic-bezier(.4,0,.2,1); will-change: transform; }
@@ -275,6 +277,10 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           className={`filter-btn${active === cat.label ? ' active' : ''}${!showAllFilter && i >= 4 ? ' filter-hidden' : ''}`} 
           onClick={() => setActive(cat.label)}
         >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
           {cat.label}
         </button>
       ))}
