@@ -175,7 +175,7 @@ const css = `
   }
 `;
 
-const router = useRouter();
+
 
 function Stars({ rating }: { rating: string }) {
   const num = parseFloat(rating);
@@ -195,6 +195,7 @@ function parsePrice(price: string) {
 }
 
 export default function ProductGrid({ products }: { products: Product[] }) {
+  
   const [showAllFilter, setShowAllFilter] = useState(false);
   const [active, setActive] = useState('전체');
   const [search, setSearch] = useState('');
@@ -203,7 +204,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const [showWish, setShowWish] = useState(false);
   const [wishes, setWishes] = useState<string[]>([]);
   const [recent, setRecent] = useState<Product[]>([]);
-
+  const router = useRouter();
   const highlights = products.filter(p => p.badge === '인기').slice(0, 4);
   const total = highlights.length;
   const [showTop, setShowTop] = useState(false);
