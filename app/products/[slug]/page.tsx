@@ -218,13 +218,36 @@ export default async function ProductPage({ params }: { params: { slug: string }
 .product-desc {
     font-size: 18px;
     color: #333;
-    line-height: 1.8; /* 가독성을 위해 1.7 -> 1.8로 살짝 상향 추천 */
+    line-height: 1.8;
     letter-spacing: -0.02em;
     word-break: keep-all;
-    padding: 20px; /* 상하 여백을 좌우보다 넓게 주면 더 정돈되어 보임 */       
+    padding: 20px;
     max-width: 850px;
-    
-  
+}
+.product-desc h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+    margin: 1.4em 0 0.4em 0;
+}
+.product-desc h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin: 1.2em 0 0.4em 0;
+}
+.product-desc p {
+    margin: 0.5em 0;
+}
+.product-desc ul {
+    margin: 0.3em 0 0.8em 0;
+    padding-left: 1.2em;
+    list-style-type: disc;
+}
+.product-desc li {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
   .product-original-price { font-size: 14px; color: #aaa; text-decoration: line-through; }
   .product-discount { font-size: 14px; color: #e52c2c; font-weight: 700; }
@@ -361,21 +384,22 @@ export default async function ProductPage({ params }: { params: { slug: string }
   .tag { word-break: break-all; }
    
 .product-desc {
-        /* 1. 폰트 크기: 너무 크지도 작지도 않은 16px */
-        font-size: 16px;
-        
-        /* 2. 패딩: 좌우 여백을 주어 글자가 화면 끝에 붙지 않게 함 */
-        padding: 20px 15px;
-        
-        /* 3. 줄 간격: 모바일은 한 줄이 짧으므로 줄 간격을 여유 있게 */
-        line-height: 1.7;     
-        
-        /* 5. 너비: 화면 너비를 100%로 쓰되, 여백(padding) 계산 고려 */
-        width: 100%;
-        box-sizing: border-box;
-        overflow-x: hidden; word-break: break-all;
-    }
-    
+    font-size: 16px;
+    padding: 20px 15px;
+    line-height: 1.7;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    word-break: keep-all;
+}
+.product-desc h2 {
+    font-size: 18px;
+    margin: 1.4em 0 0.4em 0;
+}
+.product-desc h3 {
+    font-size: 16px;
+    margin: 1.2em 0 0.4em 0;
+}
     .hanmadi { padding: 1rem; }
     .hanmadi::before { width: 70px; height: 20px; top: -5px; left: -20px; }
     .hanmadi-header { gap: 10px; }
@@ -466,11 +490,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 <div className="product-desc">
                   <ReactMarkdown
                     components={{
-                      ul: (props) => (
-                        <ul style={{ margin: '0.2em 0', paddingLeft: '1.2em' }}>{props.children}</ul>
-                      ),
+                      ul: (props) => <ul>{props.children}</ul>,
                       li: (props) => (
-                        <li style={{ margin: '0', lineHeight: '1.6' }}>
+                        <li>
                           {React.Children.map(props.children as React.ReactNode, child =>
                             React.isValidElement(child) && (child as any).type === 'p'
                               ? (child as any).props.children
@@ -478,24 +500,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
                           )}
                         </li>
                       ),
-                    p: (props) => {
-                      const children = React.Children.toArray(props.children);
-                      const isBoldOnly = children.length === 1 && 
-                        React.isValidElement(children[0]) && 
-                        (children[0] as any).type === 'strong';
-                      
-                      if (isBoldOnly) {
-                        return (
-                          <p style={{ margin: '0.3em 0 0.2em 0', fontWeight: 800 }}>
-                            {props.children}
-                          </p>
-                        );
-                      }
-                      return <p style={{ margin: '0.4em 0' }}>{props.children}</p>;
-                    },
+                      p: (props) => <p>{props.children}</p>,
                     }}
                   >
-                    {product.desc}
+                    {(product.desc || '').replace(/(\*\*[^*]+\*\*[:：])/g, '\n\n$1')}
                   </ReactMarkdown>
                 </div>
               </div>
