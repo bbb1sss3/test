@@ -192,13 +192,13 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const [active, setActive] = useState('전체');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('기본');
-  const [cur, setCur] = useState(0);
+ 
   const [showWish, setShowWish] = useState(false);
   const [wishes, setWishes] = useState<string[]>([]);
   const [recent, setRecent] = useState<Product[]>([]);
   const router = useRouter();
-  const highlights = products.filter(p => p.badge === '인기').slice(0, 4);
-  const total = highlights.length;
+ 
+  
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
   const saved = localStorage.getItem('wishes');
@@ -214,13 +214,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   return () => window.removeEventListener('scroll', handleScroll);
 }, [products]);
 
-  useEffect(() => {
-    if (total === 0) return;
-    const timer = setInterval(() => setCur(c => (c + 1) % total), 3500);
-    return () => clearInterval(timer);
-  }, [total]);
 
-  const go = (n: number) => setCur((n + total) % total);
 
   const toggleWish = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -295,7 +289,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                   <Link key={p.id} href={`/products/${p.slug || p.id}`} className="card">
                     <div className="card-img-wrap">
                       {p.image
-                        ? <Image src={p.image} alt={p.name} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ? <Image src={p.image} alt={p.name} width={400} height={400} sizes="(max-width: 768px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         : '🛒'
                       }
                     </div>
@@ -339,23 +333,6 @@ export default function ProductGrid({ products }: { products: Product[] }) {
         </div>
       </div>
 
-      {highlights.length > 0 && (
-        <div className="slider-wrap">
-          <div className="slides" style={{ transform: `translateX(-${cur * 100}%)` }}>
-            {highlights.map((p) => (
-              <Link key={p.id} href={`/products/${p.slug || p.id}`} className="slide">
-                {p.image && <Image src={p.image} alt={p.name} className="slide-bg" fill style={{ objectFit: 'cover', filter: 'brightness(0.6)' }} />}
-                <div className="slide-content">
-                  <div className="slide-tag">✦ PREMY PICK · {p.category}</div>
-                  <h2>{p.name.length > 20 ? p.name.slice(0, 20) + '...' : p.name}<br /><em>{p.category}</em></h2>
-                  <p className="slide-desc">{p.desc}</p>
-                  <div className="slide-price">{p.price}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
 
       {recent.length > 0 && (
         <div className="recent-wrap">
@@ -365,7 +342,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               <Link key={p.id} href={`/products/${p.slug || p.id}`} className="recent-item">
                 <div className="recent-img">
                   {p.image
-                    ? <Image src={p.image} alt={p.name} width={80} height={80} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ? <Image src={p.image} alt={p.name} width={80} height={80} sizes="(max-width: 768px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     : '🛒'
                   }
                 </div>
@@ -409,7 +386,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                   </button>
                   <div className="card-img-wrap">
                     {p.image
-                      ? <Image src={p.image} alt={p.name} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ? <Image src={p.image} alt={p.name} width={400} height={400} sizes="(max-width: 768px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       : '🛒'
                     }
                   </div>
