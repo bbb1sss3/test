@@ -371,18 +371,31 @@ const handleGenerateContent = async () => {
 
             {searchResults.length > 0 && (
               <div className="product-list">
-                {searchResults.map((p, i) => (
-                  <div key={i} className="product-item" onClick={() => handleSelectProduct(p)}>
+               {searchResults.map((p, i) => (
+                  <div 
+                    key={i} 
+                    className="product-item" 
+                    onClick={() => !p.isRegistered && handleSelectProduct(p)}
+                    style={{ 
+                      opacity: p.isRegistered ? 0.4 : 1,
+                      cursor: p.isRegistered ? 'not-allowed' : 'pointer',
+                    }}
+                  >
                     <img src={p.productImage} alt={p.productName} className="product-img" />
                     <div className="product-info">
-                      <div className="product-name">{p.productName}</div>
+                      <div className="product-name">
+                        {p.isRegistered && <span style={{ color: '#e52c2c', fontWeight: 700, fontSize: '12px', marginRight: '4px' }}>✓ 등록됨</span>}
+                        {p.productName}
+                      </div>
                       <div className="product-price">{p.productPrice.toLocaleString()}원~</div>
                       <div className="product-badges">
                         {p.isRocket && <span className="badge-sm badge-rocket">🚀 로켓</span>}
                         {p.isFreeShipping && <span className="badge-sm badge-free">✓ 무료배송</span>}
                       </div>
                     </div>
-                    <button className="btn btn-primary" style={{ fontSize: '12px', padding: '6px 14px' }}>선택</button>
+                    <button className="btn btn-primary" style={{ fontSize: '12px', padding: '6px 14px' }} disabled={p.isRegistered}>
+                      {p.isRegistered ? '등록됨' : '선택'}
+                    </button>
                   </div>
                 ))}
               </div>
