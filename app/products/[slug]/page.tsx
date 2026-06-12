@@ -185,6 +185,28 @@ export default async function ProductPage({ params }: { params: { slug: string }
     }),
   };
 
+ const faqMatches = (product.desc || '').match(/\*\*Q\.\s*([\s\S]+?)\*\*\s*\n+\s*([\s\S]+?)(?=\n\n|\n##|\*\*Q\.|$)/g) || [];
+
+const faqItems = faqMatches.map((block: string) => {
+  const m = block.match(/\*\*Q\.\s*([\s\S]+?)\*\*\s*\n+\s*([\s\S]+)/);
+  if (!m) return null;
+  return {
+    "@type": "Question",
+    "name": m[1].trim(),
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": m[2].trim().replace(/\n+/g, ' ')
+    }
+  };
+}).filter(Boolean);
+
+const faqJsonLd = faqItems.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems
+} : null;
+  
+
 
   const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -421,10 +443,16 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   return (
     <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-       <script
+     <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
     <header className="header">
