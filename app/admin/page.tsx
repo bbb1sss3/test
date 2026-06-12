@@ -189,7 +189,7 @@ export default function AdminPage() {
     setSearchResults([]);
   };
 
-  const handleGenerateContent = async () => {
+const handleGenerateContent = async () => {
   if (!selectedProduct || !form.category) {
     setStatus({ type: 'error', message: '카테고리를 먼저 선택해주세요.' });
     return;
@@ -210,6 +210,7 @@ export default function AdminPage() {
     if (!res.ok) throw new Error(data.error);
     setForm((prev: any) => ({
       ...prev,
+      slug: data.slug,
       desc: data.desc,
       hanmadi: data.hanmadi,
       tag: data.tag,
