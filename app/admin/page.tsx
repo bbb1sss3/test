@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-const [generating, setGenerating] = useState(false);
+
 
 const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -139,6 +139,7 @@ const emptyForm = { category: '', badge: '', price: '', originalPrice: '', disco
   );
 
 export default function AdminPage() {
+  const [generating, setGenerating] = useState(false);
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState<'add' | 'list'>('add');
