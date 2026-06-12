@@ -220,9 +220,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
     color: #333;
     line-height: 1.8; /* 가독성을 위해 1.7 -> 1.8로 살짝 상향 추천 */
     letter-spacing: -0.02em;
-    white-space: pre-wrap;
     word-break: keep-all;
-     padding: 20px; /* 상하 여백을 좌우보다 넓게 주면 더 정돈되어 보임 */       
+    padding: 20px; /* 상하 여백을 좌우보다 넓게 주면 더 정돈되어 보임 */       
     max-width: 850px;
     
   
