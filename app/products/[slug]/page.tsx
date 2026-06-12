@@ -433,7 +433,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
         <div className="product-wrap">
           <div className="product-img">
             {product.image
-              ? <Image src={product.image} alt={product.name} width={600} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
+              ? <Image src={product.image} alt={product.name} width={600} height={600} priority sizes="(max-width: 768px) 100vw, 50vw" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
               : '🛒'
             }
           </div>
