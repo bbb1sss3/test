@@ -129,7 +129,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const product = await getProduct(params.slug);
   if (!product) return { title: 'Premy(프리미)' };
   const cleanDesc = (product.desc || '').replace(/##[^\n]*/g, '').replace(/\n+/g, ' ').trim()
-  const sentences = cleanDesc.match(/[^.!?]+[.!?]+/g) || [];
+  const sentences = cleanDesc.match(/[^.!?]+[.!?](?!\d)(?:\s|$)/g) || [];
   let metaDesc = '';
   const suffix = ' 장단점, 타사 비교 정보를 확인해보세요.';
   for (const s of sentences) {
