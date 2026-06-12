@@ -479,18 +479,21 @@ export default async function ProductPage({ params }: { params: { slug: string }
                           )}
                         </li>
                       ),
-                     p: (props) => {
-                        const children = React.Children.toArray(props.children);
-                        const isBoldOnly = children.length === 1 && 
-                          React.isValidElement(children[0]) && 
-                          (children[0] as any).type === 'strong';
-                        
+                    p: (props) => {
+                      const children = React.Children.toArray(props.children);
+                      const isBoldOnly = children.length === 1 && 
+                        React.isValidElement(children[0]) && 
+                        (children[0] as any).type === 'strong';
+                      
+                      if (isBoldOnly) {
                         return (
-                          <p style={{ margin: isBoldOnly ? '1em 0 0.3em 0' : '0.4em 0' }}>
+                          <p style={{ margin: '0.3em 0 0.2em 0', fontWeight: 800 }}>
                             {props.children}
                           </p>
                         );
-                      },
+                      }
+                      return <p style={{ margin: '0.4em 0' }}>{props.children}</p>;
+                    },
                     }}
                   >
                     {product.desc}
