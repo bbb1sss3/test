@@ -160,6 +160,31 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const product = await getProduct(params.slug);
   if (!product) notFound();
 
+  const priceNumber = product.price?.replace(/[^0-9]/g, '') || '';
+  const cleanDescForJsonLd = (product.desc || '')
+    .replace(/##[^\n]*/g, '')
+    .replace(/\n+/g, ' ')
+    .trim()
+    .slice(0, 300);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.image,
+    "description": cleanDescForJsonLd,
+    "category": product.category,
+    ...(priceNumber && {
+      "offers": {
+        "@type": "Offer",
+        "url": `https://premy.co.kr/products/${product.slug}`,
+        "priceCurrency": "KRW",
+        "price": priceNumber,
+        "availability": "https://schema.org/InStock",
+      }
+    }),
+  };
+
 
   const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -382,6 +407,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   return (
     <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+       <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
     <header className="header">
