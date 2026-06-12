@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+const [generating, setGenerating] = useState(false);
 
 const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -187,6 +188,40 @@ export default function AdminPage() {
     setSearchResults([]);
   };
 
+  const handleGenerateContent = async () => {
+  if (!selectedProduct || !form.category) {
+    setStatus({ type: 'error', message: '카테고리를 먼저 선택해주세요.' });
+    return;
+  }
+  setGenerating(true);
+  setStatus({ type: 'loading', message: 'AI 콘텐츠 생성 중...' });
+  try {
+    const res = await fetch('/api/coupang/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+      body: JSON.stringify({
+        productName: selectedProduct.productName,
+        category: form.category,
+        price: form.price,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    setForm((prev: any) => ({
+      ...prev,
+      desc: data.desc,
+      hanmadi: data.hanmadi,
+      tag: data.tag,
+      compare: data.compare,
+    }));
+    setStatus({ type: 'success', message: 'AI 생성 완료! 내용을 확인해주세요.' });
+  } catch (err: any) {
+    setStatus({ type: 'error', message: err.message });
+  } finally {
+    setGenerating(false);
+  }
+};
+
   const handleAddProduct = async () => {
     if (!selectedProduct) return;
     if (!form.category) { setStatus({ type: 'error', message: '카테고리를 선택해주세요.' }); return; }
@@ -365,6 +400,11 @@ export default function AdminPage() {
                     쿠팡에서 보기 →
                   </a>
                 </div>
+                <div style={{ marginBottom: '1rem' }}>
+                <button className="btn btn-secondary" onClick={handleGenerateContent} disabled={generating}>
+                  {generating ? '✨ 생성 중...' : '✨ AI로 설명/한마디/태그/비교 자동생성'}
+                </button>
+              </div>
                 <FormFields f={form} setF={setForm} />
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button className="btn btn-primary" onClick={handleAddProduct}>노션에 추가</button>
