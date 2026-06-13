@@ -73,20 +73,38 @@ const css = `
   .count-badge { background: #f0f0f0; color: #555; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
 `;
 
-const CATEGORIES = ['노트북', '데스크탑', '모니터', '태블릿', '냉장고', '세탁기/건조기', 'TV', '청소기', '에어컨', '안마의자', '공기청정기', '식기세척기','영양제'];
 const BADGES = ['', 'NEW', '인기', '추천'];
-
 
 const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '', slug: '', iherbLink: '', imageUrl: '' };
 
- const FormFields = ({ f, setF }: { f: typeof emptyForm, setF: any }) => (
+ const FormFields = ({ f, setF, categories }: { f: typeof emptyForm, setF: any, categories: string[] }) => (
     <div className="form-grid">
       <div className="form-group">
         <label className="form-label">카테고리</label>
-        <select className="select" value={f.category} onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}>
+        <select 
+          className="select" 
+          value={categories.includes(f.category) ? f.category : (f.category ? '__new__' : '')} 
+          onChange={e => {
+            if (e.target.value === '__new__') {
+              setF((prev: any) => ({ ...prev, category: '' }));
+            } else {
+              setF((prev: any) => ({ ...prev, category: e.target.value }));
+            }
+          }}
+        >
           <option value="">선택하세요</option>
-          {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+          {categories.map(c => <option key={c} value={c}>{c}</option>)}
+          <option value="__new__">+ 새 카테고리 추가</option>
         </select>
+        {(f.category !== '' && !categories.includes(f.category)) && (
+          <input 
+            className="input" 
+            placeholder="새 카테고리명 입력" 
+            value={f.category} 
+            onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
+            style={{ marginTop: '8px' }}
+          />
+        )}
       </div>
       <div className="form-group">
         <label className="form-label">슬러그</label>
@@ -155,12 +173,23 @@ export default function AdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState(emptyForm);
 
+  const [categories, setCategories] = useState<string[]>([]);
+
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'loading'; message: string } | null>(null);
+
+  const loadCategories = async (pw: string) => {
+    try {
+      const res = await fetch('/api/categories', { headers: { 'x-admin-password': pw } });
+      const data = await res.json();
+      setCategories(data.categories || []);
+    } catch {}
+  };
 
   const handleLogin = async () => {
     const res = await fetch('/api/coupang/list', { headers: { 'x-admin-password': password } });
     if (res.status === 401) { alert('비밀번호가 틀렸습니다'); return; }
     setIsLoggedIn(true);
+    loadCategories(password);
   };
 
   const handleSearch = async () => {
@@ -240,6 +269,7 @@ const handleGenerateContent = async () => {
       setSelectedProduct(null);
       setKeyword('');
       setForm(emptyForm);
+      loadCategories(password);
     } catch (err: any) {
       setStatus({ type: 'error', message: err.message });
     }
@@ -315,6 +345,7 @@ const handleGenerateContent = async () => {
       setStatus({ type: 'success', message: '수정됐어요!' });
       setEditingId(null);
       loadProductList();
+      loadCategories(password);
     } catch (err: any) {
       setStatus({ type: 'error', message: err.message });
     }
@@ -420,7 +451,7 @@ const handleGenerateContent = async () => {
                   {generating ? '✨ 생성 중...' : '✨ AI로 설명/한마디/태그/비교 자동생성'}
                 </button>
               </div>
-                <FormFields f={form} setF={setForm} />
+                <FormFields f={form} setF={setForm} categories={categories} />
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button className="btn btn-primary" onClick={handleAddProduct}>노션에 추가</button>
                   <button className="btn-outline" onClick={() => setSelectedProduct(null)}>취소</button>
@@ -466,7 +497,7 @@ const handleGenerateContent = async () => {
                     {editingId === p.id && (
                       <div className="edit-box">
                         <div className="edit-title">✏️ {p.name} 수정</div>
-                        <FormFields f={editForm} setF={setEditForm} />
+                        <FormFields f={editForm} setF={setEditForm} categories={categories} />
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
                           <button className="btn btn-secondary" onClick={() => handleEditSave(p.id)}>저장</button>
                           <button className="btn-outline" onClick={() => setEditingId(null)}>취소</button>

@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer } from 'lucide-react';
+
+import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer, Package } from 'lucide-react';
 import { Search, Heart } from 'lucide-react'; 
 import { useRouter } from 'next/navigation';
 
@@ -24,26 +25,28 @@ type Product = {
   slug?: string;
 };
 
-const categories = [
+const categoryIcons: Record<string, any> = {
+  '노트북': Laptop,
+  '데스크탑': Computer,
+  '모니터': Monitor,
+  '냉장고': Refrigerator,
+  '세탁기/건조기': WashingMachine,
+  'TV': Tv,
+  '청소기': Wind,
+  '에어컨': AirVent,
+  '안마의자': Sofa,
+  '공기청정기': Wind,
+  '식기세척기': UtensilsCrossed,
+  '태블릿': Tablet,
+  '영양제': Pill,
+};
+
+const fixedFilters = [
   { label: '전체', icon: Home },
   { label: 'NEW', icon: Sparkles },
   { label: '추천', icon: Star },
   { label: '인기', icon: Flame },
-  { label: '노트북', icon: Laptop },
-  { label: '데스크탑', icon: Computer },
-  { label: '모니터', icon: Monitor },
-  { label: '냉장고', icon: Refrigerator },
-  { label: '세탁기/건조기', icon: WashingMachine },
-  { label: 'TV', icon: Tv },
-  { label: '청소기', icon: Wind },
-  { label: '에어컨', icon: AirVent },
-  { label: '안마의자', icon: Sofa },
-  { label: '공기청정기', icon: Wind },
-  { label: '식기세척기', icon: UtensilsCrossed },
-  { label: '태블릿', icon: Tablet },
-  { label: '영양제', icon: Pill },
 ];
-
 
 
 const css = `
@@ -192,6 +195,11 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const [active, setActive] = useState('전체');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('기본');
+  const categories = [
+  ...fixedFilters,
+  ...Array.from(new Set(products.map(p => p.category).filter(Boolean)))
+    .map(name => ({ label: name, icon: categoryIcons[name] || Package })),
+];
  
   const [showWish, setShowWish] = useState(false);
   const [wishes, setWishes] = useState<string[]>([]);
