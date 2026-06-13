@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer, Package } from 'lucide-react';
+import { Laptop, Monitor, Tv, Refrigerator, WashingMachine, Wind, Sofa, AirVent, UtensilsCrossed, Tablet, Pill, Star, Flame, Sparkles, Home, Computer, Package,Smartphone } from 'lucide-react';
 import { Search, Heart } from 'lucide-react'; 
 import { useRouter } from 'next/navigation';
 
@@ -39,6 +39,7 @@ const categoryIcons: Record<string, any> = {
   '식기세척기': UtensilsCrossed,
   '태블릿': Tablet,
   '영양제': Pill,
+  '휴대폰': Smartphone,
 };
 
 const fixedFilters = [
