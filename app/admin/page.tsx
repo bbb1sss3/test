@@ -179,7 +179,8 @@ export default function AdminPage() {
 
   const loadCategories = async (pw: string) => {
     try {
-      const res = await fetch('/api/categories', { headers: { 'x-admin-password': pw } });
+     
+      const res = await fetch('/api/coupang/categories', { headers: { 'x-admin-password': pw } });
       const data = await res.json();
       setCategories(data.categories || []);
     } catch {}
