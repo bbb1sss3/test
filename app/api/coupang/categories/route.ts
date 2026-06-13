@@ -15,7 +15,7 @@ async function fetchCategories() {
 }
 
 const getCategoriesAdmin = unstable_cache(fetchCategories, ['categories-admin'], { revalidate: 60 });
-const getCategoriesPublic = unstable_cache(fetchCategories, ['categories-public'], { revalidate: 60 });
+const getCategoriesPublic = unstable_cache(fetchCategories, ['categories-public'], { revalidate: 3600 });
 
 export async function GET(request: NextRequest) {
   const password = request.headers.get('x-admin-password');
