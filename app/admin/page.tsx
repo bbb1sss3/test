@@ -80,32 +80,23 @@ const emptyForm = { category: '', badge: '', price: '', originalPrice: '', disco
  const FormFields = ({ f, setF, categories }: { f: typeof emptyForm, setF: any, categories: string[] }) => (
     <div className="form-grid">
       <div className="form-group">
-        <label className="form-label">카테고리</label>
-    <select 
-  className="select" 
-  value={categories.includes(f.category) ? f.category : (f.category !== '' ? '__new__' : '')} 
-  onChange={e => {
-    if (e.target.value === '__new__') {
-      setF((prev: any) => ({ ...prev, category: ' ' }));
-    } else {
-      setF((prev: any) => ({ ...prev, category: e.target.value }));
-    }
-  }}
->
-  <option value="">선택하세요</option>
-  {categories.map(c => <option key={c} value={c}>{c}</option>)}
-  <option value="__new__">+ 새 카테고리 추가</option>
-</select>
-{(f.category !== '' && !categories.includes(f.category)) && (
+  <label className="form-label">카테고리</label>
+  <select 
+    className="select" 
+    value={f.category} 
+    onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
+  >
+    <option value="">선택하세요</option>
+    {categories.map(c => <option key={c} value={c}>{c}</option>)}
+  </select>
   <input 
     className="input" 
-    placeholder="새 카테고리명 입력" 
-    value={f.category} 
-    onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value.trimStart() }))}
+    placeholder="또는 새 카테고리명 직접 입력" 
+    value={categories.includes(f.category) ? '' : f.category} 
+    onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
     style={{ marginTop: '8px' }}
   />
-)}
-      </div>
+</div>
       <div className="form-group">
         <label className="form-label">슬러그</label>
         <input className="input" value={f.slug || ''} onChange={e => setF((prev: any) => ({ ...prev, slug: e.target.value }))} placeholder="예: samsung-bespoke-rs84db5002cw" />
