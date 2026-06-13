@@ -81,30 +81,30 @@ const emptyForm = { category: '', badge: '', price: '', originalPrice: '', disco
     <div className="form-grid">
       <div className="form-group">
         <label className="form-label">카테고리</label>
-        <select 
-          className="select" 
-          value={categories.includes(f.category) ? f.category : (f.category ? '__new__' : '')} 
-          onChange={e => {
-            if (e.target.value === '__new__') {
-              setF((prev: any) => ({ ...prev, category: '' }));
-            } else {
-              setF((prev: any) => ({ ...prev, category: e.target.value }));
-            }
-          }}
-        >
-          <option value="">선택하세요</option>
-          {categories.map(c => <option key={c} value={c}>{c}</option>)}
-          <option value="__new__">+ 새 카테고리 추가</option>
-        </select>
-        {(f.category !== '' && !categories.includes(f.category)) && (
-          <input 
-            className="input" 
-            placeholder="새 카테고리명 입력" 
-            value={f.category} 
-            onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
-            style={{ marginTop: '8px' }}
-          />
-        )}
+       <select 
+  className="select" 
+  value={categories.includes(f.category) ? f.category : (f.category.trim() ? '__new__' : '')} 
+  onChange={e => {
+    if (e.target.value === '__new__') {
+      setF((prev: any) => ({ ...prev, category: ' ' }));
+    } else {
+      setF((prev: any) => ({ ...prev, category: e.target.value }));
+    }
+  }}
+>
+  <option value="">선택하세요</option>
+  {categories.map(c => <option key={c} value={c}>{c}</option>)}
+  <option value="__new__">+ 새 카테고리 추가</option>
+</select>
+{(f.category.trim() !== '' && !categories.includes(f.category)) && (
+  <input 
+    className="input" 
+    placeholder="새 카테고리명 입력" 
+    value={f.category.trim()} 
+    onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
+    style={{ marginTop: '8px' }}
+  />
+)}
       </div>
       <div className="form-group">
         <label className="form-label">슬러그</label>
