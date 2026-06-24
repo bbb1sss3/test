@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function RelatedProducts({ category, currentId }: { category: string; currentId: string }) {
   const [related, setRelated] = useState<any[]>([]);
@@ -22,7 +21,7 @@ export default function RelatedProducts({ category, currentId }: { category: str
           <Link key={p.id} href={`/products/${p.slug || p.id}`} className="related-card">
             <div className="related-img">
               {p.image
-                ? <Image src={p.image} alt={p.name} width={200} height={200} sizes="(max-width: 768px) 50vw, 200px" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ? <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 : '🛒'
               }
             </div>

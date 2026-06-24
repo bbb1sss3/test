@@ -1,5 +1,5 @@
 'use client';
-import Image from "next/image";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -298,7 +298,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                   <Link key={p.id} href={`/products/${p.slug || p.id}`} className="card">
                     <div className="card-img-wrap">
                       {p.image
-                        ? <Image src={p.image} alt={p.name} width={400} height={400} sizes="(max-width: 768px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ? <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         : '🛒'
                       }
                     </div>
@@ -351,7 +351,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               <Link key={p.id} href={`/products/${p.slug || p.id}`} className="recent-item">
                 <div className="recent-img">
                   {p.image
-                    ? <Image src={p.image} alt={p.name} width={80} height={80} sizes="(max-width: 768px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ? <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     : '🛒'
                   }
                 </div>
@@ -395,7 +395,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                   </button>
                   <div className="card-img-wrap">
                     {p.image
-                      ? <Image src={p.image} alt={p.name} width={400} height={400} sizes="(max-width: 768px) 50vw, 25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ? <img src={p.image} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       : '🛒'
                     }
                   </div>
