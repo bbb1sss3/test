@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     if (!post) notFound();
 
     return (
-        <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+       <main suppressHydrationWarning style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
