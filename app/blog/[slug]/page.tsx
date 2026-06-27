@@ -1,8 +1,8 @@
-import { Client } from "@notionhq/client";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 import { unstable_cache } from "next/cache";
+import { Client } from "@notionhq/client";
 
 export const revalidate = 3600;
 
@@ -15,9 +15,34 @@ const dbId = rawId.includes('-')
 
 const getPost = unstable_cache(
     async (slug: string) => {
-        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
-        if (isUUID) {
-            const page = await notion.pages.retrieve({ page_id: slug }) as any;
+        try {
+            const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+            if (isUUID) {
+                const page = await notion.pages.retrieve({ page_id: slug }) as any;
+                return {
+                    id: page.id,
+                    title: page.properties.이름?.title?.[0]?.plain_text ?? '',
+                    slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
+                    category: page.properties.카테고리?.select?.name ?? '',
+                    date: page.properties.발행일?.date?.start ?? '',
+                    thumbnail: page.properties.썸네일?.url ?? '',
+                    content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
+                };
+            }
+            const res: Response = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+                    'Notion-Version': '2022-06-28',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filter: { property: '슬러그', rich_text: { equals: slug } },
+                }),
+            });
+            const response = await res.json();
+            if (!response.results?.length) return null;
+            const page = response.results[0] as any;
             return {
                 id: page.id,
                 title: page.properties.이름?.title?.[0]?.plain_text ?? '',
@@ -27,22 +52,10 @@ const getPost = unstable_cache(
                 thumbnail: page.properties.썸네일?.url ?? '',
                 content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
             };
+        } catch (e) {
+            console.warn('블로그 상세 조회 실패:', e);
+            return null;
         }
-        const response = await (notion.databases as any).query({
-            database_id: dbId,
-            filter: { property: '슬러그', rich_text: { equals: slug } },
-        });
-        if (!response.results.length) return null;
-        const page = response.results[0] as any;
-        return {
-            id: page.id,
-            title: page.properties.이름?.title?.[0]?.plain_text ?? '',
-            slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
-            category: page.properties.카테고리?.select?.name ?? '',
-            date: page.properties.발행일?.date?.start ?? '',
-            thumbnail: page.properties.썸네일?.url ?? '',
-            content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
-        };
     },
     ['blog-post'],
     { revalidate: 3600 }
@@ -96,9 +109,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         .post-content strong { font-weight: 800; color: #111; }
         .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #555; text-decoration: none; margin-top: 3rem; padding: 10px 20px; border: 1.5px solid #e8e8e8; border-radius: 50px; }
         .back-link:hover { border-color: #e52c2c; color: #e52c2c; }
-        .footer { border-top: 1px solid #e8e8e8; background: #111; margin-top: 4rem; }
-        .footer-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; text-align: center; }
-        .footer p { font-size: 12px; color: #999; }
         @media (max-width: 768px) {
           .container { padding: 1rem; }
           .post-title { font-size: 24px; }
@@ -129,8 +139,6 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 </div>
                 <Link href="/blog" className="back-link">← 블로그 목록</Link>
             </div>
-
-          
         </main>
     );
 }
