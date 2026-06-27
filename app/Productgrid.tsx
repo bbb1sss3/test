@@ -268,6 +268,9 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                 </span>
               )}
           </button>
+          <nav style={{ display: 'flex', gap: '1rem', marginLeft: '1rem' }}>
+          <Link href="/blog" style={{ fontSize: '14px', fontWeight: 600, color: '#333', textDecoration: 'none', flexShrink: 0 }}>블로그</Link>
+        </nav>
         </div>
       </header>
 

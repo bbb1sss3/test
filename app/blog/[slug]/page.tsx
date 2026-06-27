@@ -130,9 +130,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <Link href="/blog" className="back-link">← 블로그 목록</Link>
             </div>
 
-            <footer className="footer">
-                <div className="footer-inner"><p>© 2026 Premy(프리미)</p></div>
-            </footer>
+          
         </main>
     );
 }

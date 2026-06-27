@@ -113,9 +113,7 @@ export default async function BlogPage() {
         }
       </div>
 
-      <footer className="footer">
-        <div className="footer-inner"><p>© 2026 Premy(프리미)</p></div>
-      </footer>
+      
     </main>
   );
 }
