@@ -586,7 +586,7 @@ const faqJsonLd = faqItems.length > 0 ? {
 
       <footer className="footer">
         <div className="footer-inner">
-          <p>© 2026 Premy(프리미)</p>
+          <p>© 2026 Premy(프리미) · <a href="/privacy" style={{ color: '#999', textDecoration: 'none' }}>개인정보처리방침</a></p>
         </div>
       </footer>
       <ScrollTop />
