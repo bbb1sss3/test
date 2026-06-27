@@ -490,8 +490,9 @@ const [blogEditingId, setBlogEditingId] = useState<string | null>(null);
         </label>
       </div>
     </div>
+    <button className="btn-outline" style={{ marginLeft: '0.75rem', marginBottom: '2rem' }} onClick={() => setBlogForm(emptyBlogForm)}>초기화</button>
     <button className="btn btn-primary" onClick={handleBlogSave} disabled={blogSaving} style={{ marginBottom: '2rem' }}>{blogSaving ? '저장 중...' : '노션에 저장'}</button>
-
+    
     <hr className="divider" />
     <div className="section-title" style={{ marginTop: '1rem' }}>
       블로그 글 목록
@@ -572,6 +573,7 @@ const [blogEditingId, setBlogEditingId] = useState<string | null>(null);
                     setStatus({ type: 'error', message: err.message });
                   }
                 }}>저장</button>
+              
                 <button className="btn-outline" onClick={() => setBlogEditingId(null)}>취소</button>
               </div>
             </div>
