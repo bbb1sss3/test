@@ -150,12 +150,15 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <div className="breadcrumb">
                     <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
                 </div>
-                {post!.category && <div className="post-category">{post!.category}</div>}
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '1.5rem' }}>
+               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                     <h1 className="post-title" style={{ flex: 1, marginBottom: 0 }}>{post!.title}</h1>
-                    <BlogShare title={post!.title} />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px', flexShrink: 0, marginLeft: '12px' }}>
+                        {post!.category && <div className="post-category" style={{ marginBottom: 0 }}>{post!.category}</div>}
+                        <BlogShare title={post!.title} />
+                    </div>
                 </div>
-                                
+               
+                
                 {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
                 <div className="post-content" suppressHydrationWarning>
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
