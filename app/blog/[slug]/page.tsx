@@ -92,7 +92,7 @@ async function getRelatedProducts(category: string) {
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
     const post = await getPost(params.slug);
     if (!post) notFound();
-
+ 
     const related = post!.category ? await getRelatedProducts(post!.category) : [];
 
     return (
