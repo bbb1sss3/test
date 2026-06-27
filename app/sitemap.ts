@@ -38,28 +38,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // 블로그
-  let blogResults: any[] = [];
-  let blogCursor: string | undefined = undefined;
-  do {
-    const response = await notion.dataSources.query({
-      data_source_id: blogDbId,
-      filter: { property: '공개', checkbox: { equals: true } },
-      start_cursor: blogCursor,
-      page_size: 100,
-    });
-    blogResults = [...blogResults, ...response.results];
-    blogCursor = response.has_more ? response.next_cursor ?? undefined : undefined;
-  } while (blogCursor);
+  let blogUrls: MetadataRoute.Sitemap = [];
+  try {
+    let blogResults: any[] = [];
+    let blogCursor: string | undefined = undefined;
+    do {
+      const response = await notion.dataSources.query({
+        data_source_id: blogDbId,
+        filter: { property: '공개', checkbox: { equals: true } },
+        start_cursor: blogCursor,
+        page_size: 100,
+      });
+      blogResults = [...blogResults, ...response.results];
+      blogCursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+    } while (blogCursor);
 
-  const blogUrls = blogResults.map((page: any) => {
-    const slug = page.properties.슬러그?.rich_text?.[0]?.plain_text;
-    return {
-      url: `https://premy.co.kr/blog/${slug || page.id}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    };
-  });
+    blogUrls = blogResults.map((page: any) => {
+      const slug = page.properties.슬러그?.rich_text?.[0]?.plain_text;
+      return {
+        url: `https://premy.co.kr/blog/${slug || page.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      };
+    });
+  } catch (e) {
+    console.warn('블로그 sitemap 생성 실패:', e);
+  }
 
   return [
     { url: 'https://premy.co.kr', lastModified: new Date(), changeFrequency: 'daily' as const, priority: 1 },
