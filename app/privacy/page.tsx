@@ -53,9 +53,7 @@ export default function PrivacyPage() {
         <p>본 방침은 2026년 1월 1일부터 시행됩니다.</p>
       </div>
 
-      <footer className="footer">
-        <div className="footer-inner"><p>© 2026 Premy(프리미)</p></div>
-      </footer>
+      
     </main>
   );
 }
