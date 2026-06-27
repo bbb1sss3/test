@@ -52,7 +52,7 @@ export default async function BlogPage() {
   const posts = await getPosts();
 
   return (
-    <main suppressHydrationWarning style={{ background: '#f8f8f8', minHeight: '100vh' }}>
+    <main suppressHydrationWarning style={{ background: '#fff', minHeight: '100vh' }}>
       <style suppressHydrationWarning>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
