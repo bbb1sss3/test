@@ -88,8 +88,7 @@ export default async function BlogPage() {
         <div className="header-inner">
           <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
           <nav className="nav-links">
-            <Link href="/">제품</Link>
-            <Link href="/blog" style={{ color: '#e52c2c' }}>블로그</Link>
+             <Link href="/blog" style={{ color: '#e52c2c' }}>블로그</Link>
           </nav>
         </div>
       </header>
