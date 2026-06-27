@@ -1,11 +1,7 @@
-import { Client } from "@notionhq/client";
 import Link from "next/link";
 import { unstable_cache } from "next/cache";
 
-
 export const revalidate = 3600;
-
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 const rawId = process.env.NOTION_BLOG_DATABASE_ID!;
 const dbId = rawId.includes('-')
@@ -18,13 +14,22 @@ const getPosts = unstable_cache(
       let allResults: any[] = [];
       let cursor: string | undefined = undefined;
       do {
-        const response: any = await (notion.databases as any).query({
-            database_id: dbId,
+       const res: Response = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+            'Notion-Version': '2022-06-28',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
             filter: { property: '공개', checkbox: { equals: true } },
             sorts: [{ property: '발행일', direction: 'descending' }],
-            start_cursor: cursor,
+            ...(cursor ? { start_cursor: cursor } : {}),
             page_size: 100,
+          }),
+          cache: 'no-store',
         });
+        const response = await res.json();
         allResults = [...allResults, ...response.results];
         cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
       } while (cursor);
@@ -113,8 +118,6 @@ export default async function BlogPage() {
           )
         }
       </div>
-
-      
     </main>
   );
 }

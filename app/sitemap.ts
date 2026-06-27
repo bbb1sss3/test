@@ -43,8 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     let blogResults: any[] = [];
     let blogCursor: string | undefined = undefined;
     do {
-      const response = await notion.dataSources.query({
-        data_source_id: blogDbId,
+      const response: any = await (notion as any).databases.query({
+        database_id: blogDbId,
         filter: { property: '공개', checkbox: { equals: true } },
         start_cursor: blogCursor,
         page_size: 100,
