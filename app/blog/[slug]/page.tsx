@@ -10,67 +10,67 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 const rawId = process.env.NOTION_BLOG_DATABASE_ID!;
 const dbId = rawId.includes('-')
-  ? rawId
-  : rawId.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
+    ? rawId
+    : rawId.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
 
 const getPost = unstable_cache(
-  async (slug: string) => {
-    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
-    if (isUUID) {
-      const page = await notion.pages.retrieve({ page_id: slug }) as any;
-      return {
-        id: page.id,
-        title: page.properties.이름?.title?.[0]?.plain_text ?? '',
-        slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
-        category: page.properties.카테고리?.select?.name ?? '',
-        date: page.properties.발행일?.date?.start ?? '',
-        thumbnail: page.properties.썸네일?.url ?? '',
-        content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
-      };
-    }
-    const response = await notion.dataSources.query({
-      data_source_id: dbId,
-      filter: { property: '슬러그', rich_text: { equals: slug } },
-    });
-    if (!response.results.length) return null;
-    const page = response.results[0] as any;
-    return {
-      id: page.id,
-      title: page.properties.이름?.title?.[0]?.plain_text ?? '',
-      slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
-      category: page.properties.카테고리?.select?.name ?? '',
-      date: page.properties.발행일?.date?.start ?? '',
-      thumbnail: page.properties.썸네일?.url ?? '',
-      content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
-    };
-  },
-  ['blog-post'],
-  { revalidate: 3600 }
+    async (slug: string) => {
+        const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+        if (isUUID) {
+            const page = await notion.pages.retrieve({ page_id: slug }) as any;
+            return {
+                id: page.id,
+                title: page.properties.이름?.title?.[0]?.plain_text ?? '',
+                slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
+                category: page.properties.카테고리?.select?.name ?? '',
+                date: page.properties.발행일?.date?.start ?? '',
+                thumbnail: page.properties.썸네일?.url ?? '',
+                content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
+            };
+        }
+        const response = await (notion.databases as any).query({
+            database_id: dbId,
+            filter: { property: '슬러그', rich_text: { equals: slug } },
+        });
+        if (!response.results.length) return null;
+        const page = response.results[0] as any;
+        return {
+            id: page.id,
+            title: page.properties.이름?.title?.[0]?.plain_text ?? '',
+            slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
+            category: page.properties.카테고리?.select?.name ?? '',
+            date: page.properties.발행일?.date?.start ?? '',
+            thumbnail: page.properties.썸네일?.url ?? '',
+            content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
+        };
+    },
+    ['blog-post'],
+    { revalidate: 3600 }
 );
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
-  if (!post) return { title: 'Premy(프리미)' };
-  return {
-    title: `${post.title} | Premy(프리미) 블로그`,
-    description: post.content.slice(0, 150),
-    openGraph: {
-      title: post.title,
-      description: post.content.slice(0, 150),
-      images: post.thumbnail ? [{ url: post.thumbnail }] : [],
-      locale: 'ko_KR',
-      type: 'article',
-    },
-  };
+    const post = await getPost(params.slug);
+    if (!post) return { title: 'Premy(프리미)' };
+    return {
+        title: `${post.title} | Premy(프리미) 블로그`,
+        description: post.content.slice(0, 150),
+        openGraph: {
+            title: post.title,
+            description: post.content.slice(0, 150),
+            images: post.thumbnail ? [{ url: post.thumbnail }] : [],
+            locale: 'ko_KR',
+            type: 'article',
+        },
+    };
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
-  if (!post) notFound();
+    const post = await getPost(params.slug);
+    if (!post) notFound();
 
-  return (
-    <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <style>{`
+    return (
+        <main style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
         .header { background: #fff; border-bottom: 1px solid #e8e8e8; height: 56px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
@@ -106,33 +106,33 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         }
       `}</style>
 
-      <header className="header">
-        <div className="header-inner">
-          <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px' }}>프리미</small></Link>
-          <nav className="nav-links">
-            <Link href="/">제품</Link>
-            <Link href="/blog">블로그</Link>
-          </nav>
-        </div>
-      </header>
+            <header className="header">
+                <div className="header-inner">
+                    <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px' }}>프리미</small></Link>
+                    <nav className="nav-links">
+                        <Link href="/">제품</Link>
+                        <Link href="/blog">블로그</Link>
+                    </nav>
+                </div>
+            </header>
 
-      <div className="container">
-        <div className="breadcrumb">
-          <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
-        </div>
-        {post!.category && <div className="post-category">{post!.category}</div>}
-        <h1 className="post-title">{post!.title}</h1>
-        {post!.date && <div className="post-date">{post!.date}</div>}
-        {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
-        <div className="post-content">
-          <ReactMarkdown>{post!.content}</ReactMarkdown>
-        </div>
-        <Link href="/blog" className="back-link">← 블로그 목록</Link>
-      </div>
+            <div className="container">
+                <div className="breadcrumb">
+                    <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
+                </div>
+                {post!.category && <div className="post-category">{post!.category}</div>}
+                <h1 className="post-title">{post!.title}</h1>
+                {post!.date && <div className="post-date">{post!.date}</div>}
+                {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
+                <div className="post-content">
+                    <ReactMarkdown>{post!.content}</ReactMarkdown>
+                </div>
+                <Link href="/blog" className="back-link">← 블로그 목록</Link>
+            </div>
 
-      <footer className="footer">
-        <div className="footer-inner"><p>© 2026 Premy(프리미)</p></div>
-      </footer>
-    </main>
-  );
+            <footer className="footer">
+                <div className="footer-inner"><p>© 2026 Premy(프리미)</p></div>
+            </footer>
+        </main>
+    );
 }

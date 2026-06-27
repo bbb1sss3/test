@@ -13,19 +13,32 @@ const dbId = rawId.includes('-')
 
 const getPosts = unstable_cache(
   async () => {
-    const response = await notion.dataSources.query({
-      data_source_id: dbId,
-      filter: { property: '공개', checkbox: { equals: true } },
-      sorts: [{ property: '발행일', direction: 'descending' }],
-    });
-    return response.results.map((page: any) => ({
-      id: page.id,
-      title: page.properties.이름?.title?.[0]?.plain_text ?? '',
-      slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? page.id,
-      category: page.properties.카테고리?.select?.name ?? '',
-      date: page.properties.발행일?.date?.start ?? '',
-      thumbnail: page.properties.썸네일?.url ?? '',
-    }));
+    try {
+      let allResults: any[] = [];
+      let cursor: string | undefined = undefined;
+      do {
+        const response: any = await (notion.databases as any).query({
+            database_id: dbId,
+            filter: { property: '공개', checkbox: { equals: true } },
+            sorts: [{ property: '발행일', direction: 'descending' }],
+            start_cursor: cursor,
+            page_size: 100,
+        });
+        allResults = [...allResults, ...response.results];
+        cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+      } while (cursor);
+      return allResults.map((page: any) => ({
+        id: page.id,
+        title: page.properties.이름?.title?.[0]?.plain_text ?? '',
+        slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? page.id,
+        category: page.properties.카테고리?.select?.name ?? '',
+        date: page.properties.발행일?.date?.start ?? '',
+        thumbnail: page.properties.썸네일?.url ?? '',
+      }));
+    } catch (e) {
+      console.warn('블로그 목록 조회 실패:', e);
+      return [];
+    }
   },
   ['blog-posts'],
   { revalidate: 3600 }
@@ -40,9 +53,12 @@ export default async function BlogPage() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
         .header { background: #fff; border-bottom: 1px solid #e8e8e8; height: 56px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+        .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; display: flex; align-items: center; }
         .logo { font-size: 26px; font-weight: 900; color: #111; letter-spacing: -1px; text-decoration: none; }
         .logo span { color: #e52c2c; }
+        .nav-links { display: flex; gap: 1.5rem; margin-left: 2rem; }
+        .nav-links a { font-size: 14px; font-weight: 600; color: #333; text-decoration: none; }
+        .nav-links a:hover { color: #e52c2c; }
         .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
         .page-title { font-size: 28px; font-weight: 900; color: #111; margin-bottom: 2rem; letter-spacing: -1px; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -53,12 +69,10 @@ export default async function BlogPage() {
         .card-category { font-size: 11px; font-weight: 800; color: #e52c2c; letter-spacing: 1px; margin-bottom: 6px; }
         .card-title { font-size: 16px; font-weight: 700; color: #111; line-height: 1.5; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-date { font-size: 12px; color: #aaa; }
+        .empty { text-align: center; padding: 4rem; color: #aaa; font-size: 16px; }
         .footer { border-top: 1px solid #e8e8e8; background: #111; margin-top: 4rem; }
         .footer-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; text-align: center; }
         .footer p { font-size: 12px; color: #999; }
-        .nav-links { display: flex; gap: 1.5rem; margin-left: 2rem; }
-        .nav-links a { font-size: 14px; font-weight: 600; color: #333; text-decoration: none; }
-        .nav-links a:hover { color: #e52c2c; }
         @media (max-width: 768px) {
           .grid { grid-template-columns: 1fr; gap: 1.5rem; }
           .container { padding: 1rem; }
@@ -66,7 +80,7 @@ export default async function BlogPage() {
       `}</style>
 
       <header className="header">
-        <div className="header-inner" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="header-inner">
           <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px' }}>프리미</small></Link>
           <nav className="nav-links">
             <Link href="/">제품</Link>
@@ -77,21 +91,26 @@ export default async function BlogPage() {
 
       <div className="container">
         <h1 className="page-title">블로그</h1>
-        <div className="grid">
-          {posts.map((post) => (
-            <Link href={`/blog/${post.slug}`} key={post.id} className="card">
-              <div className="card-img">
-                {post.thumbnail
-                  ? <img src={post.thumbnail} alt={post.title} />
-                  : <div className="card-img-empty">📝</div>
-                }
-              </div>
-              {post.category && <div className="card-category">{post.category}</div>}
-              <div className="card-title">{post.title}</div>
-              {post.date && <div className="card-date">{post.date}</div>}
-            </Link>
-          ))}
-        </div>
+        {posts.length === 0
+          ? <div className="empty">아직 게시된 글이 없습니다.</div>
+          : (
+            <div className="grid">
+              {posts.map((post) => (
+                <Link href={`/blog/${post.slug}`} key={post.id} className="card">
+                  <div className="card-img">
+                    {post.thumbnail
+                      ? <img src={post.thumbnail} alt={post.title} />
+                      : <div className="card-img-empty">📝</div>
+                    }
+                  </div>
+                  {post.category && <div className="card-category">{post.category}</div>}
+                  <div className="card-title">{post.title}</div>
+                  {post.date && <div className="card-date">{post.date}</div>}
+                </Link>
+              ))}
+            </div>
+          )
+        }
       </div>
 
       <footer className="footer">
