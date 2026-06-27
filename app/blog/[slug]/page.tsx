@@ -26,6 +26,7 @@ const getPost = unstable_cache(
                     category: page.properties.카테고리?.select?.name ?? '',
                     thumbnail: page.properties.썸네일?.url ?? '',
                     content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
+                    productSlug: page.properties.제품슬러그?.rich_text?.[0]?.plain_text ?? '',
                 };
             }
             const res: Response = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
@@ -49,6 +50,7 @@ const getPost = unstable_cache(
                 category: page.properties.카테고리?.select?.name ?? '',
                 thumbnail: page.properties.썸네일?.url ?? '',
                 content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
+                productSlug: page.properties.제품슬러그?.rich_text?.[0]?.plain_text ?? '',
             };
         } catch (e) {
             console.warn('블로그 상세 조회 실패:', e);
@@ -137,8 +139,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             <header className="header">
                 <div className="header-inner">
                     <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
-                    <nav className="nav-links">
-                        <Link href="/">제품</Link>
+                    <nav className="nav-links">                        
                         <Link href="/blog">블로그</Link>
                     </nav>
                 </div>
@@ -154,6 +155,26 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <div className="post-content" suppressHydrationWarning>
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
                 </div>
+                {post!.productSlug && (
+                    <Link
+                        href={`/products/${post!.productSlug}`}
+                        style={{
+                        display: 'block',
+                        background: '#e52c2c',
+                        color: '#fff',
+                        textAlign: 'center',
+                        padding: '18px',
+                        borderRadius: '50px',
+                        fontSize: '16px',
+                        fontWeight: 800,
+                        textDecoration: 'none',
+                        margin: '2rem 0',
+                        boxShadow: '0 4px 12px rgba(229,44,44,0.3)',
+                        }}
+                    >
+                        지금 가격 확인
+                    </Link>
+                    )}
             </div>
 
             {related.length > 0 && (

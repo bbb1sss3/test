@@ -63,7 +63,7 @@ export default async function BlogPage() {
         .nav-links { display: flex; gap: 1.5rem; margin-left: 2rem; }
         .nav-links a { font-size: 14px; font-weight: 600; color: #333; text-decoration: none; }
         .nav-links a:hover { color: #e52c2c; }
-        .hero { background: #111; padding: 3rem 1.5rem; text-align: center; }
+        .hero { background: #111; padding: 2rem 1.5rem; text-align: center; }
         .hero-label { font-size: 11px; font-weight: 800; color: #e52c2c; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.75rem; }
         .hero-title { font-size: 32px; font-weight: 900; color: #fff; letter-spacing: -1px; }
         .hero-sub { font-size: 14px; color: #888; margin-top: 0.5rem; }
