@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-
 const css = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Apple SD Gothic Neo', sans-serif; background: #f4f4f4; }
@@ -71,87 +70,78 @@ const css = `
   .progress-bar { height: 100%; background: #e52c2c; border-radius: 4px; animation: loading 1.5s infinite; }
   @keyframes loading { 0% { width: 20%; } 50% { width: 80%; } 100% { width: 20%; } }
   .count-badge { background: #f0f0f0; color: #555; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
+  .blog-textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #e8e8e8; border-radius: 8px; font-size: 13px; outline: none; resize: vertical; min-height: 400px; font-family: monospace; }
+  .blog-textarea:focus { border-color: #e52c2c; }
 `;
 
 const BADGES = ['', 'NEW', '인기', '추천'];
-
 const emptyForm = { category: '', badge: '', price: '', originalPrice: '', discount: '', rating: '', desc: '', hanmadi: '', tag: '', compare: '', slug: '', iherbLink: '', imageUrl: '' };
+const emptyBlogForm = { title: '', slug: '', category: '', thumbnail: '', productSlug: '', content: '', published: false };
 
- const FormFields = ({ f, setF, categories }: { f: typeof emptyForm, setF: any, categories: string[] }) => (
-    <div className="form-grid">
-      <div className="form-group">
-  <label className="form-label">카테고리</label>
-  <select 
-    className="select" 
-    value={f.category} 
-    onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
-  >
-    <option value="">선택하세요</option>
-    {categories.map(c => <option key={c} value={c}>{c}</option>)}
-  </select>
-  <input 
-    className="input" 
-    placeholder="또는 새 카테고리명 직접 입력" 
-    value={categories.includes(f.category) ? '' : f.category} 
-    onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}
-    style={{ marginTop: '8px' }}
-  />
-</div>
-      <div className="form-group">
-        <label className="form-label">슬러그</label>
-        <input className="input" value={f.slug || ''} onChange={e => setF((prev: any) => ({ ...prev, slug: e.target.value }))} placeholder="예: samsung-bespoke-rs84db5002cw" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">뱃지</label>
-        <select className="select" value={f.badge} onChange={e => setF((prev: any) => ({ ...prev, badge: e.target.value }))}>
-          {BADGES.map(b => <option key={b} value={b}>{b || '없음'}</option>)}
-        </select>
-      </div>
-      <div className="form-group">
-        <label className="form-label">가격</label>
-        <input className="input" value={f.price} onChange={e => setF((prev: any) => ({ ...prev, price: e.target.value }))} placeholder="예: 1,690,000원~" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">원가</label>
-        <input className="input" value={f.originalPrice} onChange={e => setF((prev: any) => ({ ...prev, originalPrice: e.target.value }))} placeholder="예: 2,690,000원" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">할인율</label>
-        <input className="input" value={f.discount} onChange={e => setF((prev: any) => ({ ...prev, discount: e.target.value }))} placeholder="예: 37%" />
-      </div>
-      <div className="form-group">
-        <label className="form-label">별점</label>
-        <input className="input" value={f.rating} onChange={e => setF((prev: any) => ({ ...prev, rating: e.target.value }))} placeholder="예: 4.5" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">설명 (SEO용)</label>
-        <textarea className="textarea" value={f.desc} onChange={e => setF((prev: any) => ({ ...prev, desc: e.target.value }))} placeholder="상품 설명 (300자 이상 권장)" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">에디터 한마디</label>
-        <textarea className="textarea" value={f.hanmadi} onChange={e => setF((prev: any) => ({ ...prev, hanmadi: e.target.value }))} placeholder="솔직한 추천 이유 2문장" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">태그 (쉼표로 구분)</label>
-        <input className="input" value={f.tag} onChange={e => setF((prev: any) => ({ ...prev, tag: e.target.value }))} placeholder="예: #신혼부부필수템, #4인가족추천" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">경쟁 모델 비교</label>
-        <textarea className="textarea" value={f.compare} onChange={e => setF((prev: any) => ({ ...prev, compare: e.target.value }))} placeholder="항목|모델A|모델B|모델C" />
-      </div>
-      <div className="form-group form-full">
-        <label className="form-label">아이허브 링크</label>
-        <input className="input" value={f.iherbLink || ''} onChange={e => setF((prev: any) => ({ ...prev, iherbLink: e.target.value }))} placeholder="https://kr.iherb.com/..." />
-      </div>
-      
+const FormFields = ({ f, setF, categories }: { f: typeof emptyForm, setF: any, categories: string[] }) => (
+  <div className="form-grid">
+    <div className="form-group">
+      <label className="form-label">카테고리</label>
+      <select className="select" value={f.category} onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))}>
+        <option value="">선택하세요</option>
+        {categories.map(c => <option key={c} value={c}>{c}</option>)}
+      </select>
+      <input className="input" placeholder="또는 새 카테고리명 직접 입력" value={categories.includes(f.category) ? '' : f.category} onChange={e => setF((prev: any) => ({ ...prev, category: e.target.value }))} style={{ marginTop: '8px' }} />
     </div>
-  );
+    <div className="form-group">
+      <label className="form-label">슬러그</label>
+      <input className="input" value={f.slug || ''} onChange={e => setF((prev: any) => ({ ...prev, slug: e.target.value }))} placeholder="예: samsung-bespoke-rs84db5002cw" />
+    </div>
+    <div className="form-group">
+      <label className="form-label">뱃지</label>
+      <select className="select" value={f.badge} onChange={e => setF((prev: any) => ({ ...prev, badge: e.target.value }))}>
+        {BADGES.map(b => <option key={b} value={b}>{b || '없음'}</option>)}
+      </select>
+    </div>
+    <div className="form-group">
+      <label className="form-label">가격</label>
+      <input className="input" value={f.price} onChange={e => setF((prev: any) => ({ ...prev, price: e.target.value }))} placeholder="예: 1,690,000원~" />
+    </div>
+    <div className="form-group">
+      <label className="form-label">원가</label>
+      <input className="input" value={f.originalPrice} onChange={e => setF((prev: any) => ({ ...prev, originalPrice: e.target.value }))} placeholder="예: 2,690,000원" />
+    </div>
+    <div className="form-group">
+      <label className="form-label">할인율</label>
+      <input className="input" value={f.discount} onChange={e => setF((prev: any) => ({ ...prev, discount: e.target.value }))} placeholder="예: 37%" />
+    </div>
+    <div className="form-group">
+      <label className="form-label">별점</label>
+      <input className="input" value={f.rating} onChange={e => setF((prev: any) => ({ ...prev, rating: e.target.value }))} placeholder="예: 4.5" />
+    </div>
+    <div className="form-group form-full">
+      <label className="form-label">설명 (SEO용)</label>
+      <textarea className="textarea" value={f.desc} onChange={e => setF((prev: any) => ({ ...prev, desc: e.target.value }))} placeholder="상품 설명 (300자 이상 권장)" />
+    </div>
+    <div className="form-group form-full">
+      <label className="form-label">에디터 한마디</label>
+      <textarea className="textarea" value={f.hanmadi} onChange={e => setF((prev: any) => ({ ...prev, hanmadi: e.target.value }))} placeholder="솔직한 추천 이유 2문장" />
+    </div>
+    <div className="form-group form-full">
+      <label className="form-label">태그 (쉼표로 구분)</label>
+      <input className="input" value={f.tag} onChange={e => setF((prev: any) => ({ ...prev, tag: e.target.value }))} placeholder="예: #신혼부부필수템, #4인가족추천" />
+    </div>
+    <div className="form-group form-full">
+      <label className="form-label">경쟁 모델 비교</label>
+      <textarea className="textarea" value={f.compare} onChange={e => setF((prev: any) => ({ ...prev, compare: e.target.value }))} placeholder="항목|모델A|모델B|모델C" />
+    </div>
+    <div className="form-group form-full">
+      <label className="form-label">아이허브 링크</label>
+      <input className="input" value={f.iherbLink || ''} onChange={e => setF((prev: any) => ({ ...prev, iherbLink: e.target.value }))} placeholder="https://kr.iherb.com/..." />
+    </div>
+  </div>
+);
 
 export default function AdminPage() {
   const [generating, setGenerating] = useState(false);
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState<'add' | 'list'>('add');
+  const [activeTab, setActiveTab] = useState<'add' | 'list' | 'blog'>('add');
 
   const [keyword, setKeyword] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -165,12 +155,13 @@ export default function AdminPage() {
   const [editForm, setEditForm] = useState(emptyForm);
 
   const [categories, setCategories] = useState<string[]>([]);
-
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'loading'; message: string } | null>(null);
+
+  const [blogForm, setBlogForm] = useState(emptyBlogForm);
+  const [blogSaving, setBlogSaving] = useState(false);
 
   const loadCategories = async (pw: string) => {
     try {
-     
       const res = await fetch('/api/coupang/categories', { headers: { 'x-admin-password': pw } });
       const data = await res.json();
       setCategories(data.categories || []);
@@ -190,9 +181,7 @@ export default function AdminPage() {
     setSearchResults([]);
     setSelectedProduct(null);
     try {
-      const res = await fetch(`/api/coupang/search?keyword=${encodeURIComponent(keyword)}`, {
-        headers: { 'x-admin-password': password },
-      });
+      const res = await fetch(`/api/coupang/search?keyword=${encodeURIComponent(keyword)}`, { headers: { 'x-admin-password': password } });
       const data = await res.json();
       if (res.status === 401) { setIsLoggedIn(false); return; }
       if (!res.ok) throw new Error(data.error);
@@ -210,40 +199,26 @@ export default function AdminPage() {
     setSearchResults([]);
   };
 
-const handleGenerateContent = async () => {
-  if (!selectedProduct || !form.category) {
-    setStatus({ type: 'error', message: '카테고리를 먼저 선택해주세요.' });
-    return;
-  }
-  setGenerating(true);
-  setStatus({ type: 'loading', message: 'AI 콘텐츠 생성 중...' });
-  try {
-    const res = await fetch('/api/coupang/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
-      body: JSON.stringify({
-        productName: selectedProduct.productName,
-        category: form.category,
-        price: form.price,
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
-    setForm((prev: any) => ({
-      ...prev,
-      slug: data.slug,
-      desc: data.desc,
-      hanmadi: data.hanmadi,
-      tag: data.tag,
-      compare: data.compare,
-    }));
-    setStatus({ type: 'success', message: 'AI 생성 완료! 내용을 확인해주세요.' });
-  } catch (err: any) {
-    setStatus({ type: 'error', message: err.message });
-  } finally {
-    setGenerating(false);
-  }
-};
+  const handleGenerateContent = async () => {
+    if (!selectedProduct || !form.category) { setStatus({ type: 'error', message: '카테고리를 먼저 선택해주세요.' }); return; }
+    setGenerating(true);
+    setStatus({ type: 'loading', message: 'AI 콘텐츠 생성 중...' });
+    try {
+      const res = await fetch('/api/coupang/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+        body: JSON.stringify({ productName: selectedProduct.productName, category: form.category, price: form.price }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setForm((prev: any) => ({ ...prev, slug: data.slug, desc: data.desc, hanmadi: data.hanmadi, tag: data.tag, compare: data.compare }));
+      setStatus({ type: 'success', message: 'AI 생성 완료! 내용을 확인해주세요.' });
+    } catch (err: any) {
+      setStatus({ type: 'error', message: err.message });
+    } finally {
+      setGenerating(false);
+    }
+  };
 
   const handleAddProduct = async () => {
     if (!selectedProduct) return;
@@ -281,7 +256,7 @@ const handleGenerateContent = async () => {
     }
   };
 
-  const handleTabChange = (tab: 'add' | 'list') => {
+  const handleTabChange = (tab: 'add' | 'list' | 'blog') => {
     setActiveTab(tab);
     setStatus(null);
     setEditingId(null);
@@ -307,21 +282,7 @@ const handleGenerateContent = async () => {
 
   const handleEditStart = (p: any) => {
     setEditingId(p.id);
-    setEditForm({
-      category: p.category || '',
-      badge: p.badge || '',
-      price: p.price || '',
-      originalPrice: p.originalPrice || '',
-      discount: p.discount || '',
-      rating: p.rating || '',
-      desc: p.desc || '',
-      hanmadi: p.hanmadi || '',
-      tag: p.tag || '',
-      compare: p.compare || '',
-      slug: p.slug || '',
-      iherbLink: p.iherbLink || '',
-    imageUrl: p.image || '',
-    });
+    setEditForm({ category: p.category || '', badge: p.badge || '', price: p.price || '', originalPrice: p.originalPrice || '', discount: p.discount || '', rating: p.rating || '', desc: p.desc || '', hanmadi: p.hanmadi || '', tag: p.tag || '', compare: p.compare || '', slug: p.slug || '', iherbLink: p.iherbLink || '', imageUrl: p.image || '' });
   };
 
   const handleEditSave = async (pageId: string) => {
@@ -343,7 +304,29 @@ const handleGenerateContent = async () => {
     }
   };
 
- 
+  const handleBlogSave = async () => {
+    if (!blogForm.title.trim()) { setStatus({ type: 'error', message: '제목을 입력해주세요.' }); return; }
+    if (!blogForm.slug.trim()) { setStatus({ type: 'error', message: '슬러그를 입력해주세요.' }); return; }
+    if (!blogForm.content.trim()) { setStatus({ type: 'error', message: '본문을 입력해주세요.' }); return; }
+    setBlogSaving(true);
+    setStatus({ type: 'loading', message: '노션에 저장 중...' });
+    try {
+      const rawId = process.env.NEXT_PUBLIC_NOTION_BLOG_DATABASE_ID || '';
+      const res = await fetch('/api/blog/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+      body: JSON.stringify({ blogForm }),
+    });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || '저장 실패');
+      setStatus({ type: 'success', message: '블로그 글이 저장됐어요!' });
+      setBlogForm(emptyBlogForm);
+    } catch (err: any) {
+      setStatus({ type: 'error', message: err.message });
+    } finally {
+      setBlogSaving(false);
+    }
+  };
 
   if (!isLoggedIn) {
     return (
@@ -352,9 +335,7 @@ const handleGenerateContent = async () => {
         <div className="login-wrap">
           <div className="login-box">
             <div className="login-title">PRE<span>MY</span> 관리자</div>
-            <input className="input" type="password" placeholder="비밀번호 입력" value={password}
-              onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()}
-              style={{ width: '100%', marginBottom: '1rem' }} />
+            <input className="input" type="password" placeholder="비밀번호 입력" value={password} onChange={e => setPassword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} style={{ width: '100%', marginBottom: '1rem' }} />
             <button className="btn btn-primary" style={{ width: '100%' }} onClick={handleLogin}>로그인</button>
           </div>
         </div>
@@ -372,58 +353,38 @@ const handleGenerateContent = async () => {
         </div>
 
         <div className="tabs">
-          <button className={`tab${activeTab === 'add' ? ' active' : ''}`} onClick={() => handleTabChange('add')}>🔍 상품 추가</button>
+          <button className={`tab${activeTab === 'add' ? ' active' : ''}`} onClick={() => handleTabChange('add')}>상품 추가</button>
           <button className={`tab${activeTab === 'list' ? ' active' : ''}`} onClick={() => handleTabChange('list')}>
-            📋 상품 목록
-            {productList.length > 0 && <span className="count-badge">{productList.length}</span>}
+            상품 목록{productList.length > 0 && <span className="count-badge">{productList.length}</span>}
           </button>
+          <button className={`tab${activeTab === 'blog' ? ' active' : ''}`} onClick={() => handleTabChange('blog')}>블로그 작성</button>
         </div>
 
-        {/* 상품 추가 탭 */}
         {activeTab === 'add' && (
           <div className="section">
-            <div className="section-title">🔍 상품 추가</div>
+            <div className="section-title">상품 추가</div>
             <div className="input-row">
-              <input className="input" placeholder="검색 키워드 (예: LG 그램 17 코어Ultra5)"
-                value={keyword} onChange={e => setKeyword(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleSearch()} />
-              <button className="btn btn-primary" onClick={handleSearch} disabled={searching}>
-                {searching ? '검색 중...' : '검색'}
-              </button>
+              <input className="input" placeholder="검색 키워드 (예: LG 그램 17 코어Ultra5)" value={keyword} onChange={e => setKeyword(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSearch()} />
+              <button className="btn btn-primary" onClick={handleSearch} disabled={searching}>{searching ? '검색 중...' : '검색'}</button>
             </div>
-
             {searchResults.length > 0 && (
               <div className="product-list">
-               {searchResults.map((p, i) => (
-                  <div 
-                    key={i} 
-                    className="product-item" 
-                    onClick={() => !p.isRegistered && handleSelectProduct(p)}
-                    style={{ 
-                      opacity: p.isRegistered ? 0.4 : 1,
-                      cursor: p.isRegistered ? 'not-allowed' : 'pointer',
-                    }}
-                  >
+                {searchResults.map((p, i) => (
+                  <div key={i} className="product-item" onClick={() => !p.isRegistered && handleSelectProduct(p)} style={{ opacity: p.isRegistered ? 0.4 : 1, cursor: p.isRegistered ? 'not-allowed' : 'pointer' }}>
                     <img src={p.productImage} alt={p.productName} className="product-img" />
                     <div className="product-info">
-                      <div className="product-name">
-                        {p.isRegistered && <span style={{ color: '#e52c2c', fontWeight: 700, fontSize: '12px', marginRight: '4px' }}>✓ 등록됨</span>}
-                        {p.productName}
-                      </div>
+                      <div className="product-name">{p.isRegistered && <span style={{ color: '#e52c2c', fontWeight: 700, fontSize: '12px', marginRight: '4px' }}>등록됨</span>}{p.productName}</div>
                       <div className="product-price">{p.productPrice.toLocaleString()}원~</div>
                       <div className="product-badges">
-                        {p.isRocket && <span className="badge-sm badge-rocket">🚀 로켓</span>}
-                        {p.isFreeShipping && <span className="badge-sm badge-free">✓ 무료배송</span>}
+                        {p.isRocket && <span className="badge-sm badge-rocket">로켓</span>}
+                        {p.isFreeShipping && <span className="badge-sm badge-free">무료배송</span>}
                       </div>
                     </div>
-                    <button className="btn btn-primary" style={{ fontSize: '12px', padding: '6px 14px' }} disabled={p.isRegistered}>
-                      {p.isRegistered ? '등록됨' : '선택'}
-                    </button>
+                    <button className="btn btn-primary" style={{ fontSize: '12px', padding: '6px 14px' }} disabled={p.isRegistered}>{p.isRegistered ? '등록됨' : '선택'}</button>
                   </div>
                 ))}
               </div>
             )}
-
             {selectedProduct && (
               <>
                 <hr className="divider" />
@@ -433,16 +394,11 @@ const handleGenerateContent = async () => {
                     <div className="selected-product-name">{selectedProduct.productName}</div>
                     <div className="selected-product-price">{selectedProduct.productPrice.toLocaleString()}원~</div>
                   </div>
-                  <a href={selectedProduct.productUrl} target="_blank" rel="noopener noreferrer"
-                    className="btn-outline" style={{ textDecoration: 'none' }}>
-                    쿠팡에서 보기 →
-                  </a>
+                  <a href={selectedProduct.productUrl} target="_blank" rel="noopener noreferrer" className="btn-outline">쿠팡에서 보기</a>
                 </div>
                 <div style={{ marginBottom: '1rem' }}>
-                <button className="btn btn-secondary" onClick={handleGenerateContent} disabled={generating}>
-                  {generating ? '✨ 생성 중...' : '✨ AI로 설명/한마디/태그/비교 자동생성'}
-                </button>
-              </div>
+                  <button className="btn btn-secondary" onClick={handleGenerateContent} disabled={generating}>{generating ? 'AI 생성 중...' : 'AI 설명 자동생성'}</button>
+                </div>
                 <FormFields f={form} setF={setForm} categories={categories} />
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button className="btn btn-primary" onClick={handleAddProduct}>노션에 추가</button>
@@ -453,13 +409,9 @@ const handleGenerateContent = async () => {
           </div>
         )}
 
-        {/* 상품 목록 탭 */}
         {activeTab === 'list' && (
           <div className="section">
-            <div className="section-title">
-              📋 등록된 상품
-              <span className="count-badge">{productList.length}개</span>
-            </div>
+            <div className="section-title">등록된 상품<span className="count-badge">{productList.length}개</span></div>
             {loadingList ? (
               <div className="progress"><div className="progress-bar" /></div>
             ) : (
@@ -473,22 +425,19 @@ const handleGenerateContent = async () => {
                         <div className="product-price">{p.price}</div>
                         <div className="product-badges">
                           {p.category && <span className="badge-sm badge-category">{p.category}</span>}
-                          {p.isRocket && <span className="badge-sm badge-rocket">🚀 로켓</span>}
-                          {p.isFreeShipping && <span className="badge-sm badge-free">✓ 무료배송</span>}
+                          {p.isRocket && <span className="badge-sm badge-rocket">로켓</span>}
+                          {p.isFreeShipping && <span className="badge-sm badge-free">무료배송</span>}
                         </div>
                       </div>
                       <div className="product-actions">
                         <a href={`/products/${p.id}`} target="_blank" rel="noopener noreferrer" className="btn-outline">보기</a>
-                        <button className="btn-edit" onClick={() => editingId === p.id ? setEditingId(null) : handleEditStart(p)}>
-                          {editingId === p.id ? '닫기' : '수정'}
-                        </button>
+                        <button className="btn-edit" onClick={() => editingId === p.id ? setEditingId(null) : handleEditStart(p)}>{editingId === p.id ? '닫기' : '수정'}</button>
                         <button className="btn-danger" onClick={() => handleDelete(p.id, p.name)}>삭제</button>
                       </div>
                     </div>
-
                     {editingId === p.id && (
                       <div className="edit-box">
-                        <div className="edit-title">✏️ {p.name} 수정</div>
+                        <div className="edit-title">{p.name} 수정</div>
                         <FormFields f={editForm} setF={setEditForm} categories={categories} />
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
                           <button className="btn btn-secondary" onClick={() => handleEditSave(p.id)}>저장</button>
@@ -503,13 +452,47 @@ const handleGenerateContent = async () => {
           </div>
         )}
 
-        {status && (
-          <div className={`status status-${status.type}`}>
-            {status.type === 'loading' && '⏳ '}
-            {status.type === 'success' && '✅ '}
-            {status.type === 'error' && '❌ '}
-            {status.message}
+        {activeTab === 'blog' && (
+          <div className="section">
+            <div className="section-title">블로그 글 작성</div>
+            <div className="form-grid">
+              <div className="form-group form-full">
+                <label className="form-label">제목</label>
+                <input className="input" value={blogForm.title} onChange={e => setBlogForm(p => ({ ...p, title: e.target.value }))} placeholder="예: 애플워치 시리즈 9 한 달 써본 솔직 후기" />
+              </div>
+              <div className="form-group">
+                <label className="form-label">슬러그</label>
+                <input className="input" value={blogForm.slug} onChange={e => setBlogForm(p => ({ ...p, slug: e.target.value }))} placeholder="예: apple-watch-series-9-review" />
+              </div>
+              <div className="form-group">
+                <label className="form-label">카테고리</label>
+                <input className="input" value={blogForm.category} onChange={e => setBlogForm(p => ({ ...p, category: e.target.value }))} placeholder="예: 스마트워치" />
+              </div>
+              <div className="form-group form-full">
+                <label className="form-label">썸네일 URL</label>
+                <input className="input" value={blogForm.thumbnail} onChange={e => setBlogForm(p => ({ ...p, thumbnail: e.target.value }))} placeholder="https://..." />
+              </div>
+              <div className="form-group form-full">
+                <label className="form-label">연결 제품 슬러그</label>
+                <input className="input" value={blogForm.productSlug} onChange={e => setBlogForm(p => ({ ...p, productSlug: e.target.value }))} placeholder="예: apple-watch-series-9-gps-cellular-smartwatch" />
+              </div>
+              <div className="form-group form-full">
+                <label className="form-label">본문 (마크다운)</label>
+                <textarea className="blog-textarea" value={blogForm.content} onChange={e => setBlogForm(p => ({ ...p, content: e.target.value }))} placeholder="## 제목&#10;&#10;본문 내용을 마크다운으로 작성하세요." />
+              </div>
+              <div className="form-group">
+                <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                  <input type="checkbox" checked={blogForm.published} onChange={e => setBlogForm(p => ({ ...p, published: e.target.checked }))} />
+                  공개
+                </label>
+              </div>
+            </div>
+            <button className="btn btn-primary" onClick={handleBlogSave} disabled={blogSaving}>{blogSaving ? '저장 중...' : '노션에 저장'}</button>
           </div>
+        )}
+
+        {status && (
+          <div className={`status status-${status.type}`}>{status.message}</div>
         )}
       </div>
     </>
