@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 import { unstable_cache } from "next/cache";
 import { Client } from "@notionhq/client";
-import ShareButton from '../../products/[slug]/ShareButton';
+import BlogShare from './BlogShare';
 
 export const revalidate = 3600;
 
@@ -151,7 +151,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
                 </div>
                 {post!.category && <div className="post-category">{post!.category}</div>}
-                <h1 className="post-title">{post!.title}</h1>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '1.5rem' }}>
+                    <h1 className="post-title" style={{ flex: 1, marginBottom: 0 }}>{post!.title}</h1>
+                    <BlogShare title={post!.title} />
+                </div>
+                                
                 {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
                 <div className="post-content" suppressHydrationWarning>
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
@@ -176,7 +180,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                         지금 가격 확인
                     </Link>
                     )}
-                    <ShareButton name={post!.title} />
+                    
             </div>
 
             {related.length > 0 && (
