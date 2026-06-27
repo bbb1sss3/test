@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 import { unstable_cache } from "next/cache";
 import { Client } from "@notionhq/client";
+import ShareButton from '../../products/[slug]/ShareButton';
 
 export const revalidate = 3600;
 
@@ -175,6 +176,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                         지금 가격 확인
                     </Link>
                     )}
+                    <ShareButton name={post!.title} />
             </div>
 
             {related.length > 0 && (
