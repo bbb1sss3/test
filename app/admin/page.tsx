@@ -160,6 +160,9 @@ export default function AdminPage() {
   const [blogForm, setBlogForm] = useState(emptyBlogForm);
   const [blogSaving, setBlogSaving] = useState(false);
 
+  const [blogList, setBlogList] = useState<any[]>([]);
+const [blogEditingId, setBlogEditingId] = useState<string | null>(null);
+
   const loadCategories = async (pw: string) => {
     try {
       const res = await fetch('/api/coupang/categories', { headers: { 'x-admin-password': pw } });
@@ -452,44 +455,132 @@ export default function AdminPage() {
           </div>
         )}
 
-        {activeTab === 'blog' && (
-          <div className="section">
-            <div className="section-title">블로그 글 작성</div>
-            <div className="form-grid">
-              <div className="form-group form-full">
-                <label className="form-label">제목</label>
-                <input className="input" value={blogForm.title} onChange={e => setBlogForm(p => ({ ...p, title: e.target.value }))} placeholder="예: 애플워치 시리즈 9 한 달 써본 솔직 후기" />
+       {activeTab === 'blog' && (
+  <div className="section">
+    <div className="section-title">블로그 글 작성</div>
+    <div className="form-grid">
+      <div className="form-group form-full">
+        <label className="form-label">제목</label>
+        <input className="input" value={blogForm.title} onChange={e => setBlogForm(p => ({ ...p, title: e.target.value }))} placeholder="예: 애플워치 시리즈 9 한 달 써본 솔직 후기" />
+      </div>
+      <div className="form-group">
+        <label className="form-label">슬러그</label>
+        <input className="input" value={blogForm.slug} onChange={e => setBlogForm(p => ({ ...p, slug: e.target.value }))} placeholder="예: apple-watch-series-9-review" />
+      </div>
+      <div className="form-group">
+        <label className="form-label">카테고리</label>
+        <input className="input" value={blogForm.category} onChange={e => setBlogForm(p => ({ ...p, category: e.target.value }))} placeholder="예: 스마트워치" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">썸네일 URL</label>
+        <input className="input" value={blogForm.thumbnail} onChange={e => setBlogForm(p => ({ ...p, thumbnail: e.target.value }))} placeholder="https://..." />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">연결 제품 슬러그</label>
+        <input className="input" value={blogForm.productSlug} onChange={e => setBlogForm(p => ({ ...p, productSlug: e.target.value }))} placeholder="예: apple-watch-series-9-gps-cellular-smartwatch" />
+      </div>
+      <div className="form-group form-full">
+        <label className="form-label">본문</label>
+        <textarea className="blog-textarea" value={blogForm.content} onChange={e => setBlogForm(p => ({ ...p, content: e.target.value }))} placeholder="본문 내용을 입력하세요." />
+      </div>
+      <div className="form-group">
+        <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+          <input type="checkbox" checked={blogForm.published} onChange={e => setBlogForm(p => ({ ...p, published: e.target.checked }))} />
+          공개
+        </label>
+      </div>
+    </div>
+    <button className="btn btn-primary" onClick={handleBlogSave} disabled={blogSaving} style={{ marginBottom: '2rem' }}>{blogSaving ? '저장 중...' : '노션에 저장'}</button>
+
+    <hr className="divider" />
+    <div className="section-title" style={{ marginTop: '1rem' }}>
+      블로그 글 목록
+      <button className="btn-outline" style={{ marginLeft: '1rem' }} onClick={async () => {
+        const res = await fetch('/api/blog/list', { headers: { 'x-admin-password': password } });
+        const data = await res.json();
+        setBlogList(data.posts || []);
+      }}>불러오기</button>
+    </div>
+    <div className="product-list" style={{ marginTop: '1rem' }}>
+      {blogList.map(p => (
+        <div key={p.id}>
+          <div className="product-item">
+            <div className="product-info">
+              <div className="product-name">{p.published ? '공개' : '비공개'} · {p.title}</div>
+              <div style={{ fontSize: '12px', color: '#aaa', marginTop: '2px' }}>{p.slug}</div>
+            </div>
+            <div className="product-actions">
+              <a href={`/blog/${p.slug}`} target="_blank" rel="noopener noreferrer" className="btn-outline">보기</a>
+              <button className="btn-edit" onClick={() => {
+                setBlogEditingId(blogEditingId === p.id ? null : p.id);
+                setBlogForm({ title: p.title, slug: p.slug, category: p.category, thumbnail: p.thumbnail, productSlug: p.productSlug, content: p.content, published: p.published });
+              }}>{blogEditingId === p.id ? '닫기' : '수정'}</button>
+            </div>
+          </div>
+          {blogEditingId === p.id && (
+            <div className="edit-box">
+              <div className="edit-title">{p.title} 수정</div>
+              <div className="form-grid">
+                <div className="form-group form-full">
+                  <label className="form-label">제목</label>
+                  <input className="input" value={blogForm.title} onChange={e => setBlogForm(prev => ({ ...prev, title: e.target.value }))} />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">슬러그</label>
+                  <input className="input" value={blogForm.slug} onChange={e => setBlogForm(prev => ({ ...prev, slug: e.target.value }))} />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">카테고리</label>
+                  <input className="input" value={blogForm.category} onChange={e => setBlogForm(prev => ({ ...prev, category: e.target.value }))} />
+                </div>
+                <div className="form-group form-full">
+                  <label className="form-label">썸네일 URL</label>
+                  <input className="input" value={blogForm.thumbnail} onChange={e => setBlogForm(prev => ({ ...prev, thumbnail: e.target.value }))} />
+                </div>
+                <div className="form-group form-full">
+                  <label className="form-label">연결 제품 슬러그</label>
+                  <input className="input" value={blogForm.productSlug} onChange={e => setBlogForm(prev => ({ ...prev, productSlug: e.target.value }))} />
+                </div>
+                <div className="form-group form-full">
+                  <label className="form-label">본문</label>
+                  <textarea className="blog-textarea" value={blogForm.content} onChange={e => setBlogForm(prev => ({ ...prev, content: e.target.value }))} />
+                </div>
+                <div className="form-group">
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                    <input type="checkbox" checked={blogForm.published} onChange={e => setBlogForm(prev => ({ ...prev, published: e.target.checked }))} />
+                    공개
+                  </label>
+                </div>
               </div>
-              <div className="form-group">
-                <label className="form-label">슬러그</label>
-                <input className="input" value={blogForm.slug} onChange={e => setBlogForm(p => ({ ...p, slug: e.target.value }))} placeholder="예: apple-watch-series-9-review" />
-              </div>
-              <div className="form-group">
-                <label className="form-label">카테고리</label>
-                <input className="input" value={blogForm.category} onChange={e => setBlogForm(p => ({ ...p, category: e.target.value }))} placeholder="예: 스마트워치" />
-              </div>
-              <div className="form-group form-full">
-                <label className="form-label">썸네일 URL</label>
-                <input className="input" value={blogForm.thumbnail} onChange={e => setBlogForm(p => ({ ...p, thumbnail: e.target.value }))} placeholder="https://..." />
-              </div>
-              <div className="form-group form-full">
-                <label className="form-label">연결 제품 슬러그</label>
-                <input className="input" value={blogForm.productSlug} onChange={e => setBlogForm(p => ({ ...p, productSlug: e.target.value }))} placeholder="예: apple-watch-series-9-gps-cellular-smartwatch" />
-              </div>
-              <div className="form-group form-full">
-                <label className="form-label">본문 (마크다운)</label>
-                <textarea className="blog-textarea" value={blogForm.content} onChange={e => setBlogForm(p => ({ ...p, content: e.target.value }))} placeholder="## 제목&#10;&#10;본문 내용을 마크다운으로 작성하세요." />
-              </div>
-              <div className="form-group">
-                <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                  <input type="checkbox" checked={blogForm.published} onChange={e => setBlogForm(p => ({ ...p, published: e.target.checked }))} />
-                  공개
-                </label>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button className="btn btn-secondary" onClick={async () => {
+                  setStatus({ type: 'loading', message: '수정 중...' });
+                  try {
+                    const res = await fetch('/api/blog/edit', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+                      body: JSON.stringify({ pageId: p.id, blogForm }),
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error);
+                    setStatus({ type: 'success', message: '수정됐어요!' });
+                    setBlogEditingId(null);
+                    const listRes = await fetch('/api/blog/list', { headers: { 'x-admin-password': password } });
+                    const listData = await listRes.json();
+                    setBlogList(listData.posts || []);
+                  } catch (err: any) {
+                    setStatus({ type: 'error', message: err.message });
+                  }
+                }}>저장</button>
+                <button className="btn-outline" onClick={() => setBlogEditingId(null)}>취소</button>
               </div>
             </div>
-            <button className="btn btn-primary" onClick={handleBlogSave} disabled={blogSaving}>{blogSaving ? '저장 중...' : '노션에 저장'}</button>
-          </div>
-        )}
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
         {status && (
           <div className={`status status-${status.type}`}>{status.message}</div>
