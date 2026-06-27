@@ -131,8 +131,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
                 </div>
                 {post!.category && <div className="post-category">{post!.category}</div>}
-                <h1 className="post-title">{post!.title}</h1>
-                {post!.date && <div className="post-date">{post!.date}</div>}
+                <h1 className="post-title">{post!.title}</h1>              
                 {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
                 <div className="post-content">
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
