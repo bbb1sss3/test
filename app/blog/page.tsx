@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 import Link from "next/link";
 import { unstable_cache } from "next/cache";
-export const dynamic = 'force-dynamic';
+
 
 export const revalidate = 3600;
 
