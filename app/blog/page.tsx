@@ -53,7 +53,7 @@ export default async function BlogPage() {
   const posts = await getPosts();
 
   return (
-    <main style={{ background: '#fff', minHeight: '100vh' }}>
+    <main suppressHydrationWarning style={{ background: '#fff', minHeight: '100vh' }}>
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
@@ -108,8 +108,7 @@ export default async function BlogPage() {
                     }
                   </div>
                   {post.category && <div className="card-category">{post.category}</div>}
-                  <div className="card-title">{post.title}</div>
-                  {post.date && <div className="card-date">{post.date}</div>}
+                  <div className="card-title">{post.title}</div>                  
                 </Link>
               ))}
             </div>

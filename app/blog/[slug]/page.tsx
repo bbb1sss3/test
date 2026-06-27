@@ -132,9 +132,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 {post!.category && <div className="post-category">{post!.category}</div>}
                 <h1 className="post-title">{post!.title}</h1>              
                 {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
-                <div className="post-content">
+                <div className="post-content" suppressHydrationWarning>
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
-                </div>
+                    </div>
                 <Link href="/blog" className="back-link">← 블로그 목록</Link>
             </div>
         </main>
