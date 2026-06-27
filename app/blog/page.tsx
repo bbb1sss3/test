@@ -54,7 +54,7 @@ export default async function BlogPage() {
 
   return (
     <main suppressHydrationWarning style={{ background: '#fff', minHeight: '100vh' }}>
-      <style>{`
+     <style suppressHydrationWarning>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
         .header { background: #fff; border-bottom: 1px solid #e8e8e8; height: 56px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
