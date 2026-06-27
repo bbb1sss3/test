@@ -119,8 +119,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             <header className="header">
                 <div className="header-inner">
                     <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
-                    <nav className="nav-links">
-                        <Link href="/">제품</Link>
+                    <nav className="nav-links">                        
                         <Link href="/blog">블로그</Link>
                     </nav>
                 </div>
