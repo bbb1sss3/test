@@ -24,7 +24,6 @@ const getPost = unstable_cache(
                     title: page.properties.이름?.title?.[0]?.plain_text ?? '',
                     slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
                     category: page.properties.카테고리?.select?.name ?? '',
-                    date: page.properties.발행일?.date?.start ?? '',
                     thumbnail: page.properties.썸네일?.url ?? '',
                     content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
                 };
@@ -48,7 +47,6 @@ const getPost = unstable_cache(
                 title: page.properties.이름?.title?.[0]?.plain_text ?? '',
                 slug: page.properties.슬러그?.rich_text?.[0]?.plain_text ?? slug,
                 category: page.properties.카테고리?.select?.name ?? '',
-                date: page.properties.발행일?.date?.start ?? '',
                 thumbnail: page.properties.썸네일?.url ?? '',
                 content: page.properties.본문?.rich_text?.[0]?.plain_text ?? '',
             };
@@ -77,12 +75,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
 }
 
+async function getRelatedProducts(category: string) {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'https://premy.co.kr'}/api/coupang/related?category=${encodeURIComponent(category)}&currentId=`, {
+            next: { revalidate: 3600 },
+        });
+        return await res.json();
+    } catch {
+        return [];
+    }
+}
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
     const post = await getPost(params.slug);
     if (!post) notFound();
 
+    const related = post!.category ? await getRelatedProducts(post!.category) : [];
+
     return (
-       <main suppressHydrationWarning style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <main suppressHydrationWarning style={{ background: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <style suppressHydrationWarning>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
@@ -97,29 +108,37 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 1.5rem; }
         .breadcrumb a { color: #333; text-decoration: none; font-weight: 600; }
         .post-category { font-size: 12px; font-weight: 800; color: #e52c2c; letter-spacing: 1px; margin-bottom: 0.75rem; }
-        .post-title { font-size: 32px; font-weight: 900; color: #111; letter-spacing: -1px; line-height: 1.3; margin-bottom: 1rem; }
-        .post-date { font-size: 13px; color: #aaa; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid #e8e8e8; }
+        .post-title { font-size: 24px; font-weight: 900; color: #111; letter-spacing: -1px; line-height: 1.3; margin-bottom: 1.5rem; }
         .post-thumbnail { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 12px; margin-bottom: 2rem; }
-        .post-content { font-size: 17px; color: #333; line-height: 1.9; letter-spacing: -0.02em; word-break: keep-all; }
+        .post-content { font-size: 18px; color: #333; line-height: 1.9; letter-spacing: -0.02em; word-break: keep-all; }
         .post-content h2 { font-size: 22px; font-weight: 800; color: #111; margin: 2em 0 0.6em; }
-        .post-content h3 { font-size: 18px; font-weight: 700; color: #333; margin: 1.5em 0 0.5em; }
+        .post-content h3 { font-size: 19px; font-weight: 700; color: #333; margin: 1.5em 0 0.5em; }
         .post-content p { margin: 0.8em 0; }
         .post-content ul { padding-left: 1.4em; margin: 0.5em 0 1em; }
         .post-content li { margin: 0.3em 0; line-height: 1.7; }
         .post-content strong { font-weight: 800; color: #111; }
-        .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #555; text-decoration: none; margin-top: 3rem; padding: 10px 20px; border: 1.5px solid #e8e8e8; border-radius: 50px; }
-        .back-link:hover { border-color: #e52c2c; color: #e52c2c; }
+        .related { max-width: 780px; margin: 3rem auto 2rem; padding: 0 1.5rem; }
+        .related-title { font-size: 16px; font-weight: 800; color: #111; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #111; display: inline-block; }
+        .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
+        .related-card { text-decoration: none; display: block; }
+        .related-img { aspect-ratio: 1; background: #f4f4f4; border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
+        .related-img img { width: 100%; height: 100%; object-fit: cover; }
+        .related-name { font-size: 12px; color: #111; font-weight: 600; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .related-price { font-size: 13px; color: #111; font-weight: 900; margin-top: 4px; }
         @media (max-width: 768px) {
           .container { padding: 1rem; }
-          .post-title { font-size: 24px; }
+          .post-title { font-size: 20px; }
           .post-content { font-size: 16px; }
+          .related { padding: 0 1rem; }
+          .related-grid { grid-template-columns: repeat(2, 1fr); }
         }
       `}</style>
 
             <header className="header">
                 <div className="header-inner">
                     <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
-                    <nav className="nav-links">                        
+                    <nav className="nav-links">
+                        <Link href="/">제품</Link>
                         <Link href="/blog">블로그</Link>
                     </nav>
                 </div>
@@ -130,13 +149,32 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
                 </div>
                 {post!.category && <div className="post-category">{post!.category}</div>}
-                <h1 className="post-title">{post!.title}</h1>              
+                <h1 className="post-title">{post!.title}</h1>
                 {post!.thumbnail && <img src={post!.thumbnail} alt={post!.title} className="post-thumbnail" />}
                 <div className="post-content" suppressHydrationWarning>
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
-                    </div>
-                <Link href="/blog" className="back-link">← 블로그 목록</Link>
+                </div>
             </div>
+
+            {related.length > 0 && (
+                <div className="related">
+                    <div className="related-title">연관 제품</div>
+                    <div className="related-grid">
+                        {related.map((p: any) => (
+                            <Link href={`/products/${p.slug || p.id}`} key={p.id} className="related-card">
+                                <div className="related-img">
+                                    {p.image
+                                        ? <img src={p.image} alt={p.name} />
+                                        : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px' }}>🛒</div>
+                                    }
+                                </div>
+                                <div className="related-name">{p.name}</div>
+                                {p.price && <div className="related-price">{p.price}</div>}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
