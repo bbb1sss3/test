@@ -15,20 +15,19 @@ const getPosts = unstable_cache(
       let cursor: string | undefined = undefined;
       do {
        const res: Response = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
-            'Notion-Version': '2022-06-28',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            filter: { property: '공개', checkbox: { equals: true } },
-            sorts: [{ property: '발행일', direction: 'descending' }],
-            ...(cursor ? { start_cursor: cursor } : {}),
-            page_size: 100,
-          }),
-          cache: 'no-store',
-        });
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+    'Notion-Version': '2022-06-28',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    filter: { property: '공개', checkbox: { equals: true } },
+    sorts: [{ property: '발행일', direction: 'descending' }],
+    ...(cursor ? { start_cursor: cursor } : {}),
+    page_size: 100,
+  }),
+});
         const response = await res.json();
         allResults = [...allResults, ...response.results];
         cursor = response.has_more ? response.next_cursor ?? undefined : undefined;

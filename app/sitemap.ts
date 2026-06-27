@@ -43,12 +43,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     let blogResults: any[] = [];
     let blogCursor: string | undefined = undefined;
     do {
-      const response: any = await (notion as any).databases.query({
-        database_id: blogDbId,
-        filter: { property: '공개', checkbox: { equals: true } },
-        start_cursor: blogCursor,
-        page_size: 100,
+      const res: Response = await fetch(`https://api.notion.com/v1/databases/${blogDbId}/query`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+          'Notion-Version': '2022-06-28',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          filter: { property: '공개', checkbox: { equals: true } },
+          ...(blogCursor ? { start_cursor: blogCursor } : {}),
+          page_size: 100,
+        }),
       });
+      const response = await res.json();
       blogResults = [...blogResults, ...response.results];
       blogCursor = response.has_more ? response.next_cursor ?? undefined : undefined;
     } while (blogCursor);
