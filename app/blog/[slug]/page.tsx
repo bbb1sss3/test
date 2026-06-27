@@ -130,7 +130,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         .related-price { font-size: 13px; color: #111; font-weight: 900; margin-top: 4px; }
         @media (max-width: 768px) {
           .container { padding: 1rem; }
-          .post-title { font-size: 20px; }
+          .post-title { font-size: 20px; word-break: keep-all; }
           .post-content { font-size: 16px; }
           .related { padding: 0 1rem; }
           .related-grid { grid-template-columns: repeat(2, 1fr); }
@@ -150,12 +150,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <div className="breadcrumb">
                     <Link href="/">홈</Link> › <Link href="/blog">블로그</Link> › {post!.title.slice(0, 20)}...
                 </div>
-               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+               {post!.category && <div className="post-category">{post!.category}</div>}
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '1.5rem' }}>
                     <h1 className="post-title" style={{ flex: 1, marginBottom: 0 }}>{post!.title}</h1>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6px', flexShrink: 0, marginLeft: '12px' }}>
-                        {post!.category && <div className="post-category" style={{ marginBottom: 0 }}>{post!.category}</div>}
-                        <BlogShare title={post!.title} />
-                    </div>
+                    <BlogShare title={post!.title} />
                 </div>
                
                 
@@ -163,7 +161,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 <div className="post-content" suppressHydrationWarning>
                     <ReactMarkdown>{post!.content}</ReactMarkdown>
                 </div>
-                {post!.productSlug && (
+                {post!.productSlug && (                    
                     <Link
                         href={`/products/${post!.productSlug}`}
                         style={{

@@ -11,7 +11,7 @@ export default function BlogShare({ title }: { title: string }) {
   };
   return (
     <button onClick={handleShare} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', flexShrink: 0, marginTop: '6px', fontSize: '18px' }}>
-      🔗
+      공유
     </button>
   );
 }
