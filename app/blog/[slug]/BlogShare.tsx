@@ -10,8 +10,8 @@ export default function BlogShare({ title }: { title: string }) {
     }
   };
   return (
-    <button onClick={handleShare} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', flexShrink: 0, marginTop: '6px', fontSize: '18px' }}>
-      공유
-    </button>
+   <button onClick={handleShare} style={{ background: 'none', border: '1.5px solid #e8e8e8', cursor: 'pointer', padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: 700, color: '#555', flexShrink: 0, marginTop: '6px', whiteSpace: 'nowrap' }}>
+  공유
+</button>
   );
 }
