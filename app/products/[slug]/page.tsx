@@ -455,12 +455,14 @@ const faqJsonLd = faqItems.length > 0 ? {
       )}
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
-    <header className="header">
-       <div className="header-inner">
-         <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>  
-    
-         </div>
-      </header>
+   <header className="header">
+  <div className="header-inner">
+    <Link href="/" className="logo">PRE<span>MY</span><small style={{ fontSize: '12px', fontWeight: 400, color: '#aaa', marginLeft: '8px', letterSpacing: 0 }}>프리미</small></Link>
+    <nav style={{ display: 'flex', gap: '1.5rem', marginLeft: '2rem' }}>
+      <Link href="/blog" style={{ fontSize: '14px', fontWeight: 600, color: '#333', textDecoration: 'none' }}>블로그</Link>
+    </nav>
+  </div>
+</header>
 
 
 
