@@ -107,7 +107,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         .nav-links { display: flex; gap: 1.5rem; margin-left: 2rem; }
         .nav-links a { font-size: 14px; font-weight: 600; color: #333; text-decoration: none; }
         .nav-links a:hover { color: #e52c2c; }
-        .container { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; }
         .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 1.5rem; }
         .breadcrumb a { color: #333; text-decoration: none; font-weight: 600; }
         .post-category { font-size: 12px; font-weight: 800; color: #e52c2c; letter-spacing: 1px; margin-bottom: 0.75rem; }
