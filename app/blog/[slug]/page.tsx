@@ -69,12 +69,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     return {
         title: `${post.title} | Premy(프리미) 블로그`,
         description: desc,
+        keywords: `${post.title}, ${post.category}, 프리미 블로그`,
         openGraph: {
             title: post.title,
             description: desc,
             images: post.thumbnail ? [{ url: post.thumbnail }] : [],
             locale: 'ko_KR',
             type: 'article',
+            
         },
     };
 }
