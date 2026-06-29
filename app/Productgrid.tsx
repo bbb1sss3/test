@@ -122,7 +122,7 @@ const css = `
   .recent-name { font-size: 12px; color: #555; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
   .footer { border-top: 1px solid #e8e8e8; background: #111; }
-  .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1.5rem; text-align: center; }
+.footer-inner { max-width: 1100px; margin: 0 auto; padding: 0.75rem 1.5rem; text-align: center; font-size: 12px; }
   .footer-pc { font-size: 11px; color: #666; line-height: 1.7; }
   .footer-mobile { display: none; }
 
@@ -420,7 +420,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
 
       <footer className="footer">
         <div className="footer-inner">
-          <p>© 2026 Premy(프리미) · <a href="/privacy" style={{ color: '#999', textDecoration: 'none' }}>개인정보처리방침</a></p>
+         <p style={{ color: '#999', fontSize: '12px' }}>© 2026 Premy(프리미) · <a href="/privacy" style={{ color: '#999', textDecoration: 'none' }}>개인정보처리방침</a></p>
         </div>
       </footer>
       {showTop && (
