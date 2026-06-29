@@ -65,12 +65,13 @@ const getPost = unstable_cache(
 export async function generateMetadata({ params }: { params: { slug: string } }) {
     const post = await getPost(params.slug);
     if (!post) return { title: 'Premy(프리미)' };
+    const desc = post.content.replace(/^#+\s*/gm, '').slice(0, 150);
     return {
         title: `${post.title} | Premy(프리미) 블로그`,
-        description: post.content.slice(0, 150),
+        description: desc,
         openGraph: {
             title: post.title,
-            description: post.content.slice(0, 150),
+            description: desc,
             images: post.thumbnail ? [{ url: post.thumbnail }] : [],
             locale: 'ko_KR',
             type: 'article',
