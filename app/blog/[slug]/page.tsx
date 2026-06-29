@@ -78,6 +78,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
             type: 'article',
             
         },
+        alternates: {
+            canonical: `https://premy.co.kr/blog/${post.slug}`,
+        },
     };
 }
 
