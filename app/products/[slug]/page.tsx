@@ -145,6 +145,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${product.name} | Premy(프리미) - 프리미엄 제품 큐레이션`,
     description: metaDesc,
     keywords,
+    alternates: {
+        canonical: `https://premy.co.kr/products/${product.slug || product.id}`,
+    },
     openGraph: {
       title: `${product.name} | Premy(프리미)`,
       description: metaDesc,
