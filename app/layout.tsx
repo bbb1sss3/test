@@ -18,6 +18,9 @@ export const metadata: Metadata = {
       'naver-site-verification': 'b33fefbf7c5830931df331f5a66daf0146e683e3',
     },
   },
+  other: {
+    'google-adsense-account': 'ca-pub-7008742089841545',
+  },
   icons: {
     icon: '/favicon.svg',
   },
