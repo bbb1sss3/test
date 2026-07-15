@@ -34,7 +34,6 @@ export async function GET() {
 
   const items = products
     .filter((p) => p.slug) // 슬러그 없는 건 링크 생성 불가하니 제외
-    .slice(0, 50)
     .map((p) => {
       const url = `https://premy.co.kr/products/${p.slug}`;
       return `
