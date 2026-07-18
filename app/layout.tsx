@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from 'next/script';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: 'Premy(프리미) - 프리미엄 가전·영양제 큐레이션',
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         {children}
+        <SpeedInsights />
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7008742089841545"
